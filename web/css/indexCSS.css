@@ -138,18 +138,18 @@
 }
 
 .isas {
-  background-image:url('images/Vladi.jpg');
+  background-image:url('../images/Vladi.jpg');
   background-size:150px 150px;
 }
 
 .boisedigital {
- background-image:url('http://dizin.x10.bz/codepen/wgaFq/logo_dark.png');
+ background-image:url('../images/Sivan.jpg');
       background-size:85% auto;
   background-position:center center;
 }
 
 .dissolve {
- background-image:url('http://portfolio.dizin.x10.bz/images/dissolve.png');
+ background-image:url('../images/Erez.jpg');
       background-size:125px 125px;  
 }
 
