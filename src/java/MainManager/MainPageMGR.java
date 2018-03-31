@@ -17,14 +17,13 @@ public class MainPageMGR implements Serializable {
     public MainPageMGR()
     {
         animals = new LinkedList<Animal>();
-        animals.add(new Animal(new Owner(), "testAnimal", "type1", "subtype", "test", 10));
+        animals.add(new Animal(null, "testAnimal", "type1", "subtype", "test", 10));
         
     }
     
     public String getPets()
     {
-        //return animals.get(0).getName();
-        return "Dog";
+        return animals.get(0).getName();
     }
     
 }
