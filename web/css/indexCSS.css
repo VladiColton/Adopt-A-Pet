@@ -1,176 +1,200 @@
-/* 
-    Created on : Mar 31, 2018, 12:02:36 PM
-    Author     : vladi
-*/
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.container {
+  width:750px;
+  margin:auto;
 }
 
-body {
-  font-family: 'Open Sans', sans-serif;
-  background: #FFCC80;
-  color: #444444;
+.panel .pad {
+  padding: 0 15px; 
 }
-
-/* Cards */
-.posts-box {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 40px 10px;
-  text-align: center;
-  list-style: none;
-}
-
-.posts-box li {
-  display: inline-block;
-  width: 320px;
-  max-width: 100%;
-  padding: 10px;
-  vertical-align: top;
-}
-
-.card {
-  text-align: left;
-  border-radius: 2px;
-  background: #FFFFFF;
-  box-shadow:
-    0 2px 4px rgba(0,0,0,0.10),
-    0 1px 2px rgba(0,0,0,0.22);
-}
-
-.card img {
-  display: block;
-  width: 100%;
-}
-
-.card div {
-  padding: 16px 20px;
-  border-bottom: 1px solid #EEEEEE;
-}
-
-.card div h3 {
-  margin: 8px 0;
-  font-size: .9em;
-}
-
-.card div p {
-  margin: 8px 0;
-  font-size: .9em;
-}
-
-.button {
-  color: #FFC107;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-size: .8em;
-}
-
-.button:hover {
-  opacity: .7;
-}
-
-/* Page */
-.modal,
-.modal-box {
-  z-index: 900;
-}
-
-.modal-sandbox {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: transparent;
-}
-
-.modal {
+.panel.flip .action {
   display: none;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: #FFB74D;
-  overflow: auto;
 }
 
-.modal-box {
+.panel {
+  width: 200px;
+  height: 300px;
+  margin: 20px;
   position: relative;
-  width: 80%;
-  max-width: 920px;
-  margin: 100px auto;
-  background: #FFFFFF;
-  animation-name: modalbox;
-  animation-duration: .3s;
-  animation-timing-function: ease-out;
+  display:inline-block;
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+}
+.panel .front {
+  z-index: 900;
+  width: inherit;
+  height: inherit;
+  background: #fff;
+  
+  -moz-box-shadow: 0 1px 15px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 15px rgba(0,0,0,0.1);
+  
+  -webkit-transform: rotateX(0deg) rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  
+  -moz-transform: rotateX(0deg) rotateY(0deg);
+  -moz-transform-style: preserve-3d;
+  -moz-backface-visibility: hidden;
+  
+  -o-transform: rotateX(0deg) rotateY(0deg);
+  -o-transform-style: preserve-3d;
+  -o-backface-visibility: hidden;
+  
+  -ms-transform: rotateX(0deg) rotateY(0deg);
+  -ms-transform-style: preserve-3d;
+  -ms-backface-visibility: hidden;
+ 
+  transform: rotateX(0deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  
+  -o-transition: all .4s ease-in-out;
+  -ms-transition: all .4s ease-in-out;
+  -moz-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+.panel.flip .front {
+  z-index: 900;
+  background: #fff;
+  
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  
+  -moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+  box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+}
+  	
+.panel .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 800;
+  width: inherit;
+  height: inherit;
+  background: #fff;
+  border:1px solid #000;
+  -webkit-transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  
+  -moz-transform: rotateY(-180deg);
+  -moz-transform-style: preserve-3d;
+  -moz-backface-visibility: hidden;
+  
+  -o-transform: rotateY(-180deg);
+  -o-transform-style: preserve-3d;
+  -o-backface-visibility: hidden;
+  
+  -ms-transform: rotateY(-180deg);
+  -ms-transform-style: preserve-3d;
+  -ms-backface-visibility: hidden;
+  
+  transform: rotateY(-180deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+ 
+  -o-transition: all .4s ease-in-out;
+  -ms-transition: all .4s ease-in-out;
+  -moz-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+		
+.panel.flip .back {
+  z-index: 1000;
+  background: #fff;
+  
+  -webkit-transform: rotateX(0deg) rotateY(0deg);
+  -moz-transform: rotateX(0deg) rotateY(0deg);
+  -ms-transform: rotateX(0deg) rotateY(0deg);
+  -o-transform: rotateX(0deg) rotateY(0deg);
+  transform: rotateX(0deg) rotateY(0deg);
+  
+  box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
 }
 
-.modal-header img {
-  width: 100%;
+.frontTitle {
+  padding-top:5px;
+  text-align:center;
+  font-family:'latoregular',arial;
+  font-size:18px;
+  color:#000;
+  height:45px;
 }
 
-.modal-body {
-  padding: 60px 8%;
+.frontLogo {
+    width:100%;
+    height:200px;
+    background-repeat:no-repeat;
+    background-position:center center;
 }
 
-.modal-body h2 {
-  margin-bottom: 30px;
-  letter-spacing: .06em;
+.isas {
+  background-image:url('http://dizin.x10.bz/codepen/wgaFq/isas.png');
+  background-size:150px 150px;
 }
 
-.modal-body p {
-  font-size: .9em;
-  line-height: 1.5em;
+.boisedigital {
+ background-image:url('http://dizin.x10.bz/codepen/wgaFq/logo_dark.png');
+      background-size:85% auto;
+  background-position:center center;
 }
 
-@-webkit-keyframes modalbox {
-  0% {
-    top: -250px;
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
+.dissolve {
+ background-image:url('http://portfolio.dizin.x10.bz/images/dissolve.png');
+      background-size:125px 125px;  
 }
 
-@keyframes modalbox {
-  0% {
-    top: -250px;
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
+.frontLocation {
+  padding-top:10px;
+  text-align:center;
+  color:#aaa;
+  font-family:'latoregular',arial;
+  font-size:18px;
 }
 
-button {
-  min-width: 120px;
-  top: 50%;
-  left: 50%;
-  padding: 16px 32px;
-  margin: 24px 8px 0 0;
-  background: transparent;
-  text-decoration: none;
-  border: 1px solid #FFC107;
-  outline: none;
-  color: #FFC107;
-  cursor: pointer;
+.backTitle {
+  padding:10px;
+   color:#000;
+  font-family:'latohairline',arial;
+  font-size:16px;
+  font-weight:bold;
 }
 
-.disabled {
-  opacity: .4;
-  cursor: auto;
+.backParagraph {
+   padding:10px;
+  padding-top:0;
+   color:#000;
+  font-family:'latoregular',arial;
+  font-size:14px;
 }
 
-@media (max-width: 620px) {
-  button {
-    width: 100%;
-    min-width: auto;
-  }
+.backGoto {
+  padding:10px;
+  padding-top:0;
+  color:#06f;
+  font-family:'latoregular',arial;
+  font-size:14px;
+}
+
+.backGoto a {
+  text-decoration:none;
+  color:#06f;
+  -webkit-transition:0.1s all linear;
+  -moz-transition:0.1s all linear;
+  -o-transition:0.1s all linear;
+  transition:0.1s all linear;
+}
+
+.backGoto a:hover {
+  text-decoration:underline;
+  padding-left:15px;
 }
