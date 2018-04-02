@@ -1,11 +1,7 @@
-package Entities;
+package entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Animal Representation Class
@@ -19,7 +15,7 @@ public class Animal implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private float age;
+    private double age;
     private String description;
     private String type;
     private String subType;
@@ -31,7 +27,7 @@ public class Animal implements Serializable {
     public Animal() {
     }
 
-    public Animal(Owner owner, String description, String type, String subType, String name, float age) {
+    public Animal(Owner owner, String description, String type, String subType, String name, double age) {
         if (!isAgeValid(age)) {
             throw new IllegalArgumentException("age cannot be negative");
         }
@@ -44,7 +40,7 @@ public class Animal implements Serializable {
         this.age = age;
     }
 
-    private boolean isAgeValid(float age) {
+    private boolean isAgeValid(double age) {
         return age >= 0;
     }
 
@@ -63,7 +59,7 @@ public class Animal implements Serializable {
         this.age = age;
     }
 
-    public float getAge() {
+    public double getAge() {
         return this.age;
     }
 
