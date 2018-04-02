@@ -42,8 +42,8 @@ $(document).ready(function(){
 
 
 /*! 
-	================= ^ Ranting Stops Here ^ ====================
-	==================== Code Starts Below ======================
+================= ^ Ranting Stops Here ^ ====================
+==================== Code Starts Below ======================
 */
 
 $(document).ready(function()
@@ -90,5 +90,3 @@ $("#menu-close").click(function(e)							//declare the element event ...'(e)' = 
 	$("#sidebar-wrapper").toggleClass("active");			//instead on click event toggle active CSS element
 	e.preventDefault(); 									//prevent the default action ("Do not remove as the code
 });															//Close 'function()'
-
-
