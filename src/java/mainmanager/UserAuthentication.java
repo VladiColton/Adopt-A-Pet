@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 @SessionScoped /*Each user gets new instance of the been during the session (as defined in "web.xml" 60 min)*/
 @ManagedBean (name = "userAuthentication")
 public class UserAuthentication implements Serializable{
-    String _mailAddress;
+    private String _mailAddress;
     String _password;
     
     public UserAuthentication()
