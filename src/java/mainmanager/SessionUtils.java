@@ -1,4 +1,4 @@
-package MainManager;
+package mainmanager;
 
 /**
  * Here we obtain a session for each user logged through the getUserId method thereby

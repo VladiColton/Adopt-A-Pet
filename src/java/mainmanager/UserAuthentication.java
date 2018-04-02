@@ -1,4 +1,4 @@
-package MainManager;
+package mainmanager;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
@@ -20,7 +20,7 @@ public class UserAuthentication implements Serializable{
     
     public UserAuthentication()
     {
-        _mailAddress = " ";
+        _mailAddress = "";
         _password = "";
         _autoErrMsg = "";
     }
