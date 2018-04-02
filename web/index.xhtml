@@ -55,21 +55,33 @@
 	<nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
 		<a id="menu-close" href="#" class="btn btn-danger pull-right hidden-md hidden-lg toggle"><i class="fa fa-times"></i></a>
-                    <li class="sidebar-brand">
-			<a href="#top">Adopt A Pet: <strong>Menu</strong></a>
-                    </li>
-                    <li>
-                        <a href="/" title="Go to Top">Home</a>
-                    </li>
-                    <li>
-                        <a href="/about" title="Go to About Us section">About Us</a>
-                    </li>
-                    <li>
-			<a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Login</a>
-                    </li>
-                    <div class="login-form">
-                        <img height="80" width="100" src="images/admin.png"></img>
-                    </div>
+                <li class="sidebar-brand">
+                    <a href="#top">Adopt A Pet: <strong>Menu</strong></a>
+                </li>
+                <li>
+                    <a href="/" title="Go to Top">Home</a>
+                </li>
+                <li>
+                    <a href="/about" title="Go to About Us section">About Us</a>
+                </li>
+                <li>
+                    <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Login</a>
+                </li>
+                <div class="login-form">
+                    <img height="80" width="100" src="images/admin.png"></img>
+                    <h:form class="login-details">
+                        <center>
+                            <h:outputText class="text-error" value="#{userAuthentication.autoErrorMSG}" />
+                            <h:outputText class="text-light" value="Email:" />
+                            <h:inputText class="form-control-light" id="email" value="#{userAuthentication.email}" autocomplete="off"></h:inputText>
+                            <h:message for="email"></h:message>
+                            <h:outputText class="text-light" value="Password:" />
+                            <h:inputSecret class="form-control-light" id="password" value="#{userAuthentication.password}" autocomplete="off"></h:inputSecret>
+                            <h:message for="password"></h:message>
+                        </center>
+                        <h:commandButton action="#{userAuthentication.validateEmailPassword}" value="Login"></h:commandButton>
+                    </h:form>
+                </div>
             </ul>
 	</nav>
 	<div class="container">
@@ -119,4 +131,3 @@
 	</div>
     </h:body>
 </html>
-
