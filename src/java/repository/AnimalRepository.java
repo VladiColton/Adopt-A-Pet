@@ -3,7 +3,7 @@ package repository;
 import javax.persistence.*;
 import entities.Animal;
 
-public class AnimalService {
+public class AnimalRepository {
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Adopt-A-PetPU");
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction tx = em.getTransaction();
