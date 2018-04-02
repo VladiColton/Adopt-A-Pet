@@ -20,7 +20,7 @@ public class UserAuthentication implements Serializable{
     
     public UserAuthentication()
     {
-        _mailAddress = "";
+        _mailAddress = " ";
         _password = "";
         _autoErrMsg = "";
     }
