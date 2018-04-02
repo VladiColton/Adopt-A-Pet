@@ -67,40 +67,40 @@ public class Animal implements Serializable {
         return this.age;
     }
 
-    public void setDescription(String newDescription) {
-        this.description = newDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDescription() {
         return this.description;
     }
 
-    public void setName(String newName) {
-        this.name = newName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public void setType(String newType) {
-        this.type = newType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getType() {
         return this.type;
     }
 
-    public void setSubType(String newSubType) {
-        this.subType = newSubType;
+    public void setSubType(String subType) {
+        this.subType = subType;
     }
 
     public String getSubType() {
         return this.subType;
     }
 
-    public void setOwner(Owner newOwner) {
-        this.owner = newOwner;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     public Owner getOwner() {
