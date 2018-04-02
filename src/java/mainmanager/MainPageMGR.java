@@ -1,6 +1,6 @@
-package MainManager;
+package mainmanager;
 
-import Entities.*;
+import entities.Animal;
 import java.io.Serializable;
 import java.util.LinkedList;
 import javax.faces.bean.ManagedBean;
