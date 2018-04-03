@@ -66,7 +66,7 @@ public class UserAuthentication implements Serializable{
         else
         {
             setAutoErrorMSG("Incorrect Email or Password!!");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Passowrd", "Please enter correct username and Password"));
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Passowrd", "Please enter correct username and Password"));
             return "index";
         }
     }

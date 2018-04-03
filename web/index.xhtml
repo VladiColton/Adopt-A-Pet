@@ -52,7 +52,7 @@
                                 <li><a href="#">Action2</a></li>
                                 <li><a href="#">Action3</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Someting Else</a></li>
+                                <li><a href="#">Something Else</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -83,23 +83,36 @@
                             <h:outputText class="text-error" value="#{userAuthentication.autoErrorMSG}" />
                             <h:outputText class="text-light" value="Email:" />
                             <h:inputText class="form-control-light" id="email" value="#{userAuthentication.email}" autocomplete="off"></h:inputText>
-                            <h:message for="email"></h:message>
                             <h:outputText class="text-light" value="Password:" />
                             <h:inputSecret class="form-control-light" id="password" value="#{userAuthentication.password}" autocomplete="off"></h:inputSecret>
-                            <h:message for="password"></h:message>
                         </center>
-                        <h:commandButton action="#{userAuthentication.validateEmailPassword}" value="Login"></h:commandButton>
+                        <h:commandButton action="#{userAuthentication.validateEmailPassword}" value="Login" ></h:commandButton>
                     </h:form>
                 </div>
             </ul>
 	</nav>
         <!--Animated cards-->
         <br></br><br></br><br></br><br></br><br></br>
-        <ui:repeat value="#{mainPageMGR.animals}" var="animal">
-            <div>
-                #{animal.name}
-            </div>
-        </ui:repeat>
+        <div class="animal-cards-container">
+            <ui:repeat value="#{mainPageMGR.animals}" var="animal">
+                <div class="hover panel" onmouseover="javascript:this.className += ' flip';" onmouseout="javascript:this.className = 'hover panel';">
+                    <!--Cards FRONT side content-->
+                    <div class="front">
+                        <div class="frontTitle">Title Front</div>
+                        <div class="frontLogo isas"></div>
+                        <div class="frontLocation">Front #{animal.name}</div>
+                    </div>
+                    <!--Cards BACK side content-->
+                    <div class="back">
+                        <div class="backTitle">Title Back</div>
+                        <div class="backParagraph">I'm animal description paragraph</div>
+                        <div class="backGoto">
+                            <a href="http://google.com" target="_blank" title="PetPanel">Open full info →</a>
+                        </div>
+                    </div>
+                </div>
+            </ui:repeat>
+        </div>
         <!--Hosting login pop-up-->
 	<div class="container">
             <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
