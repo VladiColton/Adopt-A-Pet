@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <meta charset="UTF-8"></meta>
         <title>Adopt a pet</title>
@@ -16,12 +17,15 @@
     </h:head>
     <h:body>
         <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"></link>
+        <!--Upper navigation bar-->
     	<nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <!--Upper navigation bar toggle-->
                     <a id="menu-toggle" href="#" class="nav-btn btn-dark btn-lg accordion-toggle pull-left">
                     <i class="fa fa-bars" style="color:#fff;"></i>
                     </a>
+                    <!--To-Top button (located at right bottom)-->
                     <a id="to-top" class="btn btn-lg btn-inverse" href="#top">
                         <span class="sr-only">Toggle to Top Navigation</span>
                         <i class="fa fa-chevron-up"></i>
@@ -29,14 +33,17 @@
                 </div>
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
+                        <!--Left side logo-->
                         <a class="navbar-brand" href="#">
                             <img height="20" width="20" src="images/animal1.png" class="img-responsive pull-left" alt="Responsive image"></img>
                             &nbsp;Adopt a Pet
                         </a>
+                        <!--Our location link-->
                         <li>
                             <a href="#">Our Location</a>
                         </li>
                     </ul>
+                    <!--Drop Down menu-->
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
@@ -52,6 +59,7 @@
                 </div>
             </div>
 	</nav>
+        <!--Left Slide bar-->
 	<nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
 		<a id="menu-close" href="#" class="btn btn-danger pull-right hidden-md hidden-lg toggle"><i class="fa fa-times"></i></a>
@@ -85,6 +93,14 @@
                 </div>
             </ul>
 	</nav>
+        <!--Animated cards-->
+        <br></br><br></br><br></br><br></br><br></br>
+        <ui:repeat value="#{mainPageMGR.animals}" var="animal">
+            <div>
+                #{animal.name}
+            </div>
+        </ui:repeat>
+        <!--Hosting login pop-up-->
 	<div class="container">
             <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
 		<div class="modal-dialog modal-default">

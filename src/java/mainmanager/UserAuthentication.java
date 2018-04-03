@@ -60,7 +60,7 @@ public class UserAuthentication implements Serializable{
         {
             setAutoErrorMSG("");
             HttpSession session = SessionUtils.getSession();
-            session.setAttribute("username", this._mailAddress);
+            session.setAttribute("useremail", this._mailAddress);
             return "index";
         }
         else

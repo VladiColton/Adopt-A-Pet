@@ -14,7 +14,6 @@ public class Animal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private double age;
     private String description;
     private String type;
