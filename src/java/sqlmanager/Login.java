@@ -12,18 +12,34 @@ import java.sql.*;
  * @author Vladi Colton
  */
 public class Login {
-    private Connection _conn = null;
-    private ResultSet _rs = null;
-    private PreparedStatement _pst = null;
-    
-    public Login()
+    public static boolean validateUser(String email, String password)
     {
-        this._conn = SQLiteConnection.connectDB();
-    }
-    
-    public boolean isDBConnected()
-    {
-        return this._conn != null ? true : false;
-        
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try
+        {
+            conn = SQLiteConnection.connectDB();
+            if (conn == null)
+                return false;
+            ps = conn.prepareStatement("SELECT email, password FROM users WHERE email=? and password=?");
+            ps.setString(1, email);
+            ps.setString(2, password);
+            
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next())
+            {
+                //result found, means valid inputs
+                return true;
+            }
+        }
+        catch(SQLException ex)
+        {
+        }
+        finally
+        {
+            SQLiteConnection.closeConnection(conn);
+        }
+        return false;
     }
 }

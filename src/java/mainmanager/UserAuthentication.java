@@ -2,9 +2,7 @@ package mainmanager;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import sqlmanager.*;
 
@@ -55,20 +53,18 @@ public class UserAuthentication implements Serializable{
     
     public String validateEmailPassword()
     {
-        boolean valid = false; //here to add db validation of user name and password
-        Login login = new Login();       
-        boolean isConnected = login.isDBConnected();
-
+        boolean valid = Login.validateUser(_mailAddress, _password); //here to add db validation of user name and password
+        
         if(valid)
         {
-            setAutoErrorMSG("");
+            this.setAutoErrorMSG("");
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("useremail", this._mailAddress);
             return "index";
         }
         else
         {
-            setAutoErrorMSG("Incorrect Email or Password!!");
+            this.setAutoErrorMSG("Incorrect Email or Password!!");
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Passowrd", "Please enter correct username and Password"));
             return "index";
         }
