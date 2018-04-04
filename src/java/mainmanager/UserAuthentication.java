@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import sqlmanager.*;
 
 /**
  * User authentication class responsible to authenticate users vs DB
@@ -55,7 +56,9 @@ public class UserAuthentication implements Serializable{
     public String validateEmailPassword()
     {
         boolean valid = false; //here to add db validation of user name and password
-        
+        Login login = new Login();       
+        boolean isConnected = login.isDBConnected();
+
         if(valid)
         {
             setAutoErrorMSG("");
