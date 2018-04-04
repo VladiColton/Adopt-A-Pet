@@ -1,52 +1,102 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 /**
  * Owner representation Class
- *
- * @author Vladi Colton
  */
-public class Owner {
+@Entity
+public class Owner implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String name;
-    private int phoneNumber;
+    private String description;
+    private Long phoneNumber;
     private String location;
 
+    @OneToMany
+    private List<Animal> animals;
+
     public Owner() {
-        this.name = "Anonymous";
-        this.location = "Unknown";
-        this.phoneNumber = 0;
     }
 
-    public Owner(String name, String location, int phoneNum) {
-        this.name = (name != null ? name : "Anonymous");
-        this.location = (location != null ? location : "Unknown");
+    public Owner(String name, String description, String location, Long phoneNum) {
+        this.name = name;
+        this.description = description;
+        this.location = location;
         this.phoneNumber = phoneNum;
     }
 
-    public void setName(String newName) {
-        this.name = (newName != null ? newName : "Anonymous");
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
-    public void setLocation(String newLocation) {
-        this.location = (newLocation != null ? newLocation : "Unknown");
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Long phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getLocation() {
-        return this.location;
+        return location;
     }
 
-    public void setPhoneNum(int newPhoneNum) {
-        this.phoneNumber = (newPhoneNum >= 0 ? newPhoneNum : 0);
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public int getPhoneNum() {
-        return this.phoneNumber;
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Owner)) {
+            return false;
+        }
+        Owner other = (Owner) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 }
