@@ -5,8 +5,6 @@ import javax.persistence.*;
 
 /**
  * Animal Representation Class
- *
- * @author Vladi Colton
  */
 @Entity
 public class Animal implements Serializable {
@@ -14,6 +12,7 @@ public class Animal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     private double age;
     private String description;
     private String type;
@@ -39,7 +38,7 @@ public class Animal implements Serializable {
         this.age = age;
     }
 
-    private boolean isAgeValid(double age) {
+    private static boolean isAgeValid(double age) {
         return age >= 0;
     }
 
