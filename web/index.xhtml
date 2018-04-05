@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta charset="UTF-8"></meta>
         <title>Adopt a pet</title>
@@ -73,7 +74,7 @@
                     <a href="/about" title="Go to About Us section">About Us</a>
                 </li>
                 <li>
-                    <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Login</a>
+                    <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Register</a>
                 </li>
                 <div class="login-form">
                     <img height="80" width="100" src="images/admin.png"></img>
@@ -82,17 +83,16 @@
                         <center>
                             <h:outputText class="text-error" value="#{userAuthentication.autoErrorMSG}" />
                             <h:outputText class="text-light" value="Email:" />
-                            <h:inputText class="form-control-light" id="email" value="#{userAuthentication.email}" autocomplete="off"></h:inputText>
+                            <h:inputText  class="form-control-light input-password-image" id="email" value="#{userAuthentication.email}" autocomplete="off">
                             <h:outputText class="text-light" value="Password:" />
-                            <h:inputSecret class="form-control-light" id="password" value="#{userAuthentication.password}" autocomplete="off"></h:inputSecret>
+                            <h:inputSecret class="form-control-light input-email-image" id="password" value="#{userAuthentication.password}" autocomplete="off" required="true"/>
                         </center>
-                        <h:commandButton action="#{userAuthentication.validateEmailPassword}" value="Login" ></h:commandButton>
+                        <h:commandButton class="btn btn-sm" action="#{userAuthentication.validateEmailPassword}" value="Login" ></h:commandButton>
                     </h:form>
                 </div>
             </ul>
 	</nav>
         <!--Animated cards-->
-        <br></br><br></br><br></br><br></br><br></br>
         <div class="animal-cards-container">
             <ui:repeat value="#{mainPageMGR.animals}" var="animal">
                 <div class="hover panel" onmouseover="javascript:this.className += ' flip';" onmouseout="javascript:this.className = 'hover panel';">
@@ -113,48 +113,66 @@
                 </div>
             </ui:repeat>
         </div>
-        <!--Hosting login pop-up-->
+        <!--User registration form pop-up-->
 	<div class="container">
             <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
 		<div class="modal-dialog modal-default">
                     <div class="modal-content">
-			<div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3>Login to Hosting Portal - Control Panel</h3>
-			</div>
-			<div class="modal-body">
-                            <article class="container-form center-block">
-				<!-- Form Content HERE! -->
-				<form method="post" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal" action="http://www.google.com" enctype="application/x-www-form-urlencoded">
-                                    <fieldset>
-					<!-- Name input-->
-					<div class="form-group">
-                                            <label class="sr-only" for="credential_0">Username: </label>
-                                            <div class="col-xs-12">
-						<input id="credential_0" name="credential_0" type="text" placeholder="Your Username" class="form-control"></input>
-                                            </div>
-					</div>
-					<!-- Email input-->
-					<div class="form-group">
-                                            <label class="sr-only" for="credential_1">Password: </label>
-                                            <div class="col-xs-12">
-						<input id="email" type="password" name="credential_1" value="" placeholder="Your Password" class="form-control"></input>
-                                            </div>
-					</div>
-					<!-- Form actions -->
-					<div class="form-group pull-right">
-                                            <div class="col-md-12 text-right">
-						<button type="submit" name="submit" value="Sign In" class="btn btn-lg">Submit</button>
-                                            </div>
-					</div>
-                                    </fieldset>
-				</form>
-                            </article>
-			</div>
-			<div class="modal-footer">
-                            Login Problems?
-                            <button type="submit" class="btn btn-dark" data-dismiss="modal" data-href="#collapseTwo" data-toggle="collapse" data-target="#collapseTwo" style="cursor:pointer;">Contact Me</button>
-			</div>
+                        <article class="container-form center-block">
+                            <!-- Form Content-->
+                            <h:form class="needs-validation">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3>New User Registration Form</h3>
+                                </div>
+                                <div class="modal-body" style="padding-bottom: 15%">
+                                    <!--First registration form row-->
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-2">
+                                          <label for="validationCustom01">First name</label>
+                                          <input type="text" class="form-control-custom" placeholder="First name" value="#{userRegistrationFormManager.firstName}" required="required"/>
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label for="validationCustom02">Last name</label>
+                                            <input type="text" class="form-control-custom" placeholder="Last name" value="#{userRegistrationFormManager.lastName}" required="required"/>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="validationCustom01">Telephone</label>
+                                            <input type="text" class="form-control-custom" placeholder="Phone Number" value="#{userRegistrationFormManager.phoneNumber}" required="required"/>
+                                        </div>
+                                    </div>
+                                    <!--Second registration form row-->
+                                    <div class="form-row padd">
+                                        <div class="col-md-6 mb-3">
+                                          <label>Email Address</label>
+                                          <input type="text" class="form-control-custom" placeholder="Email" value="#{userRegistrationFormManager.email}" required="required"/>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Password</label>
+                                            <input type="password" class="form-control-custom" value="#{userRegistrationFormManager.password}" placeholder="Password" required="required"/>
+                                        </div>
+                                    </div>
+                                    <h3 style="text-align:center;" class="form-row padd">Address Details</h3>
+                                    <hr style="height: 2px"/>
+                                    <!--Third registration form row-->
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                          <label>Street Address</label>
+                                          <input type="text" class="form-control-custom" placeholder="Street Address" value="#{userRegistrationFormManager.streetAddress}" required="required"/>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                          <label>City</label>
+                                          <input type="text" class="form-control-custom" placeholder="City" value="#{userRegistrationFormManager.city}" required="required"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="col-md-12 text-right">
+                                        <h:commandButton class="btn btn-lg" value="Sign-In" action="#{userRegistrationFormManager.upgateUserDetails}"/>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </article>
                     </div>
 		</div>
             </div>
