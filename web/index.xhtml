@@ -77,18 +77,32 @@
                     <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Register</a>
                 </li>
                 <div class="login-form">
-                    <img height="80" width="100" src="images/admin.png"></img>
-
-                    <h:form class="login-details">
-                        <center>
-                            <h:outputText class="text-error" value="#{userAuthentication.autoErrorMSG}" />
-                            <h:outputText class="text-light" value="Email:" />
-                            <h:inputText  class="form-control-light input-password-image" id="email" value="#{userAuthentication.email}" autocomplete="off"/>
-                            <h:outputText class="text-light" value="Password:" />
-                            <h:inputSecret class="form-control-light input-email-image" id="password" value="#{userAuthentication.password}" autocomplete="off" required="true"/>
-                        </center>
-                        <h:commandButton class="btn btn-sm" action="#{userAuthentication.validateEmailPassword}" value="Login" ></h:commandButton>
-                    </h:form>
+                    <!--Not Connected User view-->
+                    <h:panelGroup rendered="#{not userAuthentication.isUserConnected}">
+                        <img height="80" width="100" src="images/admin.png" />
+                        <h:form class="login-details">
+                            <center>
+                                <h:outputText class="text-error" value="#{userAuthentication.autoErrorMSG}" />
+                                <h:outputText class="text-light" value="Email:" />
+                                <h:inputText  class="form-control-light input-password-image" id="email" value="#{userAuthentication.email}" autocomplete="off"/>
+                                <h:outputText class="text-light" value="Password:" />
+                                <h:inputSecret class="form-control-light input-email-image" id="password" value="#{userAuthentication.password}" autocomplete="off"/>
+                            </center>
+                            <h:commandButton class="btn btn-sm" action="#{userAuthentication.validateEmailPassword}" value="Login" ></h:commandButton>
+                        </h:form>
+                    </h:panelGroup>
+                    <!--Connected User view-->
+                    <h:panelGroup rendered="#{userAuthentication.isUserConnected}">
+                        <img height="80" width="100" src="images/Erez.jpg" />
+                        <h:form class="login-details">
+                            <center>
+                                <h:outputText class="text-light" value="Welcome: #{userAuthentication.email}" />
+                                <h:commandButton class="btn btn-sm" actionListener="#{userAuthentication.logOut(ActionEvent)}" value="Logout2" ></h:commandButton>
+                                <h:commandButton class="btn btn-sm" actionListener="#{userAuthentication.logOut(ActionEvent)}" value="Logout" ></h:commandButton>
+                            </center>
+                        </h:form>
+                    </h:panelGroup>
+                    
                 </div>
             </ul>
 	</nav>

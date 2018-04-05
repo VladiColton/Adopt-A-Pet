@@ -3,6 +3,7 @@ package mainmanager;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 import sqlmanager.*;
 
@@ -16,12 +17,14 @@ public class UserAuthentication implements Serializable{
     private String _mailAddress;
     private String _password;
     private String _autoErrMsg;
+    private boolean _isUserConnected;
     
     public UserAuthentication()
     {
         _mailAddress = "";
         _password = "";
         _autoErrMsg = "";
+        _isUserConnected = false;
     }
     
     public void setEmail(String email)
@@ -51,6 +54,16 @@ public class UserAuthentication implements Serializable{
         this._autoErrMsg = msg;
     }
     
+    public boolean getIsUserConnected()
+    {
+        return _isUserConnected;
+    }
+    
+    public void logOut(ActionEvent event)
+    {
+        this._isUserConnected = false;
+    }
+    
     public String validateEmailPassword()
     {
         boolean valid = false;
@@ -62,13 +75,18 @@ public class UserAuthentication implements Serializable{
         
         if(valid)
         {
+            //Add here to create Owner object from
+            //the information in the DB and set in the session
             this.setAutoErrorMSG("");
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("useremail", this._mailAddress);
+            session.setAttribute("isUserConnected", this._isUserConnected);
+            this._isUserConnected = true;
             return "index";
         }
         else
         {
+            this._isUserConnected = false;
             this.setAutoErrorMSG("Incorrect Email or Password!!");
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Passowrd", "Please enter correct username and Password"));
             return "index";
