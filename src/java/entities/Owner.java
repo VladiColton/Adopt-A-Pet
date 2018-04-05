@@ -25,10 +25,11 @@ public class Owner implements Serializable {
     public Owner() {
     }
 
-    public Owner(String name, String location, Long phoneNum) {
+    public Owner(String name, String location, Long phoneNum, String email) {
         this.name = name;
         this.location = location;
         this.phoneNumber = phoneNum;
+        this.email = email;
     }
     
     public Long getId() {
