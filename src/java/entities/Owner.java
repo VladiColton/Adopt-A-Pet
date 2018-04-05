@@ -15,9 +15,9 @@ public class Owner implements Serializable {
     private Long id;
 
     private String name;
-    private String description;
     private Long phoneNumber;
     private String location;
+    private String email;
 
     @OneToMany
     private List<Animal> animals;
@@ -25,13 +25,12 @@ public class Owner implements Serializable {
     public Owner() {
     }
 
-    public Owner(String name, String description, String location, Long phoneNum) {
+    public Owner(String name, String location, Long phoneNum) {
         this.name = name;
-        this.description = description;
         this.location = location;
         this.phoneNumber = phoneNum;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -46,14 +45,6 @@ public class Owner implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Long getPhoneNumber() {
@@ -71,7 +62,7 @@ public class Owner implements Serializable {
     public void setLocation(String location) {
         this.location = location;
     }
-
+    
     public List<Animal> getAnimals() {
         return animals;
     }
@@ -79,7 +70,16 @@ public class Owner implements Serializable {
     public void setAnimals(List<Animal> animals) {
         this.animals = animals;
     }
+    
+    public String getEmail() {
+        return this.email;
+    }
 
+    public void setEmail(String email) {
+        if (email != null)
+            this.email = email;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -53,7 +53,12 @@ public class UserAuthentication implements Serializable{
     
     public String validateEmailPassword()
     {
-        boolean valid = Login.validateUser(_mailAddress, _password); //here to add db validation of user name and password
+        boolean valid = false;
+        
+        if(_mailAddress != null && _password != null)
+        {
+            valid = Login.validateUser(_mailAddress, _password); //validate user name and password with DB
+        }
         
         if(valid)
         {

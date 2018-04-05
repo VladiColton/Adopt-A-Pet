@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+
     /* smooth scrolling for scroll to top */
     $('#to-top').bind('click', function()
     {

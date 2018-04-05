@@ -22,17 +22,26 @@ a:hover{
 }
 
 /********************************/
-/*        Login Form            */
+/*    User Registration Form    */
 /********************************/
+.form-row.padd{
+    padding-top: 13%;
+}
+
 .login-form{
     margin: 30px 0px 0px 0px !important;
     padding: auto;
+    padding-bottom: 5%;
     
 }
 .login-form>img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.modal-header{
+    text-align: center;
 }
 
 .text-light
@@ -230,7 +239,7 @@ a:hover{
     background-color: rgba(0,  0,  0,  0.7);
 }
 .btn {
-    border-radius: 0px;
+    border-radius: 5px;
     overflow: hidden;
 	border:none;
 }
@@ -373,7 +382,7 @@ a:hover{
     outline: 0 none;
 }
 
-.form-control {
+.form-control-custom {
     background-color: #090909 !important;
     background-image: none;
     border: none;
@@ -394,7 +403,7 @@ a:hover{
     outline: none;
 }
 
-.form-control:hover {
+.form-control-custom:hover {
     border-color: rgba(100,  00,  00,  0.50);
     background-color: #222222 !important;
     background-image: none;
@@ -404,7 +413,7 @@ a:hover{
     -moz-box-shadow: 0 0 10px rgba(09,  09,  09,  0.8);
     box-shadow: 0 0 10px rgba(09,  09,  09,  0.8);
 }
-.form-control:focus {
+.form-control-custom:focus {
     border-color: rgba(22,  22,  22,  .75);
     outline: 0;
     outline: thin dotted 9;
@@ -437,6 +446,19 @@ a:hover{
     margin: 0px 0px 10px 0px !important;
 }
 
+.input-password-image { 
+  background-image: url('../images/passwordIcon.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.input-email-image { 
+  background-image: url('../images/emailIcon.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .form-control-light:hover {
     border-color: rgba(100,  00,  00,  0.50);
     background-color: #cccccc !important;
@@ -463,8 +485,8 @@ a:hover{
 /*          Custom Buttons      */
 /********************************/
 .btn.btn-lg {padding: 10px 40px;}
- 
- .navbar{
+.btn.btn-sm {padding: 5px 30px;}
+.navbar{
      border:none;
      border-radius: 0px;
  }
@@ -475,6 +497,7 @@ a:hover{
 .animal-cards-container {
   width:70%;
   margin:auto;
+  padding-top: 4%;
 }
 
 .panel .pad {
