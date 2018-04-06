@@ -4,14 +4,13 @@ import entities.Animal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.*;
 /**
  * Main Page manager class before user login
  * @author Vladi Colton
  */
 @RequestScoped
-@ManagedBean (name = "mainPageMGR")
+@ManagedBean (name = "mainPageMGR", eager = true)
 public class MainPageMGR implements Serializable {
     //private LinkedList<Animal> animals;
     private List<Animal> _animals;

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta charset="UTF-8"></meta>
         <title>Adopt a pet</title>
@@ -80,10 +81,10 @@
                 </h:panelGroup>
                 <h:panelGroup rendered="#{userAuthentication.isUserConnected}">
                     <li>
-                        <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Add New Animal</a>
+                        <a data-toggle="modal" data-href="#addNewAnimalModal" data-target="#addNewAnimalModal" style="cursor:pointer;">Add New Animal</a>
                     </li>
                     <li>
-                        <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Settings</a>
+                        <a data-toggle="modal" data-href="#userSettingsModal" data-target="#userSettingsModal" style="cursor:pointer;">Settings</a>
                     </li>
                 </h:panelGroup>
                 <div class="login-form">
@@ -98,7 +99,7 @@
                                 <h:outputText class="text-light" value="Password:" />
                                 <h:inputSecret class="form-control-light input-email-image" id="password" value="#{userAuthentication.password}" autocomplete="off"/>
                             </center>
-                            <h:commandButton class="btn btn-sm" action="#{userAuthentication.validateEmailPassword}" value="Login" ></h:commandButton>
+                            <h:commandButton class="btn btn-sm " actionListener="#{userAuthentication.validateEmailPassword(ActionEvent)}" value="Login" ></h:commandButton>
                         </h:form>
                     </h:panelGroup>
                     <!--Connected User view-->
@@ -106,12 +107,11 @@
                         <h:form  class="login-details" rendered="#{userAuthentication.isUserConnected}">
                             <img height="80" width="100" src="images/Erez.jpg" />
                             <center>
-                                <h:outputText class="text-light" style="display: block" value="Welcome: #{userAuthentication.email}" />
-                                <h:commandButton class="btn btn-default" action="#{userAuthentication.logout()}" value="Logout" ></h:commandButton>
+                                <h:outputText class="text-light" style="display: block; padding-top: 3%" value="Welcome: #{userAuthentication.email}" />
+                                <h:commandButton class="btn btn-sm" action="#{userAuthentication.logout()}" value="Logout" ></h:commandButton>
                             </center>
                         </h:form>
                     </h:panelGroup>
-                    
                 </div>
             </ul>
 	</nav>
@@ -152,27 +152,27 @@
                                     <!--First registration form row-->
                                     <div class="form-row">
                                         <div class="col-md-4 mb-2">
-                                          <label for="validationCustom01">First name</label>
-                                          <input type="text" class="form-control-custom" placeholder="First name" value="#{userRegistrationFormManager.firstName}" required="required"/>
+                                            <label for="validationCustom01">First name</label>
+                                            <h:inputText class="form-control-custom" p:placeholder="First Name" value="#{userRegistrationFormManager.firstName}" autocomplete="off" required="true" />
                                         </div>
                                         <div class="col-md-4 mb-2">
                                             <label for="validationCustom02">Last name</label>
-                                            <input type="text" class="form-control-custom" placeholder="Last name" value="#{userRegistrationFormManager.lastName}" required="required"/>
+                                            <h:inputText class="form-control-custom" p:placeholder="Last Name" value="#{userRegistrationFormManager.lastName}" autocomplete="off" required="true" />
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="validationCustom01">Telephone</label>
-                                            <input type="text" class="form-control-custom" placeholder="Phone Number" value="#{userRegistrationFormManager.phoneNumber}" required="required"/>
+                                            <h:inputText class="form-control-custom" p:placeholder="Phone Number" value="#{userRegistrationFormManager.phoneNumber}" autocomplete="off" required="true" />
                                         </div>
                                     </div>
                                     <!--Second registration form row-->
                                     <div class="form-row padd">
                                         <div class="col-md-6 mb-3">
-                                          <label>Email Address</label>
-                                          <input type="text" class="form-control-custom" placeholder="Email" value="#{userRegistrationFormManager.email}" required="required"/>
+                                            <label>Email Address</label>
+                                            <h:inputText class="form-control-custom" p:placeholder="Email" value="#{userRegistrationFormManager.email}" autocomplete="off" required="true" />
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label>Password</label>
-                                            <input type="password" class="form-control-custom" value="#{userRegistrationFormManager.password}" placeholder="Password" required="required"/>
+                                            <h:inputSecret class="form-control-custom" p:placeholder="Password" id="password" value="#{userRegistrationFormManager.password}" autocomplete="off" required="true" />
                                         </div>
                                     </div>
                                     <h3 style="text-align:center;" class="form-row padd">Address Details</h3>
@@ -181,17 +181,17 @@
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                           <label>Street Address</label>
-                                          <input type="text" class="form-control-custom" placeholder="Street Address" value="#{userRegistrationFormManager.streetAddress}" required="required"/>
+                                          <h:inputText class="form-control-custom" p:placeholder="Street Address" value="#{userRegistrationFormManager.streetAddress}" autocomplete="off" required="true" />
                                         </div>
                                         <div class="col-md-6 mb-3">
                                           <label>City</label>
-                                          <input type="text" class="form-control-custom" placeholder="City" value="#{userRegistrationFormManager.city}" required="required"/>
+                                          <h:inputText class="form-control-custom" p:placeholder="City" value="#{userRegistrationFormManager.city}" autocomplete="off" required="true" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <div class="col-md-12 text-right">
-                                        <h:commandButton class="btn btn-lg" value="Sign-In" action="#{userRegistrationFormManager.upgateUserDetails}"/>
+                                        <h:commandButton class="btn btn-lg" value="Sign-In" action="#{userRegistrationFormManager.upgateUserDetails(ActionEvent)}" />
                                     </div>
                                 </div>
                             </h:form>
@@ -201,6 +201,119 @@
             </div>
 	</div>
         <!--Users personal Settings Update pop-up-->
-        
+        <h:panelGroup>
+            <h:form rendered="#{userAuthentication.isUserConnected}">
+                <div class="container">
+                    <div class="modal fade" id="userSettingsModal" tabindex="-1" role="dialog" aria-labelledby="userSettingsModal" aria-hidden="true">
+                        <div class="modal-dialog modal-default">
+                            <div class="modal-content">
+                                <article class="container-form center-block">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3>User Settings Panel</h3>
+                                    </div>
+                                    <div class="modal-body" style="padding-bottom: 15%">
+                                        General user information: + Will add here some information from the session object by "User Authentication.java" class.
+                                        <h3 style="text-align:center;" class="form-row">Update Information</h3>
+                                        <hr style="height: 2px"/>
+                                        <!--Update info form-->
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom01">Telephone</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Phone Number" value="#{userUpdateInformationFormManager.phoneNumber}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label>Email Address</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Email Address" value="#{userUpdateInformationFormManager.email}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label>Password</label>
+                                                 <h:inputSecret class="form-control-custom" p:placeholder="Password" id="password" value="#{userUpdateInformationFormManager.password}" autocomplete="off" required="true" />
+                                            </div>
+                                        </div>
+                                        <div class="form-row padd">
+                                            <div class="col-md-6 mb-3">
+                                              <label>Street Address</label>
+                                              <h:inputText class="form-control-custom" p:placeholder="Street Address" value="#{userUpdateInformationFormManager.streetAddress}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                              <label>City</label>
+                                              <h:inputText class="form-control-custom" p:placeholder="City" value="#{userUpdateInformationFormManager.city}" autocomplete="off" required="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="col-md-12 text-center">
+                                            <h:commandButton class="btn btn-lg" value="Save Changes" actionListener="#{userUpdateInformationFormManager.updateRregistrationInfo(ActionEvent)}" />
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </h:panelGroup>
+        <!--Add New Animal Form-->
+        <h:panelGroup>
+            <h:form rendered="#{userAuthentication.isUserConnected}">
+                <div class="container">
+                    <div class="modal fade" id="addNewAnimalModal" tabindex="-1" role="dialog" aria-labelledby="addNewAnimalModal" aria-hidden="true">
+                        <div class="modal-dialog modal-default">
+                            <div class="modal-content">
+                                <article class="container-form center-block">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3>Add New Animal</h3>
+                                    </div>
+                                    <div class="modal-body" style="padding-bottom: 5%">
+                                        General add new animal instructions information: + Will add here some information from the session object by "User Authentication.java" class.
+                                        <!--Update info form-->
+                                        <div class="form-row" style="padding-top: 2%;">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom01">Name</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Name" value="#{newAnimalRegirtrationFormManager.name}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label>Age</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Age" value="#{newAnimalRegirtrationFormManager.age}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label>Type</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Type" value="#{newAnimalRegirtrationFormManager.type}" autocomplete="off" required="true" />
+                                            </div>
+                                        </div>
+                                        <div class="form-row padd">
+                                            <div class="col-md-6 mb-3">
+                                                <label>Breed</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Breed" value="#{newAnimalRegirtrationFormManager.subType}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                              <label>Additional Contact Info</label>
+                                              <h:outputText class="text-error" value="Here - will be added owner location" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                              <label>Phone Number</label>
+                                              <h:outputText class="text-error" value="Here - will be added owner Phone" />
+                                            </div>
+                                        </div>
+                                        <h3 style="text-align:center; padding-top: 10%;" class="form-row">Animal Description</h3>
+                                        <hr style="height: 2px"/>
+                                        <div class="form-row">
+                                            <h:inputTextarea style="height: 100px; padding-bottom: 0px;" class="form-control-custom" p:placeholder="Full Animal Description" value="#{newAnimalRegirtrationFormManager.description}" required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="col-md-12 text-center">
+                                            <h:commandButton class="btn btn-lg" value="Save-Changes" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}" />
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </h:panelGroup>
     </h:body>
 </html>

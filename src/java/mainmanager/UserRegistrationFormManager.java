@@ -1,20 +1,20 @@
 package mainmanager;
 
 import entities.Owner;
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
+import javax.faces.bean.*;
 
 /**
  * User Registration Form manager bean (Connects UI to User class)
  * @author Vladi Colton
  */
 @SessionScoped /*Each user gets new instance of the been during the session (as defined in "web.xml" 60 min)*/
-@ManagedBean (name = "userRegistrationFormManager")
+@ManagedBean (name = "userRegistrationFormManager", eager = true)
 public class UserRegistrationFormManager implements Serializable{
     private String _lastName;
     private String _firstName;
-    private Long _phoneNumber;
+    private long _phoneNumber;
     private String _streetAddress;
     private String _city;
     private String _email;
@@ -63,11 +63,11 @@ public class UserRegistrationFormManager implements Serializable{
         this._firstName = newFirstName;
     }
     
-    public Long getPhoneNumber() {
+    public long getPhoneNumber() {
         return _phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this._phoneNumber = phoneNumber;
     }
 
@@ -87,7 +87,7 @@ public class UserRegistrationFormManager implements Serializable{
         this._city = city;
     }
     
-    public String upgateUserDetails()
+    public void upgateUserDetails(ActionEvent event)
     {
         _newOwner.setName(this._firstName + this._lastName); //Update Name
         _newOwner.setLocation(this._streetAddress + this._city); //Update Location
@@ -98,7 +98,6 @@ public class UserRegistrationFormManager implements Serializable{
         //If not exists add new user/owner to the DB according to the details recieved.
         //SQL Stuff
         
-        
-        return "index";
+
     }
 }

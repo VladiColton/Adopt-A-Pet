@@ -15,7 +15,7 @@ public class Owner implements Serializable {
     private Long id;
 
     private String name;
-    private Long phoneNumber;
+    private long phoneNumber;
     private String location;
     private String email;
 
@@ -25,7 +25,7 @@ public class Owner implements Serializable {
     public Owner() {
     }
 
-    public Owner(String name, String location, Long phoneNum, String email) {
+    public Owner(String name, String location, long phoneNum, String email) {
         this.name = name;
         this.location = location;
         this.phoneNumber = phoneNum;
@@ -48,11 +48,11 @@ public class Owner implements Serializable {
         this.name = name;
     }
 
-    public Long getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
