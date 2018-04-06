@@ -68,19 +68,29 @@
                     <a href="#top">Adopt A Pet: <strong>Menu</strong></a>
                 </li>
                 <li>
-                    <a href="/" title="Go to Top">Home</a>
+                    <a href="/Adopt-A-Pet/faces/index.xhtml" title="Go to Top">Home</a>
                 </li>
                 <li>
                     <a href="/about" title="Go to About Us section">About Us</a>
                 </li>
-                <li>
-                    <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Register</a>
-                </li>
+                <h:panelGroup rendered="#{not userAuthentication.isUserConnected}">
+                    <li>
+                        <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Register</a>
+                    </li>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{userAuthentication.isUserConnected}">
+                    <li>
+                        <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Add New Animal</a>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;">Settings</a>
+                    </li>
+                </h:panelGroup>
                 <div class="login-form">
                     <!--Not Connected User view-->
-                    <h:panelGroup rendered="#{not userAuthentication.isUserConnected}">
-                        <img height="80" width="100" src="images/admin.png" />
-                        <h:form class="login-details">
+                    <h:panelGroup>
+                        <h:form class="login-details" rendered="#{not userAuthentication.isUserConnected}">
+                            <img height="80" width="100" src="images/admin.png" />
                             <center>
                                 <h:outputText class="text-error" value="#{userAuthentication.autoErrorMSG}" />
                                 <h:outputText class="text-light" value="Email:" />
@@ -92,13 +102,12 @@
                         </h:form>
                     </h:panelGroup>
                     <!--Connected User view-->
-                    <h:panelGroup rendered="#{userAuthentication.isUserConnected}">
-                        <img height="80" width="100" src="images/Erez.jpg" />
-                        <h:form class="login-details">
+                    <h:panelGroup>  
+                        <h:form  class="login-details" rendered="#{userAuthentication.isUserConnected}">
+                            <img height="80" width="100" src="images/Erez.jpg" />
                             <center>
-                                <h:outputText class="text-light" value="Welcome: #{userAuthentication.email}" />
-                                <h:commandButton class="btn btn-sm" actionListener="#{userAuthentication.logOut(ActionEvent)}" value="Logout2" ></h:commandButton>
-                                <h:commandButton class="btn btn-sm" actionListener="#{userAuthentication.logOut(ActionEvent)}" value="Logout" ></h:commandButton>
+                                <h:outputText class="text-light" style="display: block" value="Welcome: #{userAuthentication.email}" />
+                                <h:commandButton class="btn btn-default" action="#{userAuthentication.logout()}" value="Logout" ></h:commandButton>
                             </center>
                         </h:form>
                     </h:panelGroup>
@@ -191,5 +200,7 @@
 		</div>
             </div>
 	</div>
+        <!--Users personal Settings Update pop-up-->
+        
     </h:body>
 </html>

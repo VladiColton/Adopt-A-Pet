@@ -3,7 +3,6 @@ package mainmanager;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 import sqlmanager.*;
 
@@ -59,11 +58,6 @@ public class UserAuthentication implements Serializable{
         return _isUserConnected;
     }
     
-    public void logOut(ActionEvent event)
-    {
-        this._isUserConnected = false;
-    }
-    
     public String validateEmailPassword()
     {
         boolean valid = false;
@@ -99,6 +93,7 @@ public class UserAuthentication implements Serializable{
 	HttpSession session = SessionUtils.getSession();
         this._mailAddress = "";
         this._password = "";
+        this._isUserConnected = false;
 	session.invalidate();
         return "index.xhtml?faces-redirect=true";
     }
