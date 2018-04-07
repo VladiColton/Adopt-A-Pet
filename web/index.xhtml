@@ -16,6 +16,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/main.js"></script>
         
+        
     </h:head>
     <h:body>
         <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"></link>
@@ -117,7 +118,7 @@
 	</nav>
         <!--Animated cards-->
         <div class="animal-cards-container">
-            <ui:repeat value="#{mainPageMGR.animals}" var="animal">
+            <ui:repeat value="#{mainPageMGR.animals}" var="animal" varStatus="status">
                 <div class="hover panel" onmouseover="javascript:this.className += ' flip';" onmouseout="javascript:this.className = 'hover panel';">
                     <!--Cards FRONT side content-->
                     <div class="front">
@@ -128,10 +129,26 @@
                     <!--Cards BACK side content-->
                     <div class="back">
                         <div class="backTitle">Title Back</div>
-                        <div class="backParagraph">I'm animal description paragraph</div>
+                        <div class="backParagraph">I'm animal description paragraph #{animal.name}</div>
                         <div class="backGoto">
-                            <a href="http://google.com" target="_blank" title="PetPanel">Open full info →</a>
+                            <a id="pet-desc-link" target="_blank" onclick="openFullAnimalDescription(#{status.index})" title="PetPanel">Open full info →</a>
                         </div>
+                    </div>
+                </div>
+                <!--Cards Overlay with full description-->
+                <div id="overlay#{status.index}" class="overlay" onclick="closeFullAnimalDescription(#{status.index})">
+                    <div class="enlargedAnimalCard">
+                        <h:graphicImage class="enlargedAnimalImage" value="images/DefaultAnumalImage.png" />
+                        <div class="enlargedCardContent">
+                            <h4>Name: #{animal.name}</h4>
+                            <h4>Age: #{animal.age} yrs.</h4>
+                            <h4>Breed: #{animal.type}, #{animal.subType}</h4>
+                            <h4>Description:</h4>
+                            <h:outputText class="mainAnimalDetails" value="#{animal.description}" />
+                            <h4>Contact Info:</h4><h:outputText value="Owner Name: #{animal.ownerName}, Owner Phone number: #{animal.ownerPhoneNum}" />
+                        </div>
+                        <div id="googleMap#{status.index}" style="width:100%;height:200px;"></div>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcJMsyeLLERuchKUu9LNTZB4Xo7jkzqEQ&amp;callback=myMap"></script>
                     </div>
                 </div>
             </ui:repeat>

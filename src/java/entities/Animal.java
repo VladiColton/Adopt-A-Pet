@@ -101,6 +101,15 @@ public class Animal implements Serializable {
         return this.owner;
     }
     
+    public String getOwnerName()
+    {
+        return this.owner != null ? this.owner.getName() : "Owner obj is NULL (in Animal Class)";
+    }
+    public long getOwnerPhoneNum()
+    {
+        return this.owner != null ? this.owner.getPhoneNumber() : 0;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
