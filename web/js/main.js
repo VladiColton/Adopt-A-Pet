@@ -69,9 +69,8 @@ $(document).ready(function()
 });
 
 
-var globalAnimalCardIndexSelected = 0;
-var mapsGlobal = [];
-var markers = [];
+
+
 function openFullAnimalDescription(index)
 {
     let id="overlay"+index.toString();
@@ -84,15 +83,16 @@ function closeFullAnimalDescription(index) {
 }
 
 //Google maps API Callback function
-function myMap() 
+var globalAnimalCardIndexSelected = 0;
+var maps = [];
+function myMap()
 {
-    console.log("Maps index is: " + globalAnimalCardIndexSelected);
-    var mapProp ={ center:new google.maps.LatLng(51.508742,-0.120850), zoom:5 };
-    var map = new google.maps.Map(document.getElementById("googleMap"+0),mapProp);
-    var map1 = new google.maps.Map(document.getElementById("googleMap"+1),mapProp);
-    var map2 = new google.maps.Map(document.getElementById("googleMap"+2),mapProp);
-    var map3 = new google.maps.Map(document.getElementById("googleMap"+3),mapProp);
-    //globalAnimalCardIndexSelected++;
+    globalAnimalCardIndexSelected++;
+    var mapProp ={center:new google.maps.LatLng(51.508742,-0.120850), zoom:5};
+    for(var i = 0, length = globalAnimalCardIndexSelected; i < length; i++)
+    {
+        maps[i] = new google.maps.Map(document.getElementById("googleMap"+i),mapProp);
+    }
 }
 
 // Closes the sidebar menu on menu-close button click event
