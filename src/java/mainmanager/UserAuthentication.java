@@ -1,8 +1,8 @@
 package mainmanager;
 
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
+import javax.faces.bean.*;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 import sqlmanager.*;
 
@@ -11,17 +11,23 @@ import sqlmanager.*;
  * @author Vladi Colton
  */
 @SessionScoped /*Each user gets new instance of the been during the session (as defined in "web.xml" 60 min)*/
-@ManagedBean (name = "userAuthentication")
+@ManagedBean (name = "userAuthentication", eager = true)
 public class UserAuthentication implements Serializable{
     private String _mailAddress;
     private String _password;
     private String _autoErrMsg;
+    private boolean _isUserConnected;
     
     public UserAuthentication()
     {
         _mailAddress = "";
         _password = "";
         _autoErrMsg = "";
+        _isUserConnected = false;
+        
+        //Set user session Attributes to stay connected during session
+        HttpSession session = SessionUtils.getSession();
+        session.setAttribute("isUserConnected", this._isUserConnected);
     }
     
     public void setEmail(String email)
@@ -51,7 +57,13 @@ public class UserAuthentication implements Serializable{
         this._autoErrMsg = msg;
     }
     
-    public String validateEmailPassword()
+    public boolean getIsUserConnected()
+    {
+        boolean test = SessionUtils.isUserConnected();
+        return SessionUtils.isUserConnected();
+    }
+    
+    public void validateEmailPassword(ActionEvent event)
     {
         boolean valid = false;
         
@@ -62,16 +74,19 @@ public class UserAuthentication implements Serializable{
         
         if(valid)
         {
+            //Add here to create Owner object from
+            //the information in the DB and set in the session
             this.setAutoErrorMSG("");
+            this._isUserConnected = true;
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("useremail", this._mailAddress);
-            return "index";
+            session.setAttribute("isUserConnected", this._isUserConnected);
         }
         else
         {
+            this._isUserConnected = false;
             this.setAutoErrorMSG("Incorrect Email or Password!!");
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Passowrd", "Please enter correct username and Password"));
-            return "index";
         }
     }
     
@@ -81,6 +96,8 @@ public class UserAuthentication implements Serializable{
 	HttpSession session = SessionUtils.getSession();
         this._mailAddress = "";
         this._password = "";
+        this.setAutoErrorMSG("");
+        this._isUserConnected = false;
 	session.invalidate();
         return "index.xhtml?faces-redirect=true";
     }
