@@ -68,9 +68,6 @@ $(document).ready(function()
     });
 });
 
-
-
-
 function openFullAnimalDescription(index)
 {
     let id="overlay"+index.toString();
@@ -88,7 +85,14 @@ var maps = [];
 function myMap()
 {
     globalAnimalCardIndexSelected++;
-    var mapProp ={center:new google.maps.LatLng(51.508742,-0.120850), zoom:5};
+    var mapProp ={
+        center:new google.maps.LatLng(51.508742,-0.120850),
+        zoom:5,
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false,
+        zoomControl: false
+    };
     for(var i = 0, length = globalAnimalCardIndexSelected; i < length; i++)
     {
         maps[i] = new google.maps.Map(document.getElementById("googleMap"+i),mapProp);
