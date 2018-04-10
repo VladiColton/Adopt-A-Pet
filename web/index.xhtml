@@ -43,7 +43,7 @@
                         </a>
                         <!--Our location link-->
                         <li>
-                            <a href="#">Our Location</a>
+                            <a data-toggle="modal" data-href="#ourLocationModal" data-target="#ourLocationModal" style="cursor:pointer;">Our Location</a>
                         </li>
                     </ul>
                     <!--Drop Down menu-->
@@ -73,7 +73,7 @@
                     <a href="/Adopt-A-Pet/faces/index.xhtml" title="Go to Top">Home</a>
                 </li>
                 <li>
-                    <a href="/about" title="Go to About Us section">About Us</a>
+                    <a data-toggle="modal" data-href="#aboutUsModal" data-target="#aboutUsModal" style="cursor:pointer;">About Us</a>
                 </li>
                 <h:panelGroup rendered="#{not userAuthentication.isUserConnected}">
                     <li>
@@ -116,6 +116,22 @@
                 </div>
             </ul>
 	</nav>
+        <!--Our Location Form-->
+        <div class="container">
+            <div class="modal fade" id="ourLocationModal" tabindex="-1" role="dialog" aria-labelledby="ourLocationModal" aria-hidden="true">
+                <div class="modal-dialog modal-default">
+                    <div class="modal-content">
+                        <article class="container-form center-block">
+                            <div class="modal-header"></div>
+                            <div class="modal-body" style="padding-bottom: 5%">
+                                <div id="googleMapOurLocation" style="width:100%;height:200px;"></div>
+                            </div>
+                            <div class="modal-footer"></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--Animated cards-->
         <div class="animal-cards-container">
             <ui:repeat value="#{mainPageMGR.animals}" var="animal" varStatus="status">
@@ -332,5 +348,27 @@
                 </div>
             </h:form>
         </h:panelGroup>
+        <!--About Us Form-->
+        <div class="container">
+            <div class="modal fade" id="aboutUsModal" tabindex="-1" role="dialog" aria-labelledby="aboutUsModal" aria-hidden="true">
+                <div class="modal-dialog modal-default">
+                    <div class="modal-content">
+                        <article class="container-form center-block">
+                            <div class="modal-header"></div>
+                            <div class="modal-body" style="padding-bottom: 5%">
+                                <h:outputText value="Adopt-a-Pet is a Israel’s largest non-profit pet-adoption web service that advocates pet adoption, 
+                                gathering information from over 12,000 pet shelters in the U.S. and Canada, and presenting adoptable pet 
+                                data in a searchable data base to facilitate pet adoption. Adopt-a-pet.com is registered in Redondo 
+                                Beach, California, as Humane America Animal Foundation. The web site allows people to sign up to receive 
+                                an email when a pet that satisfies their criteria appears in a local shelter. Adopt-a-Pet.com also contains 
+                                information on pet care for first-time pet owners and publishes a newsletter. The web site also lists 
+                                volunteer opportunities and promotes spaying and neutering of the pets." />
+                            </div>
+                            <div class="modal-footer"></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>

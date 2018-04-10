@@ -97,7 +97,26 @@ function myMap()
     {
         maps[i] = new google.maps.Map(document.getElementById("googleMap"+i),mapProp);
     }
+    var map2= new google.maps.Map(document.getElementById("googleMapOurLocation"),mapProp);
+    
+    var geocoder = new google.maps.Geocoder();
+    geocodeAddress(geocoder, map2);
 }
+
+function geocodeAddress(geocoder, resultsMap) {
+        var address = 'Haifa, Israel'; //document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
 
 // Closes the sidebar menu on menu-close button click event
 $("#menu-close").click(function(e) //declare the element event ...'(e)' = event (shorthand)
