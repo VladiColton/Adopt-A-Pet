@@ -162,6 +162,7 @@
                             <h4>Description:</h4>
                             <h:outputText class="mainAnimalDetails" value="#{animal.description}" />
                             <h4>Contact Info:</h4><h:outputText value="Owner Name: #{animal.ownerName}, Owner Phone number: #{animal.ownerPhoneNum}" />
+                            <h4 id="addressGeoLocation#{status.index}">#{animal.ownerAddress}</h4>
                         </div>
                         <div id="googleMap#{status.index}" style="width:100%;height:200px;"></div>
                         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcJMsyeLLERuchKUu9LNTZB4Xo7jkzqEQ&amp;callback=myMap"></script>

@@ -18,7 +18,7 @@ public class MainPageMGR implements Serializable {
     public MainPageMGR()
     {
         this._animals = new ArrayList<>();
-        this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_01", 10));
+        this._animals.add(new Animal(new Owner("Sivan", "Eilat, Israel", 509062183, "Sivi@Sivi.com"), "testAnimal", "type1", "subtype", "Animal_01", 10));
         this._animals.add(new Animal(new Owner("Vladi Colton", "Nesher", 546903018, "Vladi@Vladi.com"), "testAnimal", "type1", "subtype", "Animal_02", 10));
         this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_03", 10));
         this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_04", 10));

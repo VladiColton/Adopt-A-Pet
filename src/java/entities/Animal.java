@@ -109,6 +109,10 @@ public class Animal implements Serializable {
     {
         return this.owner != null ? this.owner.getPhoneNumber() : 0;
     }
+    public String getOwnerAddress()
+    {
+        return this.owner != null ? this.owner.getLocation() : "Israel";
+    }
     
     @Override
     public int hashCode() {
