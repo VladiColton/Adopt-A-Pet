@@ -82,6 +82,7 @@ function closeFullAnimalDescription(index) {
 //Google maps API Callback function
 var globalAnimalCardIndexSelected = 0;
 var maps = [];
+var oneTimeSetForOurLocation = true;
 function myMap()
 {
     globalAnimalCardIndexSelected++;
@@ -96,13 +97,37 @@ function myMap()
     for(var i = 0, length = globalAnimalCardIndexSelected; i < length; i++)
     {
         maps[i] = new google.maps.Map(document.getElementById("googleMap"+i),mapProp);
+        let geocoder = new google.maps.Geocoder();
+        geocodeAddress(geocoder, maps[i], $("#addressGeoLocation"+i).text());
     }
+    
+    //Only one time set for our-location window
+
+        var geocoder2 = new google.maps.Geocoder();
+        var map2= new google.maps.Map(document.getElementById("googleMapOurLocation"),mapProp);
+        geocodeAddress(geocoder2, map2, null);
+
+}
+
+function geocodeAddress(geocoder, resultsMap, geoAddress) 
+{
+    var address = (geoAddress != null ? geoAddress : 'Haifa, Israel'); //document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
 }
 
 // Closes the sidebar menu on menu-close button click event
 $("#menu-close").click(function(e) //declare the element event ...'(e)' = event (shorthand)
 {
-	// - will not work otherwise")
 	$("#sidebar-wrapper").toggleClass("active"); //instead on click event toggle active CSS element
 	e.preventDefault();  //prevent the default action
 });

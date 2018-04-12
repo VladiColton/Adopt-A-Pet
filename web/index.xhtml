@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta charset="UTF-8"></meta>
@@ -15,8 +14,6 @@
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/main.js"></script>
-        
-        
     </h:head>
     <h:body>
         <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"></link>
@@ -43,7 +40,7 @@
                         </a>
                         <!--Our location link-->
                         <li>
-                            <a href="#">Our Location</a>
+                            <a data-toggle="modal" data-href="#ourLocationModal" data-target="#ourLocationModal" style="cursor:pointer;">Our Location</a>
                         </li>
                     </ul>
                     <!--Drop Down menu-->
@@ -73,7 +70,7 @@
                     <a href="/Adopt-A-Pet/faces/index.xhtml" title="Go to Top">Home</a>
                 </li>
                 <li>
-                    <a href="/about" title="Go to About Us section">About Us</a>
+                    <a data-toggle="modal" data-href="#aboutUsModal" data-target="#aboutUsModal" style="cursor:pointer;">About Us</a>
                 </li>
                 <h:panelGroup rendered="#{not userAuthentication.isUserConnected}">
                     <li>
@@ -116,22 +113,40 @@
                 </div>
             </ul>
 	</nav>
+        <!--Our Location Form-->
+        <div class="container">
+            <div class="modal fade" id="ourLocationModal" tabindex="-1" role="dialog" aria-labelledby="ourLocationModal" aria-hidden="true">
+                <div class="modal-dialog modal-default">
+                    <div class="modal-content">
+                        <article class="container-form center-block">
+                            <div class="modal-header"></div>
+                            <div class="modal-body" style="padding-bottom: 5%">
+                                <div id="googleMapOurLocation" style="width:100%;height:200px;"></div>
+                            </div>
+                            <div class="modal-footer"></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--Animated cards-->
         <div class="animal-cards-container">
             <ui:repeat value="#{mainPageMGR.animals}" var="animal" varStatus="status">
                 <div class="hover panel" onmouseover="javascript:this.className += ' flip';" onmouseout="javascript:this.className = 'hover panel';">
                     <!--Cards FRONT side content-->
                     <div class="front">
-                        <div class="frontTitle">Title Front</div>
+                        <div class="frontTitle">#{animal.name}</div>
                         <div class="frontLogo isas"></div>
-                        <div class="frontLocation">Front #{animal.name}</div>
+                        <div class="frontLocation">#{animal.type} (#{animal.age})</div>
                     </div>
                     <!--Cards BACK side content-->
                     <div class="back">
-                        <div class="backTitle">Title Back</div>
-                        <div class="backParagraph">I'm animal description paragraph #{animal.name}</div>
+                        <div class="backTitle">#{animal.type}</div>
+                        <div class="backParagraph">Hi<h:outputText value="#{userAuthentication.isUserConnected ? userAuthentication.email : ''}" />, <br /><h:outputText value="My name is:" style="font-weight:bold" /> #{animal.name} (#{animal.age})<br /><h:outputText value="My location is:" style="font-weight:bold" /> #{animal.ownerAddress}<br /><h:outputText value="Owners Contact information:" style="font-weight:bold" /> Name:#{animal.ownerName}, Phone: #{animal.ownerPhoneNum}<br /><br />Come Adopt Me!</div>
+                        
                         <div class="backGoto">
                             <a id="pet-desc-link" target="_blank" onclick="openFullAnimalDescription(#{status.index})" title="PetPanel">Open full info →</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -140,14 +155,15 @@
                     <div class="enlargedAnimalCard">
                         <h:graphicImage class="enlargedAnimalImage" value="images/DefaultAnumalImage.png" />
                         <div class="enlargedCardContent">
-                            <h4>Name: #{animal.name}</h4>
-                            <h4>Age: #{animal.age} yrs.</h4>
-                            <h4>Breed: #{animal.type}, #{animal.subType}</h4>
-                            <h4>Description:</h4>
+                            <h4><h:outputText value="Name:" style="font-weight:bold" /> #{animal.name}</h4>
+                            <h4><h:outputText value="Age:" style="font-weight:bold" /> #{animal.age} yrs.</h4>
+                            <h4><h:outputText value="Breed:" style="font-weight:bold" /> #{animal.type}, #{animal.subType}</h4>
+                            <h4><h:outputText value="Description:" style="font-weight:bold" /></h4>
                             <h:outputText class="mainAnimalDetails" value="#{animal.description}" />
-                            <h4>Contact Info:</h4><h:outputText value="Owner Name: #{animal.ownerName}, Owner Phone number: #{animal.ownerPhoneNum}" />
+                            <h4><h:outputText value="Contact Info:" style="font-weight:bold" /></h4><h:outputText value="Owner Name: #{animal.ownerName}, Owner Phone number: #{animal.ownerPhoneNum}" />
+                            <h4 id="addressGeoLocation#{status.index}">#{animal.ownerAddress}</h4>
                         </div>
-                        <div id="googleMap#{status.index}" style="width:100%;height:200px;"></div>
+                        <div id="googleMap#{status.index}" style="width:100%; height:200px;"></div>
                         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcJMsyeLLERuchKUu9LNTZB4Xo7jkzqEQ&amp;callback=myMap"></script>
                     </div>
                 </div>
@@ -332,5 +348,27 @@
                 </div>
             </h:form>
         </h:panelGroup>
+        <!--About Us Form-->
+        <div class="container">
+            <div class="modal fade" id="aboutUsModal" tabindex="-1" role="dialog" aria-labelledby="aboutUsModal" aria-hidden="true">
+                <div class="modal-dialog modal-default">
+                    <div class="modal-content">
+                        <article class="container-form center-block">
+                            <div class="modal-header"></div>
+                            <div class="modal-body" style="padding-bottom: 5%">
+                                <h:outputText value="Adopt-a-Pet is a Israel’s largest non-profit pet-adoption web service that advocates pet adoption, 
+                                gathering information from over 12,000 pet shelters in the U.S. and Canada, and presenting adoptable pet 
+                                data in a searchable data base to facilitate pet adoption. Adopt-a-pet.com is registered in Redondo 
+                                Beach, California, as Humane America Animal Foundation. The web site allows people to sign up to receive 
+                                an email when a pet that satisfies their criteria appears in a local shelter. Adopt-a-Pet.com also contains 
+                                information on pet care for first-time pet owners and publishes a newsletter. The web site also lists 
+                                volunteer opportunities and promotes spaying and neutering of the pets." />
+                            </div>
+                            <div class="modal-footer"></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>

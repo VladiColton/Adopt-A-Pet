@@ -94,6 +94,7 @@ public class UserRegistrationFormManager implements Serializable{
         _newOwner.setPhoneNumber(this._phoneNumber); //Update PhoneNumber
         _newOwner.setEmail(this._email); //Update EMail address
         
+        
         //Here to check the details and validation for the user next to the DB for example if already exists
         //If not exists add new user/owner to the DB according to the details recieved.
         //SQL Stuff

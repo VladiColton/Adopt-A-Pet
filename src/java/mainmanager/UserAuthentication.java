@@ -59,7 +59,7 @@ public class UserAuthentication implements Serializable{
     
     public boolean getIsUserConnected()
     {
-        boolean test = SessionUtils.isUserConnected();
+        SessionUtils.isUserConnected();
         return SessionUtils.isUserConnected();
     }
     
@@ -79,8 +79,9 @@ public class UserAuthentication implements Serializable{
             this.setAutoErrorMSG("");
             this._isUserConnected = true;
             HttpSession session = SessionUtils.getSession();
-            session.setAttribute("useremail", this._mailAddress);
-            session.setAttribute("isUserConnected", this._isUserConnected);
+            session.setAttribute("useremail", this._mailAddress); //Set mail address
+            session.setAttribute("isUserConnected", this._isUserConnected); //Set if user connected
+            session.setAttribute("userid", Login.getUserDbID(_mailAddress)); //Set UserID from the DB according to the email
         }
         else
         {
