@@ -146,6 +146,7 @@
                         
                         <div class="backGoto">
                             <a id="pet-desc-link" target="_blank" onclick="openFullAnimalDescription(#{status.index})" title="PetPanel">Open full info →</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -154,15 +155,15 @@
                     <div class="enlargedAnimalCard">
                         <h:graphicImage class="enlargedAnimalImage" value="images/DefaultAnumalImage.png" />
                         <div class="enlargedCardContent">
-                            <h4>Name: #{animal.name}</h4>
-                            <h4>Age: #{animal.age} yrs.</h4>
-                            <h4>Breed: #{animal.type}, #{animal.subType}</h4>
-                            <h4>Description:</h4>
+                            <h4><h:outputText value="Name:" style="font-weight:bold" /> #{animal.name}</h4>
+                            <h4><h:outputText value="Age:" style="font-weight:bold" /> #{animal.age} yrs.</h4>
+                            <h4><h:outputText value="Breed:" style="font-weight:bold" /> #{animal.type}, #{animal.subType}</h4>
+                            <h4><h:outputText value="Description:" style="font-weight:bold" /></h4>
                             <h:outputText class="mainAnimalDetails" value="#{animal.description}" />
-                            <h4>Contact Info:</h4><h:outputText value="Owner Name: #{animal.ownerName}, Owner Phone number: #{animal.ownerPhoneNum}" />
+                            <h4><h:outputText value="Contact Info:" style="font-weight:bold" /></h4><h:outputText value="Owner Name: #{animal.ownerName}, Owner Phone number: #{animal.ownerPhoneNum}" />
                             <h4 id="addressGeoLocation#{status.index}">#{animal.ownerAddress}</h4>
                         </div>
-                        <div id="googleMap#{status.index}" style="width:100%;height:200px;"></div>
+                        <div id="googleMap#{status.index}" style="width:100%; height:200px;"></div>
                         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcJMsyeLLERuchKUu9LNTZB4Xo7jkzqEQ&amp;callback=myMap"></script>
                     </div>
                 </div>

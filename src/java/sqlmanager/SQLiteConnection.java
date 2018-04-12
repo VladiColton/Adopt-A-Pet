@@ -22,8 +22,9 @@ public class SQLiteConnection {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + str + "\\database.sqlite");
             return conn;
         }
-        catch(Exception e)
+        catch(Exception ex)
         {
+            ex.printStackTrace(System.out);
             return null;
         }   
     }
@@ -36,7 +37,7 @@ public class SQLiteConnection {
         }
         catch(Exception ex)
         {
-            
+            ex.printStackTrace(System.out);
         }
     }
     
