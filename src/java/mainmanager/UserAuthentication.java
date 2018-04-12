@@ -59,7 +59,7 @@ public class UserAuthentication implements Serializable{
     
     public boolean getIsUserConnected()
     {
-        boolean test = SessionUtils.isUserConnected();
+        SessionUtils.isUserConnected();
         return SessionUtils.isUserConnected();
     }
     

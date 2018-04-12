@@ -109,25 +109,25 @@ function myMap()
 
 }
 
-function geocodeAddress(geocoder, resultsMap, geoAddress) {
-        var address = (geoAddress != null ? geoAddress : 'Haifa, Israel'); //document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
+function geocodeAddress(geocoder, resultsMap, geoAddress) 
+{
+    var address = (geoAddress != null ? geoAddress : 'Haifa, Israel'); //document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
         });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
       }
+    });
+}
 
 // Closes the sidebar menu on menu-close button click event
 $("#menu-close").click(function(e) //declare the element event ...'(e)' = event (shorthand)
 {
-	// - will not work otherwise")
 	$("#sidebar-wrapper").toggleClass("active"); //instead on click event toggle active CSS element
 	e.preventDefault();  //prevent the default action
 });
