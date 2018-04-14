@@ -17,7 +17,7 @@ public class SQLiteConnection {
             Class.forName("org.sqlite.JDBC"); //Causes to the class "org.sqlite.JDBC" to be initialized
             File f = new File(SQLiteConnection.class.getProtectionDomain().getCodeSource().getLocation().getPath());
             String str = f.getPath(); //Set relative path to the DB
-            str = str.substring(0, str.indexOf("Adopt-A-Pet")+12) + "\\Resources";
+            str = str.substring(0, str.indexOf("Adopt-A-Pet")+12) + "\\resources";
             
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + str + "\\database.sqlite");
             return conn;
