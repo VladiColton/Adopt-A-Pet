@@ -47,11 +47,6 @@ public class Animal implements Persistable, Serializable {
         return id;
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setAge(float age) {
         if (!isAgeValid(age)) {
             throw new IllegalArgumentException("age cannot be negative");

@@ -7,11 +7,14 @@ import javax.faces.bean.*;
 
 /**
  * User Registration Form manager bean (Connects UI to User class)
+ *
  * @author Vladi Colton
  */
-@SessionScoped /*Each user gets new instance of the been during the session (as defined in "web.xml" 60 min)*/
-@ManagedBean (name = "userRegistrationFormManager", eager = true)
-public class UserRegistrationFormManager implements Serializable{
+@SessionScoped
+/*Each user gets new instance of the been during the session (as defined in "web.xml" 60 min)*/
+@ManagedBean(name = "userRegistrationFormManager", eager = true)
+public class UserRegistrationFormManager implements Serializable {
+
     private String _lastName;
     private String _firstName;
     private long _phoneNumber;
@@ -20,33 +23,26 @@ public class UserRegistrationFormManager implements Serializable{
     private String _email;
     private String _password;
     private Owner _newOwner;
-    
-    
-    public UserRegistrationFormManager()
-    {
-        this._newOwner = new Owner();
+
+    public UserRegistrationFormManager() {
     }
-    
-    public void setPassword(String pass)
-    {
+
+    public void setPassword(String pass) {
         this._password = pass;
     }
-    
-    public String getPassword()
-    {
+
+    public String getPassword() {
         return this._password;
     }
-    
-    public void setEmail(String email)
-    {
+
+    public void setEmail(String email) {
         this._email = email;
     }
-    
-    public String getEmail()
-    {
+
+    public String getEmail() {
         return this._email;
     }
-    
+
     public String getLastName() {
         return this._lastName;
     }
@@ -54,7 +50,7 @@ public class UserRegistrationFormManager implements Serializable{
     public void setLastName(String newLastName) {
         this._lastName = newLastName;
     }
-    
+
     public String getFirstName() {
         return this._firstName;
     }
@@ -62,7 +58,7 @@ public class UserRegistrationFormManager implements Serializable{
     public void setFirstName(String newFirstName) {
         this._firstName = newFirstName;
     }
-    
+
     public long getPhoneNumber() {
         return _phoneNumber;
     }
@@ -78,7 +74,7 @@ public class UserRegistrationFormManager implements Serializable{
     public void setStreetAddress(String streetAddress) {
         this._streetAddress = streetAddress;
     }
-    
+
     public String getCity() {
         return this._city;
     }
@@ -86,19 +82,23 @@ public class UserRegistrationFormManager implements Serializable{
     public void setCity(String city) {
         this._city = city;
     }
-    
-    public void upgateUserDetails(ActionEvent event)
-    {
-        _newOwner.setName(this._firstName + this._lastName); //Update Name
-        _newOwner.setLocation(this._streetAddress + this._city); //Update Location
-        _newOwner.setPhoneNumber(this._phoneNumber); //Update PhoneNumber
-        _newOwner.setEmail(this._email); //Update EMail address
-        
-        
+
+    public void upgateUserDetails(ActionEvent event) {
+//        _newOwner.setName(this._firstName + this._lastName); //Update Name
+//        _newOwner.setLocation(this._streetAddress + this._city); //Update Location
+//        _newOwner.setPhoneNumber(this._phoneNumber); //Update PhoneNumber
+//        _newOwner.setEmail(this._email); //Update EMail address
+
+        // use builder instead
+        _newOwner = Owner.builder()
+                .name(_firstName + " " + _lastName)
+                .location(_streetAddress + "" + _city)
+                .phoneNumber(_phoneNumber)
+                .email(_email)
+                .build();
+
         //Here to check the details and validation for the user next to the DB for example if already exists
         //If not exists add new user/owner to the DB according to the details recieved.
         //SQL Stuff
-        
-
     }
 }
