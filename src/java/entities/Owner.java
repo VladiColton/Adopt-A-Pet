@@ -9,46 +9,57 @@ import javax.persistence.*;
  * Owner representation Class
  */
 @Entity
-public class Owner implements Persistable, Serializable{
+public class Owner implements Persistable, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
-    
-    private long phoneNumber;
-    private String location;
-    
-    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
     private String passwordHash;
-    
+
+    @Column(nullable = false)
+    private String name;
+
+    private long phoneNumber;
+    private String location;
+
+    @Lob
+    private byte[] profilePic;
+
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Animal> animals = new HashSet<>();
 
-    public Owner() {
+    protected Owner() {
     }
 
-    public Owner(String name, String location, long phoneNum, String email, String passwordHash) {
-        this.name = name;
-        this.location = location;
-        this.phoneNumber = phoneNum;
+    private Owner(String email, String passwordHash, String name, long phoneNumber, String location, byte[] profilePic) {
         this.email = email;
         this.passwordHash = passwordHash;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.location = location;
+        this.profilePic = profilePic;
     }
-    
+
     @Override
     public Long getId() {
         return id;
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getName() {
@@ -74,7 +85,15 @@ public class Owner implements Persistable, Serializable{
     public void setLocation(String location) {
         this.location = location;
     }
-    
+
+    public byte[] getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(byte[] profilePic) {
+        this.profilePic = profilePic;
+    }
+
     public Set<Animal> getAnimals() {
         return animals;
     }
@@ -82,24 +101,7 @@ public class Owner implements Persistable, Serializable{
     public void setAnimals(Set<Animal> animals) {
         this.animals = animals;
     }
-    
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-    
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-    
-    public String getEmail() {
-        return this.email;
-    }
 
-    public void setEmail(String email) {
-        if (email != null)
-            this.email = email;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -118,5 +120,53 @@ public class Owner implements Persistable, Serializable{
             return false;
         }
         return true;
+    }
+
+    public static OwnerBuilder builder() {
+        return new OwnerBuilder();
+    }
+
+    public static class OwnerBuilder {
+
+        private String email;
+        private String passwordHash;
+        private String name;
+        private long phoneNumber;
+        private String location;
+        private byte[] profilePic;
+
+        public OwnerBuilder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public OwnerBuilder passwordHash(String passwordHash) {
+            this.passwordHash = passwordHash;
+            return this;
+        }
+
+        public OwnerBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public OwnerBuilder phoneNumber(long phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public OwnerBuilder location(String location) {
+            this.location = location;
+            return this;
+        }
+
+        public OwnerBuilder profilePic(byte[] profilePic) {
+            this.profilePic = profilePic;
+            return this;
+        }
+
+        public Owner build() {
+            return new Owner(email, passwordHash, name, phoneNumber, location, profilePic);
+        }
     }
 }
