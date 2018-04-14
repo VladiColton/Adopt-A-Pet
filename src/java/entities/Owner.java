@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Owner representation Class
  */
 @Entity
-public class Owner implements Serializable {
+public class Owner implements Persistable, Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,10 +32,12 @@ public class Owner implements Serializable {
         this.email = email;
     }
     
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }

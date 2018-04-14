@@ -7,7 +7,7 @@ import javax.persistence.*;
  * Animal Representation Class
  */
 @Entity
-public class Animal implements Serializable {
+public class Animal implements Persistable, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,10 +42,12 @@ public class Animal implements Serializable {
         return age >= 0;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
