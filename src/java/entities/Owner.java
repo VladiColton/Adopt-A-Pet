@@ -15,22 +15,30 @@ public class Owner implements Persistable, Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
+    
     private long phoneNumber;
     private String location;
+    
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private String passwordHash;
+    
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Animal> animals = new HashSet<>();
 
     public Owner() {
     }
 
-    public Owner(String name, String location, long phoneNum, String email) {
+    public Owner(String name, String location, long phoneNum, String email, String passwordHash) {
         this.name = name;
         this.location = location;
         this.phoneNumber = phoneNum;
         this.email = email;
+        this.passwordHash = passwordHash;
     }
     
     @Override
@@ -73,6 +81,14 @@ public class Owner implements Persistable, Serializable{
 
     public void setAnimals(Set<Animal> animals) {
         this.animals = animals;
+    }
+    
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+    
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
     
     public String getEmail() {
