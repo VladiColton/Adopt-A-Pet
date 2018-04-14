@@ -1,7 +1,8 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
@@ -19,8 +20,8 @@ public class Owner implements Persistable, Serializable{
     private String location;
     private String email;
 
-    @OneToMany
-    private List<Animal> animals;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Animal> animals = new HashSet<>();
 
     public Owner() {
     }
@@ -66,11 +67,11 @@ public class Owner implements Persistable, Serializable{
         this.location = location;
     }
     
-    public List<Animal> getAnimals() {
+    public Set<Animal> getAnimals() {
         return animals;
     }
 
-    public void setAnimals(List<Animal> animals) {
+    public void setAnimals(Set<Animal> animals) {
         this.animals = animals;
     }
     
