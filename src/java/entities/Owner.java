@@ -1,14 +1,15 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
  * Owner representation Class
  */
 @Entity
-public class Owner implements Serializable {
+public class Owner implements Persistable, Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,8 +20,8 @@ public class Owner implements Serializable {
     private String location;
     private String email;
 
-    @OneToMany
-    private List<Animal> animals;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Animal> animals = new HashSet<>();
 
     public Owner() {
     }
@@ -32,10 +33,12 @@ public class Owner implements Serializable {
         this.email = email;
     }
     
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -64,11 +67,11 @@ public class Owner implements Serializable {
         this.location = location;
     }
     
-    public List<Animal> getAnimals() {
+    public Set<Animal> getAnimals() {
         return animals;
     }
 
-    public void setAnimals(List<Animal> animals) {
+    public void setAnimals(Set<Animal> animals) {
         this.animals = animals;
     }
     
