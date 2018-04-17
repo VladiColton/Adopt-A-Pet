@@ -23,7 +23,8 @@ public class UserRegistrationFormManager implements Serializable {
     private String _password;
     private Owner _newOwner;
 
-    public UserRegistrationFormManager() {
+    public UserRegistrationFormManager() 
+    {
         _lastName = "";
         this._firstName = "";
         this._phoneNumber = 0;
@@ -33,15 +34,18 @@ public class UserRegistrationFormManager implements Serializable {
         this._password = "";
     }
 
-    public void setPassword(String pass) {
+    public void setPassword(String pass) 
+    {
         this._password = pass;
     }
 
-    public String getPassword() {
+    public String getPassword() 
+    {
         return this._password;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) 
+    {
         //Verify email address
         if(!email.contains("@") && !email.contains("."))
             this._email = "";
@@ -49,57 +53,68 @@ public class UserRegistrationFormManager implements Serializable {
             this._email = email;
     }
 
-    public String getEmail() {
+    public String getEmail() 
+    {
         return this._email;
     }
 
-    public String getLastName() {
+    public String getLastName() 
+    {
         return this._lastName;
     }
 
-    public void setLastName(String newLastName) {
+    public void setLastName(String newLastName) 
+    {
         this._lastName = newLastName;
     }
 
-    public String getFirstName() {
+    public String getFirstName() 
+    {
         return this._firstName;
     }
 
-    public void setFirstName(String newFirstName) {
+    public void setFirstName(String newFirstName) 
+    {
         this._firstName = newFirstName;
     }
 
-    public long getPhoneNumber() {
+    public long getPhoneNumber() 
+    {
         return _phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) 
+    {
         this._phoneNumber = phoneNumber;
     }
 
-    public String getStreetAddress() {
+    public String getStreetAddress() 
+    {
         return this._streetAddress;
     }
 
-    public void setStreetAddress(String streetAddress) {
+    public void setStreetAddress(String streetAddress) 
+    {
         this._streetAddress = streetAddress;
     }
 
-    public String getCity() {
+    public String getCity() 
+    {
         return this._city;
     }
 
-    public void setCity(String city) {
+    public void setCity(String city) 
+    {
         this._city = city;
     }
+    
     public boolean allPropertiesFilled(AjaxBehaviorEvent event)
     {
-        boolean res;
-        res= (_phoneNumber != 0 && !_email.equalsIgnoreCase("") && !_password.equalsIgnoreCase("") && (!_firstName.equalsIgnoreCase("") || !_lastName.equalsIgnoreCase("")) && !_streetAddress.equalsIgnoreCase("") && !_city.equalsIgnoreCase(""));
-        return res;
+        return (_phoneNumber != 0 && !_email.equalsIgnoreCase("") && !_password.equalsIgnoreCase("") && (!_firstName.equalsIgnoreCase("") || !_lastName.equalsIgnoreCase("")) && !_streetAddress.equalsIgnoreCase("") && !_city.equalsIgnoreCase(""));
     }
 
-    public void updateUserDetails(ActionEvent event) {
+    public void updateUserDetails(ActionEvent event) 
+    {
         _newOwner = Owner.builder()
                 .name(_firstName + " " + _lastName)
                 .location(_streetAddress + ", " + _city)

@@ -261,41 +261,47 @@
                                         <h3>User Settings Panel</h3>
                                     </div>
                                     <div class="modal-body" style="padding-bottom: 15%">
-                                        General user information: + Will add here some information from the session object by "User Authentication.java" class.
+                                        <h4><h:outputText value="Hello #{userUpdateInformationFormManager.userName}!" style="font-weight:bold" /></h4>
+                                        In This form you can change some of your personal registration information as appears in our DataBase.
                                         <h3 style="text-align:center;" class="form-row">Update Information</h3>
                                         <hr style="height: 2px"/>
                                         <!--Update info form-->
                                         <div class="form-row">
                                             <div class="col-md-4 mb-3">
                                                 <label for="validationCustom01">Telephone</label>
-                                                <h:inputText class="form-control-custom" p:placeholder="Phone Number" value="#{userUpdateInformationFormManager.phoneNumber}" autocomplete="off" required="true" />
+                                                <h:inputText class="form-control-custom" p:placeholder="Phone Number" value="#{userUpdateInformationFormManager.phoneNumber}" autocomplete="off" required="true">
+                                                    <f:ajax listener="#{userUpdateInformationFormManager.allPropertiesFilled}" render="userPersonalDetailsUpdateForm" />
+                                                </h:inputText>
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label>Email Address</label>
-                                                <h:inputText class="form-control-custom" p:placeholder="Email Address" value="#{userUpdateInformationFormManager.email}" autocomplete="off" required="true" />
+                                                <h:inputText class="form-control-custom" p:placeholder="Email Address" value="#{userUpdateInformationFormManager.email}" autocomplete="off" required="true">
+                                                    <f:ajax listener="#{userUpdateInformationFormManager.allPropertiesFilled}" render="userPersonalDetailsUpdateForm" />
+                                                </h:inputText>
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label>Password</label>
-                                                 <h:inputSecret class="form-control-custom" p:placeholder="Password" id="password" value="#{userUpdateInformationFormManager.password}" autocomplete="off" required="true" />
+                                                 <h:inputSecret class="form-control-custom" p:placeholder="Password" id="password" value="#{userUpdateInformationFormManager.password}" autocomplete="off" />
                                             </div>
                                         </div>
                                         <div class="form-row padd">
                                             <div class="col-md-6 mb-3">
                                               <label>Street Address</label>
-                                              <h:inputText class="form-control-custom" p:placeholder="Street Address" value="#{userUpdateInformationFormManager.streetAddress}" autocomplete="off" required="true" />
+                                              <h:inputText class="form-control-custom" p:placeholder="Street Address" value="#{userUpdateInformationFormManager.streetAddress}" autocomplete="off" />
                                             </div>
                                             <div class="col-md-6 mb-3">
                                               <label>City</label>
-                                              <h:inputText class="form-control-custom" p:placeholder="City" value="#{userUpdateInformationFormManager.city}" autocomplete="off" required="true" />
+                                              <h:inputText class="form-control-custom" p:placeholder="City" value="#{userUpdateInformationFormManager.city}" autocomplete="off" />
                                             </div>
                                         </div>
                                         <h:inputFile class="btn btn-sm" value="#{uploadController.image}" style="padding-top: 5%; margin-left: auto; margin-right: auto" />
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
-                                            <h:commandButton class="btn btn-lg" value="Save Changes" actionListener="#{userUpdateInformationFormManager.updateRregistrationInfo(ActionEvent)}">
+                                            <h:commandButton class="btn btn-lg" value="Save Changes" disabled="#{not userUpdateInformationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" actionListener="#{userUpdateInformationFormManager.updateRregistrationInfo(ActionEvent)}">
                                                 <f:actionListener binding="#{uploadController.doUploadForProfile()}" />
                                             </h:commandButton>
+                                            
                                         </div>
                                     </div>
                                 </article>
