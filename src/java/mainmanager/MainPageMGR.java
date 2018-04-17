@@ -20,8 +20,8 @@ public class MainPageMGR implements Serializable {
         // TODO - remove file
         this._animals = new ArrayList<>();
         
-//        this._animals.add(new Animal(new Owner("Sivan", "Eilat, Israel", 509062183, "Sivi@Sivi.com", ""), "testAnimal", "type1", "subtype", "Animal_01", 10));
-//        this._animals.add(new Animal(new Owner("Vladi Colton", "Nesher", 546903018, "Vladi@Vladi.com", ""), "testAnimal", "type1", "subtype", "Animal_02", 10));
+        this._animals.add(new Animal(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build(), "testAnimal", "type1", "subtype", "Animal_01", 10));
+        this._animals.add(new Animal(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build(), "testAnima2", "type2", "subtype", "Animal_02", 12));
         this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_03", 10));
         this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_04", 10));
         this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_05", 10));

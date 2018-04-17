@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta charset="UTF-8"></meta>
         <title>Adopt a pet</title>
@@ -186,26 +187,36 @@
                                     <div class="form-row">
                                         <div class="col-md-4 mb-2">
                                             <label for="validationCustom01">First name</label>
-                                            <h:inputText class="form-control-custom" p:placeholder="First Name" value="#{userRegistrationFormManager.firstName}" autocomplete="off" required="true" />
+                                            <h:inputText class="form-control-custom" p:placeholder="First Name" value="#{userRegistrationFormManager.firstName}" autocomplete="off">
+                                                <f:ajax listener="#{userRegistrationFormManager.allPropertiesFilled}" render="userRegistrationForm" />
+                                            </h:inputText>
                                         </div>
                                         <div class="col-md-4 mb-2">
                                             <label for="validationCustom02">Last name</label>
-                                            <h:inputText class="form-control-custom" p:placeholder="Last Name" value="#{userRegistrationFormManager.lastName}" autocomplete="off" required="true" />
+                                            <h:inputText class="form-control-custom" p:placeholder="Last Name" value="#{userRegistrationFormManager.lastName}" autocomplete="off">
+                                                <f:ajax listener="#{userRegistrationFormManager.allPropertiesFilled}" render="userRegistrationForm" />
+                                            </h:inputText>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="validationCustom01">Telephone</label>
-                                            <h:inputText class="form-control-custom" p:placeholder="Phone Number" value="#{userRegistrationFormManager.phoneNumber}" autocomplete="off" required="true" />
+                                            <h:inputText class="form-control-custom" p:placeholder="Phone Number" value="#{userRegistrationFormManager.phoneNumber}" autocomplete="off">
+                                                 <f:ajax listener="#{userRegistrationFormManager.allPropertiesFilled}" render="userRegistrationForm" />
+                                            </h:inputText>
                                         </div>
                                     </div>
                                     <!--Second registration form row-->
                                     <div class="form-row padd">
                                         <div class="col-md-6 mb-3">
                                             <label>Email Address</label>
-                                            <h:inputText class="form-control-custom" p:placeholder="Email" value="#{userRegistrationFormManager.email}" autocomplete="off" required="true" />
+                                            <h:inputText class="form-control-custom" p:placeholder="Email" value="#{userRegistrationFormManager.email}" autocomplete="off">
+                                                <f:ajax listener="#{userRegistrationFormManager.allPropertiesFilled}" render="userRegistrationForm" />
+                                            </h:inputText>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label>Password</label>
-                                            <h:inputSecret class="form-control-custom" p:placeholder="Password" id="password" value="#{userRegistrationFormManager.password}" autocomplete="off" required="true" />
+                                            <h:inputSecret class="form-control-custom" p:placeholder="Password" id="password" value="#{userRegistrationFormManager.password}" autocomplete="off" required="true">
+                                                <f:ajax listener="#{userRegistrationFormManager.allPropertiesFilled}" render="userRegistrationForm" />
+                                            </h:inputSecret>
                                         </div>
                                     </div>
                                     <h3 style="text-align:center;" class="form-row padd">Address Details</h3>
@@ -213,18 +224,22 @@
                                     <!--Third registration form row-->
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                          <label>Street Address</label>
-                                          <h:inputText class="form-control-custom" p:placeholder="Street Address" value="#{userRegistrationFormManager.streetAddress}" autocomplete="off" required="true" />
+                                            <label>Street Address</label>
+                                            <h:inputText class="form-control-custom" p:placeholder="Street Address" value="#{userRegistrationFormManager.streetAddress}" autocomplete="off">
+                                                <f:ajax listener="#{userRegistrationFormManager.allPropertiesFilled}" render="userRegistrationForm" />
+                                            </h:inputText>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                          <label>City</label>
-                                          <h:inputText class="form-control-custom" p:placeholder="City" value="#{userRegistrationFormManager.city}" autocomplete="off" required="true" />
+                                            <label>City</label>
+                                            <h:inputText class="form-control-custom" p:placeholder="City" value="#{userRegistrationFormManager.city}" autocomplete="off">
+                                                <f:ajax listener="#{userRegistrationFormManager.allPropertiesFilled}" render="userRegistrationForm" />
+                                            </h:inputText>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <div class="col-md-12 text-right">
-                                        <h:commandButton class="btn btn-lg" value="Sign-In" action="#{userRegistrationFormManager.upgateUserDetails(ActionEvent)}" />
+                                        <h:commandButton id="userRegistrationForm" class="btn btn-lg" value="Sign-In" disabled="#{not userRegistrationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" action="#{userRegistrationFormManager.updateUserDetails(ActionEvent)}" />
                                     </div>
                                 </div>
                             </h:form>
@@ -235,7 +250,7 @@
 	</div>
         <!--Users personal Settings Update pop-up-->
         <h:panelGroup>
-            <h:form rendered="#{userAuthentication.isUserConnected}">
+            <h:form rendered="#{userAuthentication.isUserConnected}"  enctype="multipart/form-data">
                 <div class="container">
                     <div class="modal fade" id="userSettingsModal" tabindex="-1" role="dialog" aria-labelledby="userSettingsModal" aria-hidden="true">
                         <div class="modal-dialog modal-default">
@@ -274,10 +289,13 @@
                                               <h:inputText class="form-control-custom" p:placeholder="City" value="#{userUpdateInformationFormManager.city}" autocomplete="off" required="true" />
                                             </div>
                                         </div>
+                                        <h:inputFile class="btn btn-sm" value="#{uploadController.image}" style="padding-top: 5%; margin-left: auto; margin-right: auto" />
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
-                                            <h:commandButton class="btn btn-lg" value="Save Changes" actionListener="#{userUpdateInformationFormManager.updateRregistrationInfo(ActionEvent)}" />
+                                            <h:commandButton class="btn btn-lg" value="Save Changes" actionListener="#{userUpdateInformationFormManager.updateRregistrationInfo(ActionEvent)}">
+                                                <f:actionListener binding="#{uploadController.doUploadForProfile()}" />
+                                            </h:commandButton>
                                         </div>
                                     </div>
                                 </article>
@@ -289,7 +307,7 @@
         </h:panelGroup>
         <!--Add New Animal Form-->
         <h:panelGroup>
-            <h:form rendered="#{userAuthentication.isUserConnected}">
+            <h:form rendered="#{userAuthentication.isUserConnected}" enctype="multipart/form-data">
                 <div class="container">
                     <div class="modal fade" id="addNewAnimalModal" tabindex="-1" role="dialog" aria-labelledby="addNewAnimalModal" aria-hidden="true">
                         <div class="modal-dialog modal-default">
@@ -335,10 +353,13 @@
                                         <div class="form-row">
                                             <h:inputTextarea style="height: 100px; padding-bottom: 0px;" class="form-control-custom" p:placeholder="Full Animal Description" value="#{newAnimalRegirtrationFormManager.description}" required="true" />
                                         </div>
+                                        <h:inputFile class="btn btn-sm" value="#{uploadController.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto" />
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
-                                            <h:commandButton class="btn btn-lg" value="Save-Changes" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}" />
+                                            <h:commandButton class="btn btn-lg" value="Save-Changes" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
+                                                <f:actionListener binding="#{uploadController.doUpload()}" />
+                                            </h:commandButton>
                                         </div>
                                     </div>
                                 </article>
