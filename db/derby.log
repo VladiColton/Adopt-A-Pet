@@ -1,0 +1,31 @@
+Tue Apr 17 22:14:08 IDT 2018 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Tue Apr 17 22:14:09 IDT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0162-d507-4d00-000010d10dc3 
+on database directory /home/erez/Adopt-A-Pet/db/aapdb with class loader sun.misc.Launcher$AppClassLoader@266474c2 
+Loaded from file:/home/erez/glassfish-4.1.1/javadb/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_161-b12
+user.dir=/home/erez/glassfish-4.1.1/javadb
+os.name=Linux
+os.arch=amd64
+os.version=4.13.0-38-generic
+derby.system.home=/home/erez/Adopt-A-Pet/db/
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Apr 17 22:14:14 IDT 2018:
+Shutting down instance a816c00e-0162-d507-4d00-000010d10dc3 on database directory /home/erez/Adopt-A-Pet/db/aapdb with class loader sun.misc.Launcher$AppClassLoader@266474c2 
+Tue Apr 17 22:14:14 IDT 2018 Thread[DRDAConnThread_3,5,main] (DATABASE = aapdb), (DRDAID = {2}), Database 'aapdb' shutdown.
+----------------------------------------------------------------
+Tue Apr 17 22:16:45 IDT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance ed8940a7-0162-d507-4d00-000010d10dc3 
+on database directory /home/erez/Adopt-A-Pet/db/aapdb with class loader sun.misc.Launcher$AppClassLoader@266474c2 
+Loaded from file:/home/erez/glassfish-4.1.1/javadb/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_161-b12
+user.dir=/home/erez/glassfish-4.1.1/javadb
+os.name=Linux
+os.arch=amd64
+os.version=4.13.0-38-generic
+derby.system.home=/home/erez/Adopt-A-Pet/db/
+Database Class Loader started - derby.database.classpath=''
