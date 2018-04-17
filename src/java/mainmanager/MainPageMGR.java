@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.*;
+import repository.OwnerRepository;
 /**
  * Main Page manager class before user login
  * @author Vladi Colton
@@ -17,6 +18,10 @@ public class MainPageMGR implements Serializable {
     private List<Animal> _animals;
     public MainPageMGR()
     {
+        Owner o = Owner.builder().email("acsa").passwordHash("scacxzc").name("cvadf").build();
+        OwnerRepository r = new OwnerRepository();
+        r.create(o);
+        Owner x = r.find(o.getId());
         // TODO - remove file
         this._animals = new ArrayList<>();
         
