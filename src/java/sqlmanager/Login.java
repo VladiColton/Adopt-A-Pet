@@ -48,7 +48,7 @@ public class Login {
             conn = SQLiteConnection.connectDB();
             if (conn == null)
                 return null;
-            ps = conn.prepareStatement("SELECT email, userID FROM users WHERE email=? and password=?");
+            ps = conn.prepareStatement("SELECT email, userID FROM users WHERE email=?");
             ps.setString(1, email);
             
             ResultSet rs = ps.executeQuery();

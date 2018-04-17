@@ -79,15 +79,17 @@ public class UserAuthentication implements Serializable{
             this.setAutoErrorMSG("");
             this._isUserConnected = true;
             HttpSession session = SessionUtils.getSession();
-            session.setAttribute("useremail", this._mailAddress); //Set mail address
-            session.setAttribute("isUserConnected", this._isUserConnected); //Set if user connected
-            session.setAttribute("userid", Login.getUserDbID(_mailAddress)); //Set UserID from the DB according to the email
+            SessionUtils.setUserEmail(_mailAddress);
+            SessionUtils.setIsUserConnected(_isUserConnected);
+            SessionUtils.setUserId(_mailAddress);
+            SessionUtils.setUserLocation("");
+            SessionUtils.setUserPhone(0);
+            SessionUtils.setUserName("", _mailAddress);
         }
         else
         {
             this._isUserConnected = false;
             this.setAutoErrorMSG("Incorrect Email or Password!!");
-            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Passowrd", "Please enter correct username and Password"));
         }
     }
     
