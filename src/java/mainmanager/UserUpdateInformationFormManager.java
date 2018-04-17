@@ -1,10 +1,9 @@
 package mainmanager;
 
-import java.io.Serializable;
-
 import javax.faces.event.ActionEvent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**
@@ -13,7 +12,7 @@ import javax.faces.bean.SessionScoped;
  */
 @SessionScoped /*Each user gets new instance of the been during the session (as defined in "web.xml" 60 min)*/
 @ManagedBean (name = "userUpdateInformationFormManager", eager = true)
-public class UserUpdateInformationFormManager implements Serializable {
+public class UserUpdateInformationFormManager{
     private long _phoneNumber;
     private String _streetAddress;
     private String _city;
@@ -27,46 +26,64 @@ public class UserUpdateInformationFormManager implements Serializable {
         this._streetAddress = "";
         this._city = "";
         this._password = "";
+        this._phoneNumber = SessionUtils.getUserPhone();
     }
     
-    public long getPhoneNumber() {
+    public long getPhoneNumber() 
+    {
         return _phoneNumber;
     }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this._phoneNumber = phoneNumber;
+    public void setPhoneNumber(long phoneNumber) 
+    {
+        if(phoneNumber != 0)
+            this._phoneNumber = phoneNumber;
     }
 
-    public String getStreetAddress() {
+    public String getStreetAddress() 
+    {
         return _streetAddress;
     }
-
-    public void setStreetAddress(String streetAddress) {
+    public void setStreetAddress(String streetAddress) 
+    {
         this._streetAddress = streetAddress;
     }
 
-    public String getCity() {
+    public String getCity() 
+    {
         return _city;
     }
-
-    public void setCity(String city) {
+    public void setCity(String city) 
+    {
         this._city = city;
     }
 
-    public String getEmail() {
+    public String getEmail() 
+    {
         return _email;
     }
-
-    public void setEmail(String email) {
-        this._email = email;
+    public void setEmail(String email) 
+    {
+        if(email.contains("@") && email.contains("."))
+            this._email = email;
     }
 
-    public String getPassword() {
+    public String getPassword() 
+    {
         return _password;
     }
-
-    public void setPassword(String password) {
+    public void setPassword(String password) 
+    {
         this._password = password;
+    }
+    
+    public String getUserName()
+    {
+        return SessionUtils.getUserName();
+    }
+    
+    public boolean allPropertiesFilled(AjaxBehaviorEvent event)
+    {
+        return (_email.contains("@") && _email.contains(".") && _phoneNumber != 0);
     }
     
     public void updateRregistrationInfo(ActionEvent event)
@@ -75,16 +92,16 @@ public class UserUpdateInformationFormManager implements Serializable {
         if(!SessionUtils.isUserConnected())
             return;
         
+        //Update session details to reflect imideatly all changes in the current session
+        SessionUtils.setUserPhone(_phoneNumber);
+        SessionUtils.setUserLocation(_streetAddress + ", " + _city);
+        
         //DO NOT REMOVE THIS COMMENTS
         
         //Here need to send new data recieved to the DB for saving
-        //
-        //
-        //
-        
-        //Here need to update session details to work with updated one live
-        //
-        //
-        //
+        //Password
+        //Location
+        //Phone
+        //email address (By userID Saved in SessionUtils) 
     }
 }
