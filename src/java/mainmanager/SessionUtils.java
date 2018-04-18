@@ -8,7 +8,6 @@ package mainmanager;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import sqlmanager.Login;
 
 public class SessionUtils {
 
@@ -87,10 +86,5 @@ public class SessionUtils {
             return (Integer) session.getAttribute("userid");
         else
             return null;
-    }
-    public static void setUserId(String _mailAddress)
-    {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        session.setAttribute("userid", Login.getUserDbID(_mailAddress)); //Set UserID from the DB according to the email
     }
 }

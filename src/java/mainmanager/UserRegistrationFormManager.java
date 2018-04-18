@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import javax.faces.bean.*;
 import javax.faces.event.AjaxBehaviorEvent;
+import repository.OwnerRepository;
 
 /**
  * User Registration Form manager bean (Connects UI to User class)
@@ -46,8 +47,9 @@ public class UserRegistrationFormManager implements Serializable {
 
     public void setEmail(String email) 
     {
+        OwnerRepository rep = new OwnerRepository();
         //Verify email address
-        if(!email.contains("@") && !email.contains("."))
+        if(!email.contains("@") && !email.contains(".") && !rep.isEmailAvailable(email))
             this._email = "";
         else
             this._email = email;

@@ -16,13 +16,11 @@ public class UserUpdateInformationFormManager{
     private long _phoneNumber;
     private String _streetAddress;
     private String _city;
-    private String _email;
     private String _password;
     
     public UserUpdateInformationFormManager()
     {
         //Get all user information from the session
-        this._email = SessionUtils.getUserEmail();
         this._streetAddress = "";
         this._city = "";
         this._password = "";
@@ -57,16 +55,6 @@ public class UserUpdateInformationFormManager{
         this._city = city;
     }
 
-    public String getEmail() 
-    {
-        return _email;
-    }
-    public void setEmail(String email) 
-    {
-        if(email.contains("@") && email.contains("."))
-            this._email = email;
-    }
-
     public String getPassword() 
     {
         return _password;
@@ -83,7 +71,7 @@ public class UserUpdateInformationFormManager{
     
     public boolean allPropertiesFilled(AjaxBehaviorEvent event)
     {
-        return (_email.contains("@") && _email.contains(".") && _phoneNumber != 0);
+        return (_phoneNumber != 0);
     }
     
     public void updateRregistrationInfo(ActionEvent event)

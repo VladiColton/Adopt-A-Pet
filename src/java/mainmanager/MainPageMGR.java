@@ -23,10 +23,6 @@ public class MainPageMGR implements Serializable {
     public MainPageMGR() {
         // TODO - remove file
         this._animals = new ArrayList<>();
-        
-        OwnerRepository o = new OwnerRepository();
-        Owner test = Owner.builder().name("Admin").location("Haifa" + ", " + "Israel").phoneNumber(546903018).email("admin@admin.com").password("admin").build();
-        o.create(test);
 
         this._animals.add(new Animal(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build(), "testAnimal", "type1", "subtype", "Animal_01", 10));
         this._animals.add(new Animal(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build(), "testAnima2", "type2", "subtype", "Animal_02", 12));

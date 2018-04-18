@@ -270,20 +270,14 @@
                                         <hr style="height: 2px"/>
                                         <!--Update info form-->
                                         <div class="form-row">
-                                            <div class="col-md-4 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <label for="validationCustom01">Telephone</label>
                                                 <h:inputText class="form-control-custom" p:placeholder="Phone Number" value="#{userUpdateInformationFormManager.phoneNumber}" autocomplete="off" required="true">
                                                     <f:ajax listener="#{userUpdateInformationFormManager.allPropertiesFilled}" render="userPersonalDetailsUpdateForm" />
                                                 </h:inputText>
                                             </div>
-                                            <div class="col-md-4 mb-3">
-                                                <label>Email Address</label>
-                                                <h:inputText class="form-control-custom" p:placeholder="Email Address" value="#{userUpdateInformationFormManager.email}" autocomplete="off" required="true">
-                                                    <f:ajax listener="#{userUpdateInformationFormManager.allPropertiesFilled}" render="userPersonalDetailsUpdateForm" />
-                                                </h:inputText>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <label>Password</label>
+                                            <div class="col-md-6 mb-3">
+                                                <label>New Password</label>
                                                  <h:inputSecret class="form-control-custom" p:placeholder="Password" id="password" value="#{userUpdateInformationFormManager.password}" autocomplete="off" />
                                             </div>
                                         </div>
