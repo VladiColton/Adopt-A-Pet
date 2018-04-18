@@ -80,6 +80,9 @@
                 </h:panelGroup>
                 <h:panelGroup rendered="#{userAuthentication.isUserConnected}">
                     <li>
+                        <a data-toggle="modal" data-href="#editAnimalModal" data-target="#editAnimalModal" style="cursor:pointer;">Edit Animals</a>
+                    </li>
+                    <li>
                         <a data-toggle="modal" data-href="#addNewAnimalModal" data-target="#addNewAnimalModal" style="cursor:pointer;">Add New Animal</a>
                     </li>
                     <li>
@@ -316,6 +319,70 @@
             <h:form rendered="#{userAuthentication.isUserConnected}" enctype="multipart/form-data">
                 <div class="container">
                     <div class="modal fade" id="addNewAnimalModal" tabindex="-1" role="dialog" aria-labelledby="addNewAnimalModal" aria-hidden="true">
+                        <div class="modal-dialog modal-default">
+                            <div class="modal-content">
+                                <article class="container-form center-block">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3>Add New Animal</h3>
+                                    </div>
+                                    <div class="modal-body" style="padding-bottom: 5%">
+                                        General add new animal instructions information: + Will add here some information from the session object by "User Authentication.java" class.
+                                        <!--Update info form-->
+                                        <div class="form-row" style="padding-top: 2%;">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom01">Name</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Name" value="#{newAnimalRegirtrationFormManager.name}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label>Age</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Age" value="#{newAnimalRegirtrationFormManager.age}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label>Type</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Type" value="#{newAnimalRegirtrationFormManager.type}" autocomplete="off" required="true" />
+                                            </div>
+                                        </div>
+                                        <div class="form-row padd">
+                                            <div class="col-md-6 mb-3">
+                                                <label>Breed</label>
+                                                <h:inputText class="form-control-custom" p:placeholder="Breed" value="#{newAnimalRegirtrationFormManager.subType}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                              <label>Additional Contact Info</label>
+                                              <h:outputText class="text-error" value="Here - will be added owner location" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                              <label>Phone Number</label>
+                                              <h:outputText class="text-error" value="Here - will be added owner Phone" />
+                                            </div>
+                                        </div>
+                                        <h3 style="text-align:center; padding-top: 10%;" class="form-row">Animal Description</h3>
+                                        <hr style="height: 2px"/>
+                                        <div class="form-row">
+                                            <h:inputTextarea style="height: 100px; padding-bottom: 0px;" class="form-control-custom" p:placeholder="Full Animal Description" value="#{newAnimalRegirtrationFormManager.description}" required="true" />
+                                        </div>
+                                        <h:inputFile class="btn btn-sm" value="#{uploadController.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto" />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="col-md-12 text-center">
+                                            <h:commandButton class="btn btn-lg" value="Save-Changes" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
+                                                <f:actionListener binding="#{uploadController.doUpload()}" />
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </h:panelGroup>
+        <!--Edit animals details Form-->
+        <h:panelGroup>
+            <h:form rendered="#{userAuthentication.isUserConnected}" enctype="multipart/form-data">
+                <div class="container">
+                    <div class="modal fade" id="editAnimalModal" tabindex="-1" role="dialog" aria-labelledby="editAnimalModal" aria-hidden="true">
                         <div class="modal-dialog modal-default">
                             <div class="modal-content">
                                 <article class="container-form center-block">
