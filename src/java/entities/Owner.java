@@ -11,12 +11,15 @@ import passwords.Passwords;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = Owner.IS_EMAIL_AVAILABLE,
-            query = "SELECT COUNT(o) FROM Owner o WHERE o.email = :email")
+    @NamedQuery(name = Owner.GET_EMAIL_COUNT,
+            query = "SELECT COUNT(o) FROM Owner o WHERE o.email = :email"),
+    @NamedQuery(name = Owner.GET_OWNER_PASSWORD,
+            query = "SELECT o.passwordHash FROM Owner o WHERE o.email = :email")
 })
 public class Owner implements Persistable, Serializable {
 
-    public static final String IS_EMAIL_AVAILABLE = "Owner.isEmailAvaiable";
+    public static final String GET_EMAIL_COUNT = "Owner.getEmailCount";
+    public static final String GET_OWNER_PASSWORD = "Owner.getOwnerPassword";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
