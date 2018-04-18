@@ -4,12 +4,22 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import passwords.Passwords;
 
 /**
  * Owner representation Class
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = Owner.GET_EMAIL_COUNT,
+            query = "SELECT COUNT(o) FROM Owner o WHERE o.email = :email"),
+    @NamedQuery(name = Owner.GET_OWNER_PASSWORD,
+            query = "SELECT o.passwordHash FROM Owner o WHERE o.email = :email")
+})
 public class Owner implements Persistable, Serializable {
+
+    public static final String GET_EMAIL_COUNT = "Owner.getEmailCount";
+    public static final String GET_OWNER_PASSWORD = "Owner.getOwnerPassword";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,12 +64,12 @@ public class Owner implements Persistable, Serializable {
         return this.email;
     }
 
-    public String getPasswordHash() {
+    public String getPassword() {
         return passwordHash;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.passwordHash = Passwords.hashPassword(password);
     }
 
     public String getName() {
@@ -140,8 +150,8 @@ public class Owner implements Persistable, Serializable {
             return this;
         }
 
-        public OwnerBuilder passwordHash(String passwordHash) {
-            this.passwordHash = passwordHash;
+        public OwnerBuilder password(String password) {
+            this.passwordHash = Passwords.hashPassword(password);
             return this;
         }
 
