@@ -1,3 +1,4 @@
+package passwords;
 
 import org.mindrot.jbcrypt.BCrypt;
 
