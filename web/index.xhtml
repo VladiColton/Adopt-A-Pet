@@ -271,7 +271,7 @@
                                         <!--Update info form-->
                                         <div class="form-row">
                                             <div class="col-md-6 mb-3">
-                                                <label for="validationCustom01">Telephone</label>
+                                                <label>Telephone</label>
                                                 <h:inputText class="form-control-custom" p:placeholder="Phone Number" converter="javax.faces.Long" value="#{userUpdateInformationFormManager.phoneNumber}" autocomplete="off" required="true">
                                                     <f:ajax listener="#{userUpdateInformationFormManager.allPropertiesFilled}" render="userPersonalDetailsUpdateButton" />
                                                 </h:inputText>
@@ -324,7 +324,7 @@
                                         <!--Update info form-->
                                         <div class="form-row" style="padding-top: 2%;">
                                             <div class="col-md-4 mb-3">
-                                                <label for="validationCustom01">Name</label>
+                                                <label>Name</label>
                                                 <h:inputText class="form-control-custom" p:placeholder="Name" value="#{newAnimalRegirtrationFormManager.name}" autocomplete="off" required="true">
                                                     <f:ajax listener="#{newAnimalRegirtrationFormManager.allPropertiesFilled}" render="addNewAnimalButton" />
                                                 </h:inputText>
@@ -387,14 +387,17 @@
                                 <article class="container-form center-block">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h3>Add New Animal</h3>
+                                        <h3>Edit Animals</h3>
                                     </div>
                                     <div class="modal-body" style="padding-bottom: 5%">
-                                        General add new animal instructions information: + Will add here some information from the session object by "User Authentication.java" class.
+                                        <!--Select animal from the list-->
+                                        <h:outputText value="Please select one of your animals to edit information from the list below:" />  
+                                        <h3 style="text-align:center;" class="form-row">Information</h3>
+                                        <hr style="height: 2px"/>
                                         <!--Update info form-->
                                         <div class="form-row" style="padding-top: 2%;">
                                             <div class="col-md-4 mb-3">
-                                                <label for="validationCustom01">Name</label>
+                                                <label>Name</label>
                                                 <h:inputText class="form-control-custom" p:placeholder="Name" value="#{newAnimalRegirtrationFormManager.name}" autocomplete="off" required="true" />
                                             </div>
                                             <div class="col-md-4 mb-3">
@@ -429,7 +432,10 @@
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
-                                            <h:commandButton class="btn btn-lg" value="Save-Changes" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
+                                            <h:commandButton class="btn btn-lg" value="Save Changes" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
+                                                <f:actionListener binding="#{uploadController.doUpload()}" />
+                                            </h:commandButton>
+                                            <h:commandButton class="btn btn-lg" value="Delete Animal" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
                                                 <f:actionListener binding="#{uploadController.doUpload()}" />
                                             </h:commandButton>
                                         </div>
