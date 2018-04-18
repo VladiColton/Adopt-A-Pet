@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import static mainmanager.SessionUtils.getSession;
 
 /**
  * Upload Controller used to manage incoming image streams, save them under
@@ -38,7 +36,7 @@ public class UploadController implements Serializable{
             File f = new File(UploadController.class.getProtectionDomain().getCodeSource().getLocation().getPath());
             String str = f.getPath(); //Set relative path to the DB
             str = str.substring(0, str.indexOf("Adopt-A-Pet")+12) + "\\imagesUploads";
-            File path = new File(str+"\\"+SessionUtils.getUserId().toString());
+            File path = new File(str+"\\"+SessionUtils.getUserEmail());
             
             if (!path.exists() || !path.isDirectory())
             {
@@ -54,7 +52,7 @@ public class UploadController implements Serializable{
                 midString = midString+"profile.";
                 isForProfile = false;
             }
-            File pic = new File(str+"\\"+SessionUtils.getUserId().toString() + midString + image.getSubmittedFileName());
+            File pic = new File(str+"\\"+SessionUtils.getUserEmail() + midString + image.getSubmittedFileName());
             pic.createNewFile();
             FileOutputStream out = new FileOutputStream(pic);
             
