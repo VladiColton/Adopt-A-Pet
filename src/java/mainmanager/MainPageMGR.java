@@ -18,10 +18,13 @@ public class MainPageMGR implements Serializable {
     private List<Animal> _animals;
     public MainPageMGR()
     {
-        Owner o = Owner.builder().email("acsa").passwordHash("scacxzc").name("cvadf").build();
+        Owner o = Owner.builder().email("wowthis").password("wowthis").name("cvadf").build();
         OwnerRepository r = new OwnerRepository();
         r.create(o);
         Owner x = r.find(o.getId());
+        r.isEmailAvailable("wowthis1");
+        r.isEmailAvailable("wowthis");
+        
         // TODO - remove file
         this._animals = new ArrayList<>();
         
