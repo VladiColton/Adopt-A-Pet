@@ -4,7 +4,7 @@ import java.io.Serializable;
 import javax.faces.bean.*;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
-import sqlmanager.*;
+import repository.OwnerRepository;
 
 /**
  * User authentication class responsible to authenticate users vs DB
@@ -66,10 +66,11 @@ public class UserAuthentication implements Serializable{
     public void validateEmailPassword(ActionEvent event)
     {
         boolean valid = false;
+        OwnerRepository rep = new OwnerRepository();
         
         if(_mailAddress != null && _password != null)
         {
-            valid = Login.validateUser(_mailAddress, _password); //validate user name and password with DB
+            valid = rep.isLoginValid(_mailAddress, _password); //Validate user name and password with DB
         }
         
         if(valid)
@@ -78,10 +79,8 @@ public class UserAuthentication implements Serializable{
             //the information in the DB and set in the session
             this.setAutoErrorMSG("");
             this._isUserConnected = true;
-            HttpSession session = SessionUtils.getSession();
             SessionUtils.setUserEmail(_mailAddress);
             SessionUtils.setIsUserConnected(_isUserConnected);
-            SessionUtils.setUserId(_mailAddress);
             SessionUtils.setUserLocation("");
             SessionUtils.setUserPhone(0);
             SessionUtils.setUserName("", _mailAddress);

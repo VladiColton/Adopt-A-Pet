@@ -57,6 +57,12 @@ a:hover{
     font-weight: bold;
     display: block;
 }
+.text-primary
+{
+    font-weight: bold;
+    margin: 0px 0px 5px 0px !important;
+    display: block;
+}
 
 .login-form .login-details{
     margin: 20px 0px 0px 0px !important;

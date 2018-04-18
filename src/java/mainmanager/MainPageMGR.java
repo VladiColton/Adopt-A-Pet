@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.*;
+import repository.OwnerRepository;
 
 /**
  * Main Page manager class before user login
@@ -31,12 +32,8 @@ public class MainPageMGR implements Serializable {
         this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_06", 10));
     }
 
-    public String getPets() {
-        return this._animals.get(0).getName();
-    }
-
-    public List<Animal> getAnimals() {
+    public List<Animal> getAnimals() 
+    {
         return this._animals;
     }
-
 }
