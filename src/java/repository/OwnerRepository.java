@@ -31,4 +31,17 @@ public class OwnerRepository extends Repository<Owner> {
         String hashedPassword = resultList.get(0);
         return Passwords.checkPassword(password, hashedPassword);
     }
+    
+    public Owner getOwner(String email) {
+        List<Owner> resultList = em.createNamedQuery(Owner.GET_OWNER)
+                .setParameter("email", email)
+                .getResultList();
+        
+        if (resultList.isEmpty()) {
+            return null;
+        }
+        
+        Owner o = resultList.get(0);
+        return o;
+    }
 }
