@@ -98,5 +98,4 @@ public class NewAnimalRegirtrationFormManager {
         if(!SessionUtils.isUserConnected())
             return;
     }
-    
 }
