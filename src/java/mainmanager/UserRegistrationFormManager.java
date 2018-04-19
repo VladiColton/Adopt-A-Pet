@@ -2,7 +2,10 @@ package mainmanager;
 
 import entities.Owner;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
 import javax.faces.bean.*;
 import javax.faces.event.AjaxBehaviorEvent;
 import repository.OwnerRepository;
@@ -119,6 +122,23 @@ public class UserRegistrationFormManager implements Serializable {
     public void updateUserDetails(ActionEvent event) 
     {
         OwnerRepository rep = new OwnerRepository();
+        byte[] defaultProfPic = null;
+        
+        try 
+        {
+            //Get directory with default image
+            File f = new File(UploadController.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+            String imageLocation = f.getPath(); //Set relative path to the DB
+            imageLocation = imageLocation.substring(0, imageLocation.indexOf("Adopt-A-Pet")+12) + "\\web\\images";
+            //Get default image
+            File usrImageFile = new File(imageLocation + "\\defaultUserImage.png");
+            //Create byte array for saving in the DB
+            defaultProfPic = Files.readAllBytes(usrImageFile.toPath());
+        }
+        catch (IOException ex) 
+        {
+            ex.printStackTrace(System.out);
+        }
         
         _newOwner = Owner.builder()
                 .name(_firstName + " " + _lastName)
@@ -126,8 +146,10 @@ public class UserRegistrationFormManager implements Serializable {
                 .phoneNumber(_phoneNumber)
                 .email(_email)
                 .password(_password)
+                .profilePic(defaultProfPic)
                 .build();
         
         rep.create(_newOwner);
+        
     }
 }
