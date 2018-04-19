@@ -30,11 +30,10 @@ public class SessionUtils {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         return session.getAttribute("username").toString();
     }
-    protected static void setUserName(String userName, String email)
+    protected static void setUserName(String userName)
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        //session.setAttribute("username", Login.getUserName(email)); //Get users phone number
-        session.setAttribute("username", "ReadFromDB");
+        session.setAttribute("username", userName);
     }
     
     public static String getUserEmail() 
@@ -42,10 +41,10 @@ public class SessionUtils {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         return session.getAttribute("useremail").toString();
     }
-    protected static void setUserEmail(String mail)
+    protected static void setUserEmail(String email)
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        session.setAttribute("useremail", mail);
+        session.setAttribute("useremail", email);
     }
     
     public static String getUserLocation() 
@@ -56,8 +55,7 @@ public class SessionUtils {
     protected static void setUserLocation(String userLocation)
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        //session.setAttribute("userlocation", Login.getUserLocation(_mailAddress)); //Get User Location
-        session.setAttribute("userlocation", "Read FromDB"); //Temp till db read User Location
+        session.setAttribute("userlocation", userLocation);
     }
     
     public static long getUserPhone() 
@@ -68,8 +66,7 @@ public class SessionUtils {
     protected static void setUserPhone(long phone)
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        //session.setAttribute("userphone", Login.getUserPhoneNum(_mailAddress)); //Get users phone number
-        session.setAttribute("userphone", (long)123456);
+        session.setAttribute("userphone", phone);
     }
     
     public static boolean isUserConnected()
