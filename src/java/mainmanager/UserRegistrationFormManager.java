@@ -112,20 +112,22 @@ public class UserRegistrationFormManager implements Serializable {
     
     public boolean allPropertiesFilled(AjaxBehaviorEvent event)
     {
-        return (_phoneNumber != 0 && !_email.equalsIgnoreCase("") && !_password.equalsIgnoreCase("") && (!_firstName.equalsIgnoreCase("") || !_lastName.equalsIgnoreCase("")) && !_streetAddress.equalsIgnoreCase("") && !_city.equalsIgnoreCase(""));
+        OwnerRepository rep = new OwnerRepository();
+        return (_phoneNumber != 0 && !_email.equalsIgnoreCase("") && _email.contains("@") && _email.contains(".") && !_password.equalsIgnoreCase("") && (!_firstName.equalsIgnoreCase("") || !_lastName.equalsIgnoreCase("")) && !_streetAddress.equalsIgnoreCase("") && !_city.equalsIgnoreCase("") && rep.isEmailAvailable(_email));
     }
 
     public void updateUserDetails(ActionEvent event) 
     {
+        OwnerRepository rep = new OwnerRepository();
+        
         _newOwner = Owner.builder()
                 .name(_firstName + " " + _lastName)
                 .location(_streetAddress + ", " + _city)
                 .phoneNumber(_phoneNumber)
                 .email(_email)
+                .password(_password)
                 .build();
-
-        //Here to check the details and validation for the user next to the DB for example if already exists
-        //If not exists add new user/owner to the DB according to the details recieved.
-        //SQL Stuff
+        
+        rep.create(_newOwner);
     }
 }
