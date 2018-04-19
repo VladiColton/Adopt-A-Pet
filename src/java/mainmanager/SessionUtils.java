@@ -3,11 +3,15 @@ package mainmanager;
 /**
  * Here we obtain a session for each user logged through the getUserId method thereby
  * associating a session id to a particular user id.
+ * Available Session attributes for use:
+ * (long)"userphone", (String)"useremail", (String)"userlocation", (String)"username", (boolean)"isUserConnected"
  * @author Vladi Colton
  */
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import repository.OwnerRepository;
+import entities.Owner;
 
 public class SessionUtils {
 
@@ -26,7 +30,7 @@ public class SessionUtils {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         return session.getAttribute("username").toString();
     }
-    public static void setUserName(String userName, String email)
+    protected static void setUserName(String userName, String email)
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         //session.setAttribute("username", Login.getUserName(email)); //Get users phone number
@@ -38,7 +42,7 @@ public class SessionUtils {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         return session.getAttribute("useremail").toString();
     }
-    public static void setUserEmail(String mail)
+    protected static void setUserEmail(String mail)
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.setAttribute("useremail", mail);
@@ -49,7 +53,7 @@ public class SessionUtils {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         return session.getAttribute("userlocation").toString();
     }
-    public static void setUserLocation(String userLocation)
+    protected static void setUserLocation(String userLocation)
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         //session.setAttribute("userlocation", Login.getUserLocation(_mailAddress)); //Get User Location
@@ -61,7 +65,7 @@ public class SessionUtils {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         return (long)session.getAttribute("userphone");
     }
-    public static void setUserPhone(long phone)
+    protected static void setUserPhone(long phone)
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         //session.setAttribute("userphone", Login.getUserPhoneNum(_mailAddress)); //Get users phone number
@@ -73,9 +77,26 @@ public class SessionUtils {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         return session.getAttribute("isUserConnected").toString().equalsIgnoreCase("true");
     }
-    public static void setIsUserConnected(boolean connectionState)
+    protected static void setIsUserConnected(boolean connectionState)
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.setAttribute("isUserConnected", connectionState); //Set if user connected
+    }
+    protected static void setUserDetailsToSession(String mailAddress)
+    {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        
+        //Get user by mail from DB
+        OwnerRepository rep = new OwnerRepository();
+        Owner usr = rep.getOwner(mailAddress);
+        
+        if (usr != null)
+        {
+            //Set sessions details for the user
+            session.setAttribute("userphone", usr.getPhoneNumber());
+            session.setAttribute("useremail", mailAddress);
+            session.setAttribute("userlocation", usr.getLocation());
+            session.setAttribute("username", usr.getName());
+        }
     }
 }

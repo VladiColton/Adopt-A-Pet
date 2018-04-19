@@ -79,11 +79,8 @@ public class UserAuthentication implements Serializable{
             //the information in the DB and set in the session
             this.setAutoErrorMSG("");
             this._isUserConnected = true;
-            SessionUtils.setUserEmail(_mailAddress);
+            SessionUtils.setUserDetailsToSession(_mailAddress);
             SessionUtils.setIsUserConnected(_isUserConnected);
-            SessionUtils.setUserLocation("");
-            SessionUtils.setUserPhone(0);
-            SessionUtils.setUserName("", _mailAddress);
         }
         else
         {

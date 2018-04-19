@@ -6,11 +6,13 @@ import passwords.Passwords;
 
 public class OwnerRepository extends Repository<Owner> {
 
-    public OwnerRepository() {
+    public OwnerRepository() 
+    {
         super(Owner.class);
     }
 
-    public boolean isEmailAvailable(String email) {
+    public boolean isEmailAvailable(String email) 
+    {
         List<Long> resultList = em.createNamedQuery(Owner.GET_EMAIL_COUNT)
                 .setParameter("email", email)
                 .getResultList();
@@ -19,7 +21,8 @@ public class OwnerRepository extends Repository<Owner> {
         return ownersFound == 0;
     }
 
-    public boolean isLoginValid(String email, String password) {
+    public boolean isLoginValid(String email, String password) 
+    {
         List<String> resultList = em.createNamedQuery(Owner.GET_OWNER_PASSWORD)
                 .setParameter("email", email)
                 .getResultList();
@@ -32,12 +35,14 @@ public class OwnerRepository extends Repository<Owner> {
         return Passwords.checkPassword(password, hashedPassword);
     }
     
-    public Owner getOwner(String email) {
+    public Owner getOwner(String email) 
+    {
         List<Owner> resultList = em.createNamedQuery(Owner.GET_OWNER)
                 .setParameter("email", email)
                 .getResultList();
         
-        if (resultList.isEmpty()) {
+        if (resultList.isEmpty()) 
+        {
             return null;
         }
         
