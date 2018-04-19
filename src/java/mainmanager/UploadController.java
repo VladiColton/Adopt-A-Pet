@@ -1,12 +1,17 @@
 package mainmanager;
 
+import entities.Owner;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.Part;
+import repository.OwnerRepository;
+import sun.misc.IOUtils;
+
 
 /**
  * Upload Controller used to manage incoming image streams, save them under
@@ -26,48 +31,30 @@ public class UploadController implements Serializable{
     
     public void doUpload()
     {
-        //make sure the user is logged in, if not return
-        if(!isForProfile && !SessionUtils.isUserConnected())
+        //make sure image selected by user and need to be uploaded and user logged in, if not return
+        if(!SessionUtils.isUserConnected() || image == null)
             return;
         
         try
         {
-            //Check if user directory already exists - if no create
-            File f = new File(UploadController.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-            String str = f.getPath(); //Set relative path to the DB
-            str = str.substring(0, str.indexOf("Adopt-A-Pet")+12) + "\\imagesUploads";
-            File path = new File(str+"\\"+SessionUtils.getUserEmail());
-            
-            if (!path.exists() || !path.isDirectory())
-            {
-                boolean success = path.mkdir();
-                if (!success)
-                    return;
-            }
-            
             InputStream in = image.getInputStream();
-            String midString = "\\";
-            if (isForProfile)
+            //Create byte array to save the image in the DB
+            byte[] fileAsByteArray = IOUtils.readFully(in, Integer.MAX_VALUE, true/*ignored since Integer.MAX_VALUE set*/);
+            
+            if (isForProfile)// If for user profile picture
             {
-                midString = midString+"profile.";
-                isForProfile = false;
+                //Save the image in the DB for the connected user
+                OwnerRepository rep = new OwnerRepository();
+                Owner usr  = rep.getOwner(SessionUtils.getUserEmail());
+                usr.setProfilePic(fileAsByteArray);
+                rep.update(usr);   
             }
-            File pic = new File(str+"\\"+SessionUtils.getUserEmail() + midString + image.getSubmittedFileName());
-            pic.createNewFile();
-            FileOutputStream out = new FileOutputStream(pic);
-            
-            byte[] buffer = new byte[1024];
-            int length;
-            
-            while((length = in.read(buffer))>0)
+            else // Animal image
             {
-                out.write(buffer, 0, length);
+                //Add here animal image uploading code
             }
-            
-            out.close();
-            in.close();
         }
-        catch(Exception ex)
+        catch(IOException ex)
         {
             ex.printStackTrace(System.out);
         }
@@ -79,12 +66,45 @@ public class UploadController implements Serializable{
         doUpload();
     }
     
-    public Part getImage() 
+    protected static byte[] setDefaultProfileImage()
+    {
+        //Check that the user connected
+        if(!SessionUtils.isUserConnected())
+            return null;
+        
+        OwnerRepository rep = new OwnerRepository();
+        Owner user = rep.getOwner(SessionUtils.getUserEmail());
+        byte[] defaultProfPic = null;
+        
+        try 
+        {
+            //Get directory with default image
+            File f = new File(UploadController.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+            String imageLocation = f.getPath(); //Set relative path to the DB
+            imageLocation = imageLocation.substring(0, imageLocation.indexOf("Adopt-A-Pet")+12) + "\\web\\images";
+            //Get default image
+            File usrImageFile = new File(imageLocation + "\\defaultUserImage.png");
+            //Create byte array for saving in the DB
+            defaultProfPic = Files.readAllBytes(usrImageFile.toPath());
+        }
+        catch (IOException ex) 
+        {
+            ex.printStackTrace(System.out);
+        }
+        
+        //Update user profile image
+        user.setProfilePic(defaultProfPic);
+        rep.update(user);
+        return defaultProfPic;
+        
+    }
+    
+    public Part getImage()
     {
         return image;
     }
 
-    public void setImage(Part image) 
+    public void setImage(Part image)
     {
         this.image = image;
     }

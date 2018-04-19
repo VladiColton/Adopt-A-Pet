@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.*;
-import repository.OwnerRepository;
 
 /**
  * Main Page manager class before user login
