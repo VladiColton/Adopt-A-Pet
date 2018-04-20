@@ -134,6 +134,11 @@ public class UserUpdateInformationFormManager{
             //Delete the user from the DB
             rep.remove(user.getId());
         }
+        
+        //Here need to add also parsing on all animals of the registered user
+        //and remove them as well from the Animals rep.
+        
+        
         return "index.xhtml?faces-redirect=true";
     }
 }
