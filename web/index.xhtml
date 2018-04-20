@@ -393,42 +393,46 @@
                                     </div>
                                     <div class="modal-body" style="padding-bottom: 5%">
                                         <!--Select animal from the list-->
-                                        <h:outputText value="Please select one of your animals to edit information from the list below:" />  
-                                        <h3 style="text-align:center;" class="form-row">Information</h3>
+                                        <h:outputText value="Please select one of your animals to edit information from the list below:" />
+                                        <!--Get list for all animals can be edited by the user-->
+                                        <div class="form-row" style="padding-bottom: 10%; padding-top: 2%; text-align: center;">
+                                            <ui:repeat value="#{mainPageMGR.animals}" var="animal" varStatus="status">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="GotoAnimal">
+                                                        <h:commandLink id="pet-update-link" title="UpdateAnimals" target="_blank" value="#{animal.name}">
+                                                            <f:ajax event="click" listener="#{animalUpdateFormManager.animalSelectedListener(animal)}" render="animalUpdateFormFieldName" />
+                                                        </h:commandLink>
+                                                    </div>
+                                                </div>
+                                            </ui:repeat>
+                                        </div>
+                                        <h3 style="text-align:center;">Animal Information To Edit</h3>
                                         <hr style="height: 2px"/>
                                         <!--Update info form-->
                                         <div class="form-row" style="padding-top: 2%;">
                                             <div class="col-md-4 mb-3">
                                                 <label>Name</label>
-                                                <h:inputText class="form-control-custom" p:placeholder="Name" value="#{newAnimalRegirtrationFormManager.name}" autocomplete="off" required="true" />
+                                                <h:inputText id="animalUpdateFormFieldName" class="form-control-custom" value="#{animalUpdateFormManager.name}" autocomplete="off" required="true" />
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label>Age</label>
-                                                <h:inputText class="form-control-custom" p:placeholder="Age" value="#{newAnimalRegirtrationFormManager.age}" autocomplete="off" required="true" />
+                                                <h:inputText id="animalUpdateFormField_Age" class="form-control-custom" p:placeholder="Age" value="#{animalUpdateFormManager.age}" autocomplete="off" required="true" />
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label>Type</label>
-                                                <h:inputText class="form-control-custom" p:placeholder="Type" value="#{newAnimalRegirtrationFormManager.type}" autocomplete="off" required="true" />
+                                                <h:inputText id="animalUpdateFormField_Type" class="form-control-custom" p:placeholder="Type" value="#{animalUpdateFormManager.type}" autocomplete="off" required="true" />
                                             </div>
                                         </div>
                                         <div class="form-row padd">
                                             <div class="col-md-6 mb-3">
                                                 <label>Breed</label>
-                                                <h:inputText class="form-control-custom" p:placeholder="Breed" value="#{newAnimalRegirtrationFormManager.subType}" autocomplete="off" required="true" />
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Additional Contact Info</label>
-                                                <h:outputText class="text-error" value="Here - will be added owner location" />
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Phone Number</label>
-                                                <h:outputText class="text-error" value="Here - will be added owner Phone" />
+                                                <h:inputText id="animalUpdateFormField_Breed" class="form-control-custom" p:placeholder="Breed" value="#{animalUpdateFormManager.subType}" autocomplete="off" required="true" />
                                             </div>
                                         </div>
                                         <h3 style="text-align:center; padding-top: 10%;" class="form-row">Animal Description</h3>
                                         <hr style="height: 2px"/>
                                         <div class="form-row">
-                                            <h:inputTextarea style="height: 100px; padding-bottom: 0px;" class="form-control-custom" p:placeholder="Full Animal Description" value="#{newAnimalRegirtrationFormManager.description}" required="true" />
+                                            <h:inputTextarea id="animalUpdateFormField_Description" style="height: 100px; padding-bottom: 0px;" class="form-control-custom" p:placeholder="Full Animal Description" value="#{animalUpdateFormManager.description}" required="true" />
                                         </div>
                                         <h:inputFile class="btn btn-sm" value="#{uploadController.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto" />
                                     </div>
