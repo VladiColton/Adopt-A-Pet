@@ -111,7 +111,7 @@
                             <k:graphicImage value="#{imageReciverController.profileImageFromDB}" height="80" width="120" cache="false" />
                             <center>
                                 <h:outputText class="text-light" style="display: block; padding-top: 3%" value="Welcome: #{userAuthentication.email}" />
-                                <h:commandButton class="btn btn-sm" action="#{userAuthentication.logout()}" value="Logout" ></h:commandButton>
+                                <h:commandButton class="btn btn-sm" action="#{userAuthentication.logout()}" value="Logout" />
                             </center>
                         </h:form>
                     </h:panelGroup>
@@ -264,7 +264,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                         <h3>User Settings Panel</h3>
                                     </div>
-                                    <div class="modal-body" style="padding-bottom: 15%">
+                                    <div class="modal-body" style="padding-bottom: 5%">
                                         <h4><h:outputText value="Hello #{userUpdateInformationFormManager.userName}!" style="font-weight:bold" /></h4>
                                         In This form you can change some of your personal registration information as appears in our DataBase.
                                         <h3 style="text-align:center;" class="form-row">Update Information</h3>
@@ -299,6 +299,7 @@
                                             <h:commandButton id="userPersonalDetailsUpdateButton" class="btn btn-lg" value="Save Changes" disabled="#{not userUpdateInformationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" actionListener="#{userUpdateInformationFormManager.updateRregistrationInfo(ActionEvent)}">
                                                 <f:actionListener binding="#{uploadController.doUploadForProfile()}" />
                                             </h:commandButton>
+                                            <h:commandButton id="userPersonalDetailsDeleteButton" class="btn btn-lg" value="Delete Account" action="#{userUpdateInformationFormManager.deleteUserAccount()}" />
                                         </div>
                                     </div>
                                 </article>

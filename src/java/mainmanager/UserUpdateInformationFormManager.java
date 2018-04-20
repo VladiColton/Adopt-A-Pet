@@ -5,6 +5,7 @@ import javax.faces.event.ActionEvent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.http.HttpSession;
 import repository.OwnerRepository;
 
 
@@ -115,5 +116,24 @@ public class UserUpdateInformationFormManager{
             rep.update(user);
         }
         
+    }
+    
+    public String deleteUserAccount()
+    {
+         //Verify that user connected and only then update the information
+        if(SessionUtils.isUserConnected())
+        {
+            //Get user to be deleted from data base
+            OwnerRepository rep = new OwnerRepository();
+            Owner user = rep.getOwner(SessionUtils.getUserEmail());
+            
+            //Close the session for the user on delete action
+            HttpSession session = SessionUtils.getSession();
+            session.invalidate();
+            
+            //Delete the user from the DB
+            rep.remove(user.getId());
+        }
+        return "index.xhtml?faces-redirect=true";
     }
 }
