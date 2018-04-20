@@ -29,6 +29,7 @@ public class MainPageMGR implements Serializable {
         this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_04", 10));
         this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_05", 10));
         this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_06", 10));
+        
     }
 
     public List<Animal> getAnimals() 

@@ -747,3 +747,25 @@ a:hover{
   text-decoration:underline;
   padding-left:15px;
 }
+
+.GotoAnimal {
+  padding:10px;
+  padding-top:0;
+  color:#06f;
+  font-family:'latoregular',arial;
+  font-size:14px;
+}
+
+.GotoAnimal a {
+  text-decoration:none;
+  color:#06f;
+  -webkit-transition:0.1s all linear;
+  -moz-transition:0.1s all linear;
+  -o-transition:0.1s all linear;
+  transition:0.1s all linear;
+}
+
+.GotoAnimal a:hover {
+  text-decoration:underline;
+  padding-left:15px;
+}
