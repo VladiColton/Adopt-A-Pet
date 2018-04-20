@@ -1,9 +1,11 @@
 package mainmanager;
 
+import entities.Owner;
 import javax.faces.event.ActionEvent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
+import repository.OwnerRepository;
 
 
 /**
@@ -84,12 +86,34 @@ public class UserUpdateInformationFormManager{
         SessionUtils.setUserPhone(_phoneNumber);
         SessionUtils.setUserLocation(_streetAddress + ", " + _city);
         
-        //DO NOT REMOVE THIS COMMENTS
+        OwnerRepository rep = new OwnerRepository();
+        Owner user = rep.getOwner(SessionUtils.getUserEmail());
         
-        //Here need to send new data recieved to the DB for saving
-        //Password
-        //Location
-        //Phone
-        //email address (By userID Saved in SessionUtils) 
+        boolean needDBUpdate = false;
+        if(!this._password.equalsIgnoreCase("") && !user.getPassword().equals(this._password))
+        {
+            //Replase existing password
+            user.setPassword(_password);
+            needDBUpdate = true;
+        }
+        if(!this._streetAddress.equalsIgnoreCase("") || !this._city.equalsIgnoreCase(""))
+        {
+            //Replase existing location
+            user.setLocation(_streetAddress + ", " + _city);
+            needDBUpdate = true;
+        }
+        if(this._phoneNumber != user.getPhoneNumber())
+        {
+            //Replase existing PhoneNumber
+            user.setPhoneNumber(_phoneNumber);
+            needDBUpdate = true;
+        }
+        
+        //Update DB with new details if needed
+        if(needDBUpdate)
+        {
+            rep.update(user);
+        }
+        
     }
 }

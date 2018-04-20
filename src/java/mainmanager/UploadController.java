@@ -47,7 +47,8 @@ public class UploadController implements Serializable{
                 OwnerRepository rep = new OwnerRepository();
                 Owner usr  = rep.getOwner(SessionUtils.getUserEmail());
                 usr.setProfilePic(fileAsByteArray);
-                rep.update(usr);   
+                rep.update(usr);
+                isForProfile = false;
             }
             else // Animal image
             {
