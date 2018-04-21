@@ -18,15 +18,18 @@ public class Animal implements Persistable, Serializable {
     private String type;
     private String subType;
     private String name;
+    private byte[] animalPic;
 
     @ManyToOne
     private Owner owner;
 
-    public Animal() {
+    public Animal() 
+    {
     }
 
     public Animal(Owner owner, String description, String type, String subType, String name, double age) {
-        if (!isAgeValid(age)) {
+        if (!isAgeValid(age)) 
+        {
             throw new IllegalArgumentException("age cannot be negative");
         }
 
@@ -38,56 +41,78 @@ public class Animal implements Persistable, Serializable {
         this.age = age;
     }
 
-    private static boolean isAgeValid(double age) {
+    private static boolean isAgeValid(double age) 
+    {
         return age >= 0;
     }
 
     @Override
-    public Long getId() {
+    public Long getId() 
+    {
         return id;
     }
 
-    public void setAge(float age) {
+    public void setAge(float age) 
+    {
         if (!isAgeValid(age)) {
             throw new IllegalArgumentException("age cannot be negative");
         }
         this.age = age;
     }
 
-    public double getAge() {
+    public double getAge() 
+    {
         return this.age;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description) 
+    {
         this.description = description;
     }
 
-    public String getDescription() {
+    public String getDescription() 
+    {
         return this.description;
     }
 
-    public void setName(String name) {
+    public void setName(String name) 
+    {
         this.name = name;
     }
 
-    public String getName() {
+    public String getName() 
+    {
         return this.name;
     }
 
-    public void setType(String type) {
+    public void setType(String type) 
+    {
         this.type = type;
     }
 
-    public String getType() {
+    public String getType() 
+    {
         return this.type;
     }
 
-    public void setSubType(String subType) {
+    public void setSubType(String subType) 
+    {
         this.subType = subType;
     }
 
-    public String getSubType() {
+    public String getSubType() 
+    {
         return this.subType;
+    }
+    
+    public byte[] getAnimalPic() 
+    {
+        return animalPic;
+    }
+
+    public void setAnimalPic(byte[] animalPic) 
+    {
+        this.animalPic = animalPic;
     }
 
     public void setOwner(Owner owner) {
@@ -112,20 +137,24 @@ public class Animal implements Persistable, Serializable {
     }
     
     @Override
-    public int hashCode() {
+    public int hashCode() 
+    {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
     
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object) 
+    {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Animal)) {
+        if (!(object instanceof Animal)) 
+        {
             return false;
         }
         Animal other = (Animal) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) 
+        {
             return false;
         }
         return true;
