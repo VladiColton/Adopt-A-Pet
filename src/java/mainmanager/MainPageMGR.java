@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.faces.bean.*;
 
 /**
@@ -20,10 +21,11 @@ import javax.faces.bean.*;
 public class MainPageMGR implements Serializable {
 
     //private LinkedList<Animal> animals;
-    public List<Animal> _animals;
+    private List<Animal> _animals;
+    private String animalTypeToView;
 
     public MainPageMGR() {
-        // TODO - remove file
+        animalTypeToView = "all";
         
         byte[] animalProfPic = null;
         try
@@ -45,7 +47,7 @@ public class MainPageMGR implements Serializable {
         //Create animals
         this._animals = new ArrayList<>();
         
-        Animal an1 = new Animal(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build(), "testAnimal", "type1", "subtype", "Animal_01", 10);
+        Animal an1 = new Animal(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build(), "testAnimal", "dog", "subtype", "Animal_01", 10);
         an1.setAnimalPic(animalProfPic);
         this._animals.add(an1);
         Animal an2 = new Animal(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build(), "testAnima2", "type2", "subtype", "Animal_02", 12);
@@ -57,11 +59,35 @@ public class MainPageMGR implements Serializable {
         Animal an4 = new Animal(null, "testAnimal desk4", "type4", "subtype3", "Animal_04", 177);
         an4.setAnimalPic(animalProfPic);
         this._animals.add(an4);
-        
     }
     
     public List<Animal> getAnimals() 
     {
-        return this._animals;
+        if (animalTypeToView.equalsIgnoreCase("all"))
+        {
+            return this._animals;
+        }
+        else
+        {
+            //Build new sublist to return with only selected animals
+            List<Animal> test = this._animals.stream().filter(a -> a.getType().equalsIgnoreCase(animalTypeToView)).collect(Collectors.toList());
+            return test;
+        }
+    }
+    
+    public void setAnimalFilter(String animalType)
+    {
+        //Switch case
+        switch(animalType)
+        {
+            case "dog":
+            case "cat":
+            case "parrot":
+                animalTypeToView = animalType;
+                break;
+            default:
+                animalTypeToView = "all";
+                break;
+        }
     }
 }
