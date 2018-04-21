@@ -54,12 +54,12 @@ public class ImageReciverController implements Serializable{
             image = UploadController.setDefaultProfileImage();
         }
         
-        return new DefaultStreamedContent(new ByteArrayInputStream(image), "image2/png");     
+        return new DefaultStreamedContent(new ByteArrayInputStream(image));     
     }
 
     public StreamedContent getAnimalImageFromDB()
     {
-        return new DefaultStreamedContent(new ByteArrayInputStream(defaultAnimalProfileImage), "image/png");
+        return new DefaultStreamedContent(new ByteArrayInputStream(defaultAnimalProfileImage));
     }
     
 }

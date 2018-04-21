@@ -137,8 +137,7 @@ public class UserUpdateInformationFormManager{
         
         //Here need to add also parsing on all animals of the registered user
         //and remove them as well from the Animals rep.
-        
-        
+
         return "index.xhtml?faces-redirect=true";
     }
 }
