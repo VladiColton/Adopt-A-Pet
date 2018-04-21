@@ -2,6 +2,7 @@ package mainmanager;
 
 import entities.Animal;
 import entities.Owner;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.faces.bean.*;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  * Main Page manager class before user login
@@ -21,9 +24,13 @@ public class MainPageMGR implements Serializable {
     //private LinkedList<Animal> animals;
     private List<Animal> _animals;
     private String animalTypeToView;
-
+    private int imageIndex;
+    private List<Animal> listOfAnimals;
+    
+    
     public MainPageMGR() {
         animalTypeToView = "all";
+        imageIndex = -1;
         
         byte[] animalProfPic = null;
         try
@@ -48,7 +55,7 @@ public class MainPageMGR implements Serializable {
         Animal an1 = new Animal(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build(), "testAnimal", "dog", "subtype", "Animal_01", 10);
         an1.setAnimalPic(animalProfPic);
         this._animals.add(an1);
-        Animal an2 = new Animal(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build(), "testAnima2", "type2", "subtype", "Animal_02", 12);
+        Animal an2 = new Animal(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build(), "testAnima2", "cat", "subtype", "Animal_02", 12);
         an2.setAnimalPic(animalProfPic);
         this._animals.add(an2);
         Animal an3 = new Animal(null, "testAnimal desk3", "type3", "subtype2", "Animal_03", 16);
@@ -61,16 +68,20 @@ public class MainPageMGR implements Serializable {
     
     public List<Animal> getAnimals() 
     {
+        List<Animal> res;
         if (animalTypeToView.equalsIgnoreCase("all"))
         {
-            return this._animals;
+            res = this._animals;
         }
         else
         {
             //Build new sublist to return with only selected animals
-            List<Animal> test = this._animals.stream().filter(a -> a.getType().equalsIgnoreCase(animalTypeToView)).collect(Collectors.toList());
-            return test;
+            res = this._animals.stream().filter(a -> a.getType().equalsIgnoreCase(animalTypeToView)).collect(Collectors.toList());
         }
+        
+        //Before exit update the session with active list
+        setAnimalsList(res);
+        return res;
     }
     
     public void setAnimalFilter(String animalType)
@@ -87,5 +98,19 @@ public class MainPageMGR implements Serializable {
                 animalTypeToView = "all";
                 break;
         }
+    }
+    
+    public void setAnimalsList(List<Animal> list)
+    {
+        imageIndex = -1;
+        listOfAnimals = list;
+    }
+    
+    public StreamedContent getAnimalImageFromDB()
+    {
+        imageIndex++;
+        if(listOfAnimals.size() == imageIndex)
+            imageIndex = imageIndex-1;
+        return new DefaultStreamedContent(new ByteArrayInputStream(listOfAnimals.get(imageIndex).getAnimalPic()));
     }
 }
