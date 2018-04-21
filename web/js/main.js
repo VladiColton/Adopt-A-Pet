@@ -11,7 +11,7 @@ $(document).ready(function()
     {
         $('a[href*=#]:not([href=#])').click(function()
         {
-            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) 
+            if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && location.hostname === this.hostname) 
             {
                 var target = $(this.hash);
                 target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
@@ -57,7 +57,6 @@ $(document).ready(function()
     });
 
     $('#sidebar-wrapper').mouseleave(function(e)//declare the jQuery: mouseleave() event 
-    // - see: ('//api.jquery.com/mouseleave/' for details)
     {
         /* toggleClass: Add or remove one or more classes from each element
         in the set of matched elements, depending on either the class's
@@ -72,9 +71,9 @@ function openFullAnimalDescription(index)
 {
     let id="overlay"+index.toString();
     document.getElementById(id).style.display = "block";
-    
 }
-function closeFullAnimalDescription(index) {
+function closeFullAnimalDescription(index) 
+{
     let id="overlay"+index.toString();
     document.getElementById(id).style.display = "none";
 }
@@ -125,9 +124,25 @@ function geocodeAddress(geocoder, resultsMap, geoAddress)
     });
 }
 
-// Closes the sidebar menu on menu-close button click event
-$("#menu-close").click(function(e) //declare the element event ...'(e)' = event (shorthand)
+function updateSelectedAnimalFields(animalName, animalAge, animalType, animalBreed, animalDescription, animalID)
 {
-	$("#sidebar-wrapper").toggleClass("active"); //instead on click event toggle active CSS element
-	e.preventDefault();  //prevent the default action
-});
+    console.log("In updateSelectedAnimalFields with params:" + "Name="+animalName + " Age="+animalAge + " Type="+animalType);
+    var animalNameField = document.getElementsByClassName("form-control-custom animalUpdateFormField_Name");
+    var animalAgeField = document.getElementsByClassName("form-control-custom animalUpdateFormField_Age");
+    var animalTypeField = document.getElementsByClassName("form-control-custom animalUpdateFormField_Type");
+    var animalBreedField = document.getElementsByClassName("form-control-custom animalUpdateFormField_Breed");
+    var animalDescriptionField = document.getElementsByClassName("form-control-custom animalUpdateFormField_Description");
+    var animalIdField = document.getElementsByClassName("text-primary animalUpdateFormField_ID");
+    
+    //Set the details for the form.
+    animalNameField[0].value = animalName;
+    animalAgeField[0].value = animalAge;
+    animalTypeField[0].value = animalType;
+    animalBreedField[0].value = animalBreed;
+    animalDescriptionField[0].value = animalDescription;
+    
+    if(animalID === '')
+        animalID = -1;
+    animalIdField[0].innerHTML = animalID;
+    animalIdField[1].value = animalID;
+}

@@ -23,6 +23,7 @@ import sun.misc.IOUtils;
 public class UploadController implements Serializable{
     private Part image;
     private boolean isForProfile;
+    private Long idToAssociateWith;
     
     public UploadController()
     {
@@ -31,7 +32,7 @@ public class UploadController implements Serializable{
     
     public void doUpload()
     {
-        //make sure image selected by user and need to be uploaded and user logged in, if not return
+        //Make sure image selected by user and need to be uploaded and user logged in, if not return
         if(!SessionUtils.isUserConnected() || image == null)
             return;
         
@@ -53,11 +54,24 @@ public class UploadController implements Serializable{
             else // Animal image
             {
                 //Add here animal image uploading code
+                //idToAssociateWith <- Animal ID for image update
             }
         }
         catch(IOException ex)
         {
             ex.printStackTrace(System.out);
+        }
+    }
+    
+    public void doUploadForAnimal(String animalIDtoBeAssociatedWith)
+    {
+        isForProfile = false; //Set image is not for user profile
+        idToAssociateWith = Long.getLong(animalIDtoBeAssociatedWith); //get long from the recived string
+        
+        //Make sure AnimalID is valid
+        if(idToAssociateWith != -1 && idToAssociateWith > 0)
+        {
+            doUpload();
         }
     }
     

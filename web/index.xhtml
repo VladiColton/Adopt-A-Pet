@@ -148,10 +148,8 @@
                     <div class="back">
                         <div class="backTitle">#{animal.type}</div>
                         <div class="backParagraph">Hi <h:outputText value="#{userAuthentication.isUserConnected ? userAuthentication.email : ''}" />, <br /><h:outputText value="My name is:" style="font-weight:bold" /> #{animal.name} (#{animal.age})<br /><h:outputText value="My location is:" style="font-weight:bold" /> #{animal.ownerAddress}<br /><h:outputText value="Owners Contact information:" style="font-weight:bold" /> Name:#{animal.ownerName}, Phone: #{animal.ownerPhoneNum}<br /><br />Come Adopt Me!</div>
-
                         <div class="backGoto">
                             <a id="pet-desc-link" target="_blank" onclick="openFullAnimalDescription(#{status.index})" title="PetPanel">Open full info →</a>
-
                         </div>
                     </div>
                 </div>
@@ -399,9 +397,7 @@
                                             <ui:repeat value="#{mainPageMGR.animals}" var="animal" varStatus="status">
                                                 <div class="col-md-4 mb-3">
                                                     <div class="GotoAnimal">
-                                                        <h:commandLink id="pet-update-link" title="UpdateAnimals" target="_blank" value="#{animal.name}">
-                                                            <f:ajax event="click" listener="#{animalUpdateFormManager.animalSelectedListener(animal)}" render="animalUpdateFormFieldName" />
-                                                        </h:commandLink>
+                                                        <a id="pet-update-link" title="UpdateAnimals" target="_blank" onclick="updateSelectedAnimalFields('#{animal.name}', #{animal.age}, '#{animal.type}', '#{animal.subType}', '#{animal.description}', '#{animal.id}')">#{animal.name}</a>
                                                     </div>
                                                 </div>
                                             </ui:repeat>
@@ -412,38 +408,41 @@
                                         <div class="form-row" style="padding-top: 2%;">
                                             <div class="col-md-4 mb-3">
                                                 <label>Name</label>
-                                                <h:inputText id="animalUpdateFormFieldName" class="form-control-custom" value="#{animalUpdateFormManager.name}" autocomplete="off" required="true" />
+                                                <h:inputText class="form-control-custom animalUpdateFormField_Name" p:placeholder="Name" value="#{animalUpdateFormManager.name}" autocomplete="off" required="true" />                                   
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label>Age</label>
-                                                <h:inputText id="animalUpdateFormField_Age" class="form-control-custom" p:placeholder="Age" value="#{animalUpdateFormManager.age}" autocomplete="off" required="true" />
+                                                <h:inputText class="form-control-custom animalUpdateFormField_Age" p:placeholder="Age" value="#{animalUpdateFormManager.age}" autocomplete="off" required="true" />
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label>Type</label>
-                                                <h:inputText id="animalUpdateFormField_Type" class="form-control-custom" p:placeholder="Type" value="#{animalUpdateFormManager.type}" autocomplete="off" required="true" />
+                                                <h:inputText class="form-control-custom animalUpdateFormField_Type" p:placeholder="Type" value="#{animalUpdateFormManager.type}" autocomplete="off" required="true" />
                                             </div>
                                         </div>
                                         <div class="form-row padd">
                                             <div class="col-md-6 mb-3">
                                                 <label>Breed</label>
-                                                <h:inputText id="animalUpdateFormField_Breed" class="form-control-custom" p:placeholder="Breed" value="#{animalUpdateFormManager.subType}" autocomplete="off" required="true" />
+                                                <h:inputText class="form-control-custom animalUpdateFormField_Breed" p:placeholder="Breed" value="#{animalUpdateFormManager.subType}" autocomplete="off" required="true" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Registered Animal ID:</label>
+                                                <h:outputText class="text-primary animalUpdateFormField_ID" value="#{animalUpdateFormManager.id}" />
+                                                <h:inputText class="text-primary animalUpdateFormField_ID"  style="display: none;" value="#{animalUpdateFormManager.id}" autocomplete="off" required="false" />
                                             </div>
                                         </div>
                                         <h3 style="text-align:center; padding-top: 10%;" class="form-row">Animal Description</h3>
                                         <hr style="height: 2px"/>
                                         <div class="form-row">
-                                            <h:inputTextarea id="animalUpdateFormField_Description" style="height: 100px; padding-bottom: 0px;" class="form-control-custom" p:placeholder="Full Animal Description" value="#{animalUpdateFormManager.description}" required="true" />
+                                            <h:inputTextarea style="height: 100px; padding-bottom: 0px;" class="form-control-custom animalUpdateFormField_Description" p:placeholder="Full Animal Description" value="#{animalUpdateFormManager.description}" required="true" />
                                         </div>
                                         <h:inputFile class="btn btn-sm" value="#{uploadController.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto" />
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
-                                            <h:commandButton class="btn btn-lg" value="Save Changes" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
-                                                <f:actionListener binding="#{uploadController.doUpload()}" />
+                                            <h:commandButton class="btn btn-lg" value="Save Changes" actionListener="#{animalUpdateFormManager.updateAnimalDetails()}">
+                                                <f:actionListener binding="#{uploadController.doUploadForAnimal(animalUpdateFormManager.id)}" />
                                             </h:commandButton>
-                                            <h:commandButton class="btn btn-lg" value="Delete Animal" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
-                                                <f:actionListener binding="#{uploadController.doUpload()}" />
-                                            </h:commandButton>
+                                            <h:commandButton class="btn btn-lg" value="Delete Animal" actionListener="#{animalUpdateFormManager.deleteAnimal()}" />
                                         </div>
                                     </div>
                                 </article>

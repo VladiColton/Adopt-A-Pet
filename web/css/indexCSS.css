@@ -401,7 +401,7 @@ a:hover{
     padding: 6px 12px;
     transition: border-color 0.15s ease-in-out 0s,  box-shadow 0.15s ease-in-out 0s;
     width: 100%;
-    color: #inherit !important;
+    color: #bfbfbf !important;
     -webkit-transition: all .8s ease-in-out;
     -moz-transition: all .8s ease-in-out;
     -ms-transition: all .8s ease-in-out;
@@ -766,6 +766,7 @@ a:hover{
 }
 
 .GotoAnimal a:hover {
+  cursor: pointer;
   text-decoration:underline;
   padding-left:15px;
 }
