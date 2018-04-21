@@ -1,6 +1,5 @@
 package mainmanager;
 
-import entities.Animal;
 import entities.Owner;
 import java.io.ByteArrayInputStream;
 import java.io.File;

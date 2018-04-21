@@ -51,11 +51,11 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Filters <span class="caret"></span></a>
                             <ul role="menu">
                                 <h:form class="dropdown-menu">
-                                    <li><h:commandLink  value="Dogs" /></li>
-                                    <li><h:commandLink  value="Cats" /></li>
-                                    <li><h:commandLink  value="Parrots" /></li>
+                                    <li><h:commandLink  value="Dogs" actionListener="#{mainPageMGR.setAnimalFilter('dog')}" /></li>
+                                    <li><h:commandLink  value="Cats" actionListener="#{mainPageMGR.setAnimalFilter('cat')}" /></li>
+                                    <li><h:commandLink  value="Parrots" actionListener="#{mainPageMGR.setAnimalFilter('parrot')}" /></li>
                                     <li class="divider"></li>
-                                    <li><h:commandLink  value="Show Only My" /></li>
+                                    <li><h:commandLink  value="All" actionListener="#{mainPageMGR.setAnimalFilter('all')}" /></li>
                                 </h:form>
                             </ul>
                         </li>
