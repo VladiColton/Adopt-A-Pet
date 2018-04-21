@@ -48,13 +48,13 @@
                     <!--Drop Down menu-->
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Filters <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action1</a></li>
-                                <li><a href="#">Action2</a></li>
-                                <li><a href="#">Action3</a></li>
+                                <li><a href="#">Filter1</a></li>
+                                <li><a href="#">Filter2</a></li>
+                                <li><a href="#">Filter3</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Something Else</a></li>
+                                <li><a href="#">Show Only My</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -141,7 +141,9 @@
                     <!--Cards FRONT side content-->
                     <div class="front">
                         <div class="frontTitle">#{animal.name}</div>
-                        <div class="frontLogo isas"></div>
+                        <div class="frontLogo isas">
+                            <k:graphicImage value="#{imageReciverController.animalImageFromDB}" style="padding-left: 2%; padding-right: 2%;" height="150px" width="200px" cache="false" />
+                        </div>
                         <div class="frontLocation">#{animal.type} (#{animal.age})</div>
                     </div>
                     <!--Cards BACK side content-->
@@ -361,12 +363,12 @@
                                         <div class="form-row">
                                             <h:inputTextarea style="height: 100px; padding-bottom: 0px;" class="form-control-custom" p:placeholder="Full Animal Description" value="#{newAnimalRegirtrationFormManager.description}" />
                                         </div>
-                                        <h:inputFile class="btn btn-sm" value="#{uploadController.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto;" />
+                                        <h:inputFile class="btn btn-sm" value="#{animalUpdateFormManager.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto;" />
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
                                             <h:commandButton id="addNewAnimalButton" class="btn btn-lg" value="Save-Changes" disabled="#{not newAnimalRegirtrationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
-                                                <f:actionListener binding="#{uploadController.doUpload()}" />
+                                                <f:actionListener binding="#{animalUpdateFormManager.uploadImage()}" />
                                             </h:commandButton>
                                         </div>
                                     </div>

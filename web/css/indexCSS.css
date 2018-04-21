@@ -687,19 +687,7 @@ a:hover{
 }
 
 .isas {
-  background-image:url('../images/Vladi.jpg');
   background-size:150px 150px;
-}
-
-.boisedigital {
- background-image:url('../images/Sivan.jpg');
-      background-size:85% auto;
-  background-position:center center;
-}
-
-.dissolve {
- background-image:url('../images/Erez.jpg');
-      background-size:125px 125px;  
 }
 
 .frontLocation {
