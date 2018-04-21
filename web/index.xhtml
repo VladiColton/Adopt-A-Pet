@@ -49,12 +49,14 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Filters <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Filter1</a></li>
-                                <li><a href="#">Filter2</a></li>
-                                <li><a href="#">Filter3</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Show Only My</a></li>
+                            <ul role="menu">
+                                <h:form class="dropdown-menu">
+                                    <li><h:commandLink  value="Dogs" /></li>
+                                    <li><h:commandLink  value="Cats" /></li>
+                                    <li><h:commandLink  value="Parrots" /></li>
+                                    <li class="divider"></li>
+                                    <li><h:commandLink  value="Show Only My" /></li>
+                                </h:form>
                             </ul>
                         </li>
                     </ul>
