@@ -20,7 +20,6 @@ import repository.OwnerRepository;
 public class ImageReciverController implements Serializable{
     private byte[] defaultAnimalProfileImage;
     
-    
     public ImageReciverController() 
     {
         defaultAnimalProfileImage = null;
@@ -56,10 +55,4 @@ public class ImageReciverController implements Serializable{
         
         return new DefaultStreamedContent(new ByteArrayInputStream(image));     
     }
-
-    public StreamedContent getAnimalImageFromDB()
-    {
-        return new DefaultStreamedContent(new ByteArrayInputStream(defaultAnimalProfileImage));
-    }
-    
 }
