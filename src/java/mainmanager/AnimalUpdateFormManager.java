@@ -4,30 +4,38 @@ import entities.Animal;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
 /**
  * Update Animals information Form manager bean
  */
 @SessionScoped
 @ManagedBean(name = "animalUpdateFormManager", eager = true)
 public class AnimalUpdateFormManager extends NewAnimalRegirtrationFormManager implements Serializable {
-
+    private Long id;
+    
     public AnimalUpdateFormManager()
     {
-        
+        this.id = new Long(0);
     }
     
-    
-    
-    public void animalSelectedListener(Animal selectedAnimal)
+    public String getId()
     {
-        this.setName(selectedAnimal.getName());
-        this.setAge(selectedAnimal.getAge());
-        this.setType(selectedAnimal.getType());
-        
-        if (selectedAnimal.getSubType() != null)
-            this.setSubType(selectedAnimal.getSubType());
-        if(selectedAnimal.getDescription() != null)
-            this.setDescription(selectedAnimal.getDescription());
+        return this.id.toString();
+    }
+    
+    public void setId(String newId)
+    {
+        this.id = Long.valueOf(newId);
+    }
+    
+    public void deleteAnimal()
+    {
+        //Add here delete process of animal from the data base
+        int test = 0 ;
+    }
+    
+    public void updateAnimalDetails()
+    {
+        //Save animal details to the DB
+        int test = 0 ;
     }
 }

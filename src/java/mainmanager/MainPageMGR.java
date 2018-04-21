@@ -25,10 +25,10 @@ public class MainPageMGR implements Serializable {
 
         this._animals.add(new Animal(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build(), "testAnimal", "type1", "subtype", "Animal_01", 10));
         this._animals.add(new Animal(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build(), "testAnima2", "type2", "subtype", "Animal_02", 12));
-        this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_03", 10));
-        this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_04", 10));
-        this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_05", 10));
-        this._animals.add(new Animal(null, "testAnimal", "type1", "subtype", "Animal_06", 10));
+        this._animals.add(new Animal(null, "testAnimal desk3", "type3", "subtype2", "Animal_03", 16));
+        this._animals.add(new Animal(null, "testAnimal desk4", "type4", "subtype3", "Animal_04", 177));
+        this._animals.add(new Animal(null, "testAnimal desk5", "type5", "subtype4", "Animal_05", 1088));
+        this._animals.add(new Animal(null, "testAnimal desk6", "type6", "subtype5", "Animal_06", 13));
         
     }
 
