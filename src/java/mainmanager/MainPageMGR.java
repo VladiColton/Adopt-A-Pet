@@ -13,8 +13,6 @@ import javax.faces.bean.*;
 
 /**
  * Main Page manager class before user login
- *
- * @author Vladi Colton
  */
 @SessionScoped
 @ManagedBean(name = "mainPageMGR", eager = true)
