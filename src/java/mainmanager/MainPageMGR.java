@@ -49,18 +49,29 @@ public class MainPageMGR implements Serializable {
         this._animals = new ArrayList<>();
 
         // Use new builder
-//        Animal an1 = new Animal(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build(), "testAnimal", "dog", "subtype", "Animal_01", 10);
-//        an1.setAnimalPic(animalProfPic);
-//        this._animals.add(an1);
-//        Animal an2 = new Animal(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build(), "testAnima2", "cat", "subtype", "Animal_02", 12);
-//        an2.setAnimalPic(animalProfPic);
-//        this._animals.add(an2);
-//        Animal an3 = new Animal(null, "testAnimal desk3", "type3", "subtype2", "Animal_03", 16);
-//        an3.setAnimalPic(animalProfPic);
-//        this._animals.add(an3);
-//        Animal an4 = new Animal(null, "testAnimal desk4", "type4", "subtype3", "Animal_04", 177);
-//        an4.setAnimalPic(animalProfPic);
-//        this._animals.add(an4);
+        Animal an1 = Animal.builder()
+                .name("Animal_01")
+                .age(10)
+                .type("dog")
+                .subType("subtype")
+                .description("testAnimal")
+                .animalPic(animalProfPic)
+                .owner(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build())
+                .build();
+        this._animals.add(an1);
+        
+        Animal an2 = Animal.builder()
+                .name("Animal_02")
+                .age(12)
+                .type("cat")
+                .subType("subtype")
+                .description("testAnima2")
+                .animalPic(animalProfPic)
+                .owner(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build())
+                .build();
+        this._animals.add(an2);
+        
+       
     }
 
     public List<Animal> getAnimals() {
