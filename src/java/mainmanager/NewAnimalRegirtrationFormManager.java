@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
@@ -124,9 +125,9 @@ public class NewAnimalRegirtrationFormManager {
                     //Get directory with default image
                     File f = new File(UploadController.class.getProtectionDomain().getCodeSource().getLocation().getPath());
                     String imageLocation = f.getPath(); //Set relative path to the DB
-                    imageLocation = imageLocation.substring(0, imageLocation.indexOf("Adopt-A-Pet")+12) + "\\web\\images";
+                    imageLocation = Paths.get(imageLocation.substring(0, imageLocation.indexOf("Adopt-A-Pet")+12), "web", "images").toString();
                     //Get default image
-                    File usrImageFile = new File(imageLocation + "\\DefaultAnimalProfileImage.png");
+                    File usrImageFile = new File(Paths.get(imageLocation, "DefaultAnimalProfileImage.png").toString());
                     //Create byte array for saving in the DB
                     animalProfPic = Files.readAllBytes(usrImageFile.toPath());
             }
