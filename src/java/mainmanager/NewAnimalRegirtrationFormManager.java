@@ -147,17 +147,17 @@ public class NewAnimalRegirtrationFormManager {
         
         //Create Animal from the recieved details
         AnimalRepository repAnimal = new AnimalRepository();
-//TO comment out back while Erez finish his part
-//        newAnimal = Animal.builder()
-//                .name(name)
-//                .age(age)
-//                .type(type)
-//                .subType(subType)
-//                .description(description)
-//                .profilePic(animalProfPic)
-//                .owner(owner)
-//                .build();
+
+        newAnimal = Animal.builder()
+                .name(name)
+                .age(age)
+                .type(type)
+                .subType(subType)
+                .description(description)
+                .animalPic(animalProfPic)
+                .owner(owner)
+                .build();
         
-//        repAnimal.create(newAnimal);
+       repAnimal.create(newAnimal);
     }
 }
