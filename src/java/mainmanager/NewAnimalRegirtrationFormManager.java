@@ -159,6 +159,7 @@ public class NewAnimalRegirtrationFormManager {
                 .owner(owner)
                 .build();
         
-       repAnimal.create(newAnimal);
+        //Create the animal in the DB
+        repAnimal.create(newAnimal);
     }
 }

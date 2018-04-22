@@ -395,7 +395,7 @@
                                         <h:outputText value="Please select one of your animals to edit information from the list below:" />
                                         <!--Get list for all animals can be edited by the user-->
                                         <div class="form-row" style="padding-bottom: 10%; padding-top: 2%; text-align: center;">
-                                            <ui:repeat value="#{mainPageMGR.animals}" var="animal" varStatus="status">
+                                            <ui:repeat value="#{animalUpdateFormManager.listOfAnimalregisteredByUser}" var="animal" varStatus="status">
                                                 <div class="col-md-4 mb-3">
                                                     <div class="GotoAnimal">
                                                         <a id="pet-update-link" title="UpdateAnimals" target="_blank" onclick="updateSelectedAnimalFields('#{animal.name}', #{animal.age}, '#{animal.type}', '#{animal.subType}', '#{animal.description}', '#{animal.id}')">#{animal.name}</a>
