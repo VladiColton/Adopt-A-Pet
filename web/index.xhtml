@@ -368,9 +368,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
-                                            <h:commandButton id="addNewAnimalButton" class="btn btn-lg" value="Save-Changes" disabled="#{not newAnimalRegirtrationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
-                                                <f:actionListener binding="#{newAnimalRegirtrationFormManager.uploadImage()}" />
-                                            </h:commandButton>
+                                            <h:commandButton id="addNewAnimalButton" class="btn btn-lg" value="Save-Changes" disabled="#{not newAnimalRegirtrationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}" />
                                         </div>
                                     </div>
                                 </article>
