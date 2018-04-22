@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -12,151 +13,172 @@ public class Animal implements Persistable, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
+    private String name;
     private double age;
-    private String description;
     private String type;
     private String subType;
-    private String name;
+    private String description;
+
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
+
+    @Lob
     private byte[] animalPic;
 
     @ManyToOne
     private Owner owner;
 
-    public Animal() 
-    {
+    protected Animal() {
     }
 
-    public Animal(Owner owner, String description, String type, String subType, String name, double age) {
-        if (!isAgeValid(age)) 
-        {
-            throw new IllegalArgumentException("age cannot be negative");
-        }
-
-        this.description = description;
+    private Animal(String name, double age, String type, String subType, String description, byte[] animalPic, Owner owner) {
         this.name = name;
+        this.age = age;
         this.type = type;
         this.subType = subType;
+        this.description = description;
+        this.animalPic = animalPic;
         this.owner = owner;
-        this.age = age;
-    }
 
-    private static boolean isAgeValid(double age) 
-    {
-        return age >= 0;
+        this.creationDate = new Date();
     }
 
     @Override
-    public Long getId() 
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setAge(float age) 
-    {
-        if (!isAgeValid(age)) {
-            throw new IllegalArgumentException("age cannot be negative");
-        }
-        this.age = age;
+    public String getName() {
+        return name;
     }
 
-    public double getAge() 
-    {
-        return this.age;
-    }
-
-    public void setDescription(String description) 
-    {
-        this.description = description;
-    }
-
-    public String getDescription() 
-    {
-        return this.description;
-    }
-
-    public void setName(String name) 
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getName() 
-    {
-        return this.name;
+    public double getAge() {
+        return age;
     }
 
-    public void setType(String type) 
-    {
+    public void setAge(double age) {
+        this.age = age;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getType() 
-    {
-        return this.type;
+    public String getSubType() {
+        return subType;
     }
 
-    public void setSubType(String subType) 
-    {
+    public void setSubType(String subType) {
         this.subType = subType;
     }
 
-    public String getSubType() 
-    {
-        return this.subType;
+    public String getDescription() {
+        return description;
     }
-    
-    public byte[] getAnimalPic() 
-    {
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public byte[] getAnimalPic() {
         return animalPic;
     }
 
-    public void setAnimalPic(byte[] animalPic) 
-    {
+    public void setAnimalPic(byte[] animalPic) {
         this.animalPic = animalPic;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public Owner getOwner() {
-        return this.owner;
-    }
-    
-    public String getOwnerName()
-    {
-        return this.owner != null ? this.owner.getName() : "Owner obj is NULL (in Animal Class)";
-    }
-    public long getOwnerPhoneNum()
-    {
-        return this.owner != null ? this.owner.getPhoneNumber() : 0;
-    }
-    public String getOwnerAddress()
-    {
-        return this.owner != null ? this.owner.getLocation() : "Israel";
-    }
-    
     @Override
-    public int hashCode() 
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
-    
+
     @Override
-    public boolean equals(Object object) 
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Animal)) 
-        {
+        if (!(object instanceof Animal)) {
             return false;
         }
         Animal other = (Animal) object;
-        if((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) 
-        {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
+    }
+
+    public static AnimalBuilder builder() {
+        return new AnimalBuilder();
+    }
+
+    public static class AnimalBuilder {
+
+        private String name;
+        private double age;
+        private String type;
+        private String subType;
+        private String description;
+        private byte[] animalPic;
+        private Owner owner;
+
+        public AnimalBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public AnimalBuilder age(double age) {
+            this.age = age;
+            return this;
+        }
+
+        public AnimalBuilder type(String type) {
+            this.type = type;
+            return this;
+        }
+
+        public AnimalBuilder subType(String subType) {
+            this.subType = subType;
+            return this;
+        }
+
+        public AnimalBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public AnimalBuilder animalPic(byte[] animalPic) {
+            this.animalPic = animalPic;
+            return this;
+        }
+
+        public AnimalBuilder owner(Owner owner) {
+            this.owner = owner;
+            return this;
+        }
+
+        public Animal build() {
+            if (this.owner == null) {
+                throw new IllegalArgumentException("owner cannot be null");
+            }
+            return new Animal(name, age, type, subType, description, animalPic, owner);
+        }
     }
 }

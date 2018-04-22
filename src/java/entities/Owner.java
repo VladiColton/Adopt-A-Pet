@@ -1,8 +1,7 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import passwords.Passwords;
 
@@ -46,7 +45,7 @@ public class Owner implements Persistable, Serializable {
     private byte[] profilePic;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Animal> animals = new HashSet<>();
+    private List<Animal> animals = new ArrayList<>();
 
     protected Owner() {
     }
@@ -109,11 +108,11 @@ public class Owner implements Persistable, Serializable {
         this.profilePic = profilePic;
     }
 
-    public Set<Animal> getAnimals() {
+    public List<Animal> getAnimals() {
         return animals;
     }
 
-    public void setAnimals(Set<Animal> animals) {
+    public void setAnimals(List<Animal> animals) {
         this.animals = animals;
     }
 

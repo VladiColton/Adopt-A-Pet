@@ -13,7 +13,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.Part;
 import repository.AnimalRepository;
 import repository.OwnerRepository;
-import sun.misc.IOUtils;
+import static sun.misc.IOUtils.readFully;
 
 /**
  * New Animal Registration form controller
@@ -133,7 +133,7 @@ public class NewAnimalRegirtrationFormManager {
             else //Use uploaded image for the animal
             {
                 InputStream in = image.getInputStream();
-                animalProfPic = IOUtils.readFully(in, Integer.MAX_VALUE, true/*ignored since Integer.MAX_VALUE set*/);
+                animalProfPic = readFully(in, Integer.MAX_VALUE, true/*ignored since Integer.MAX_VALUE set*/);
             }
         }
         catch (IOException ex) 
