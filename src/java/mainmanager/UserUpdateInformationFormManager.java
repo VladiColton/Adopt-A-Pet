@@ -1,11 +1,14 @@
 package mainmanager;
 
+import entities.Animal;
 import entities.Owner;
+import java.util.List;
 import javax.faces.event.ActionEvent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpSession;
+import repository.AnimalRepository;
 import repository.OwnerRepository;
 
 
@@ -124,19 +127,21 @@ public class UserUpdateInformationFormManager{
         if(SessionUtils.isUserConnected())
         {
             //Get user to be deleted from data base
-            OwnerRepository rep = new OwnerRepository();
-            Owner user = rep.getOwner(SessionUtils.getUserEmail());
+            OwnerRepository userRep = new OwnerRepository();
+            Owner user = userRep.getOwner(SessionUtils.getUserEmail());
             
             //Close the session for the user on delete action
             HttpSession session = SessionUtils.getSession();
             session.invalidate();
             
-            //Delete the user from the DB
-            rep.remove(user.getId());
+            //Remove all animals user have registered
+            AnimalRepository animalRep = new AnimalRepository();
+            List<Animal> userAnimalsList = user.getAnimals();
+            userAnimalsList.forEach((userAnimal) -> {animalRep.remove(userAnimal.getId());});
+            
+            //Now after all user Animals removed delete the user from the DB
+            userRep.remove(user.getId());
         }
-        
-        //Here need to add also parsing on all animals of the registered user
-        //and remove them as well from the Animals rep.
 
         return "index.xhtml?faces-redirect=true";
     }
