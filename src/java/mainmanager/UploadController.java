@@ -10,7 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.Part;
 import repository.OwnerRepository;
-import sun.misc.IOUtils;
+import static sun.misc.IOUtils.readFully;
 
 
 /**
@@ -40,7 +40,7 @@ public class UploadController implements Serializable{
         {
             InputStream in = image.getInputStream();
             //Create byte array to save the image in the DB
-            byte[] fileAsByteArray = IOUtils.readFully(in, Integer.MAX_VALUE, true/*ignored since Integer.MAX_VALUE set*/);
+            byte[] fileAsByteArray = readFully(in, Integer.MAX_VALUE, true/*ignored since Integer.MAX_VALUE set*/);
             
             if (isForProfile)// If for user profile picture
             {
