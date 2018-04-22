@@ -8,15 +8,29 @@ import javax.persistence.*;
  * Animal Representation Class
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = Animal.GET_ANIMALS_BY_DATE_DESC,
+            query = "SELECT a FROM Animal a ORDER BY a.creationDate DESC")
+//        ,
+//    @NamedQuery
+})
 public class Animal implements Persistable, Serializable {
+
+    public static final String GET_ANIMALS_BY_DATE_DESC = "Animal.getAnimalsByDateDesc";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private double age;
+
+    @Column(nullable = false)
     private String type;
+
     private String subType;
     private String description;
 
@@ -26,7 +40,7 @@ public class Animal implements Persistable, Serializable {
     @Lob
     private byte[] animalPic;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Owner owner;
 
     protected Animal() {
@@ -175,9 +189,6 @@ public class Animal implements Persistable, Serializable {
         }
 
         public Animal build() {
-            if (this.owner == null) {
-                throw new IllegalArgumentException("owner cannot be null");
-            }
             return new Animal(name, age, type, subType, description, animalPic, owner);
         }
     }
