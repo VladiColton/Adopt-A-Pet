@@ -150,7 +150,7 @@
                     <!--Cards BACK side content-->
                     <div class="back">
                         <div class="backTitle">#{animal.type}</div>
-                        <div class="backParagraph">Hi <h:outputText value="#{userAuthentication.isUserConnected ? userAuthentication.email : ''}" />, <br /><h:outputText value="My name is:" style="font-weight:bold" /> #{animal.name} (#{animal.age})<br /><h:outputText value="My location is:" style="font-weight:bold" /> #{animal.ownerAddress}<br /><h:outputText value="Owners Contact information:" style="font-weight:bold" /> Name:#{animal.ownerName}, Phone: #{animal.ownerPhoneNum}<br /><br />Come Adopt Me!</div>
+                        <div class="backParagraph">Hi <h:outputText value="#{userAuthentication.isUserConnected ? userAuthentication.email : ''}" />, <br /><h:outputText value="My name is:" style="font-weight:bold" /> #{animal.name} (#{animal.age})<br /><h:outputText value="My location is:" style="font-weight:bold" /> #{animal.owner.location}<br /><h:outputText value="Owners Contact information:" style="font-weight:bold" /> Name:#{animal.owner.name}, Phone: #{animal.owner.phoneNumber}<br /><br />Come Adopt Me!</div>
                         <div class="backGoto">
                             <a id="pet-desc-link" target="_blank" onclick="openFullAnimalDescription(#{status.index})" title="PetPanel">Open full info →</a>
                         </div>
@@ -166,8 +166,8 @@
                             <h4><h:outputText value="Breed:" style="font-weight:bold" /> #{animal.type}, #{animal.subType}</h4>
                             <h4><h:outputText value="Description:" style="font-weight:bold" /></h4>
                             <h:outputText class="mainAnimalDetails" value="#{animal.description}" />
-                            <h4><h:outputText value="Contact Info:" style="font-weight:bold" /></h4><h:outputText value="Owner Name: #{animal.ownerName}, Owner Phone number: #{animal.ownerPhoneNum}" />
-                            <h4 id="addressGeoLocation#{status.index}">#{animal.ownerAddress}</h4>
+                            <h4><h:outputText value="Contact Info:" style="font-weight:bold" /></h4><h:outputText value="Owner Name: #{animal.owner.name}, Owner Phone number: #{animal.owner.phoneNumber}" />
+                            <h4 id="addressGeoLocation#{status.index}">#{animal.owner.location}</h4>
                         </div>
                         <div id="googleMap#{status.index}" style="width:100%; height:200px;"></div>
                         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcJMsyeLLERuchKUu9LNTZB4Xo7jkzqEQ&amp;callback=myMap"></script>
@@ -364,12 +364,12 @@
                                         <div class="form-row">
                                             <h:inputTextarea style="height: 100px; padding-bottom: 0px;" class="form-control-custom" p:placeholder="Full Animal Description" value="#{newAnimalRegirtrationFormManager.description}" />
                                         </div>
-                                        <h:inputFile class="btn btn-sm" value="#{animalUpdateFormManager.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto;" />
+                                        <h:inputFile class="btn btn-sm" value="#{newAnimalRegirtrationFormManager.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto;" />
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
                                             <h:commandButton id="addNewAnimalButton" class="btn btn-lg" value="Save-Changes" disabled="#{not newAnimalRegirtrationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}">
-                                                <f:actionListener binding="#{animalUpdateFormManager.uploadImage()}" />
+                                                <f:actionListener binding="#{newAnimalRegirtrationFormManager.uploadImage()}" />
                                             </h:commandButton>
                                         </div>
                                     </div>
