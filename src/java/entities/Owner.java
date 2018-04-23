@@ -44,7 +44,11 @@ public class Owner implements Persistable, Serializable {
     @Lob
     private byte[] profilePic;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "owner",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<Animal> animals = new ArrayList<>();
 
     protected Owner() {
@@ -112,8 +116,14 @@ public class Owner implements Persistable, Serializable {
         return animals;
     }
 
-    public void setAnimals(List<Animal> animals) {
-        this.animals = animals;
+    public void addAnimal(Animal animal) {
+        animals.add(animal);
+        animal.setOwner(this);
+    }
+    
+    public void removeAnimal(Animal animal) {
+        animals.remove(animal);
+        animal.setOwner(null);
     }
 
     @Override
