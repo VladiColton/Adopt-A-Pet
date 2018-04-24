@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import repository.AnimalRepository;
 import repository.OwnerRepository;
 
 /**
@@ -17,33 +16,23 @@ import repository.OwnerRepository;
 public class AnimalUpdateFormManager extends NewAnimalRegirtrationFormManager implements Serializable {
     private Long id;
     private List<Animal> listOfAnimalregisteredByUser;
-    private boolean needsUpdate;
     
     public AnimalUpdateFormManager()
     {
-        needsUpdate = true;
         this.id = new Long(0);
     }
     
     public List<Animal> getListOfAnimalregisteredByUser() 
     {
-        if(needsUpdate)
-        {
-            //Get the list of the Animals registered by the connected user
-            OwnerRepository ownerRep = new OwnerRepository();
-            Owner connectedUser = ownerRep.getOwner(SessionUtils.getUserEmail());
-            listOfAnimalregisteredByUser = connectedUser.getAnimals();
-            needsUpdate = false;
-        }
-        
-        if(listOfAnimalregisteredByUser == null)
-        {
-            listOfAnimalregisteredByUser.add(Animal.builder().name("No Registered animals Yet").build());
-        }
-            
+        //Get the list of the Animals registered by the connected user
+        OwnerRepository ownerRep = new OwnerRepository();
+        Owner connectedUser = ownerRep.getOwner(SessionUtils.getUserEmail());
+        listOfAnimalregisteredByUser = connectedUser.getAnimals();
+
         return listOfAnimalregisteredByUser;
     }
-    public void setListOfAnimalregisteredByUser(List<Animal> listOfAnimalregisteredByUser) {
+    public void setListOfAnimalregisteredByUser(List<Animal> listOfAnimalregisteredByUser) 
+    {
         this.listOfAnimalregisteredByUser = listOfAnimalregisteredByUser;
     }
     
@@ -58,13 +47,20 @@ public class AnimalUpdateFormManager extends NewAnimalRegirtrationFormManager im
     
     public void deleteAnimal()
     {
-        AnimalRepository animalsRep = new AnimalRepository();
+        OwnerRepository ownerRep = new OwnerRepository();
+        Owner connectedUser = ownerRep.getOwner(SessionUtils.getUserEmail());
         
-        //Remove selected animal from the DB by ID
-        animalsRep.remove(id);
-        
-        //Set to update animals list
-        needsUpdate = true;
+        //Find the animal to be deleted in the list
+        for(int i = 0; i < listOfAnimalregisteredByUser.size(); i++)
+        {
+            if(listOfAnimalregisteredByUser.get(i).getId().compareTo(this.id) == 0)
+            {
+                //Remove selected animal from the DB
+                connectedUser.removeAnimal(listOfAnimalregisteredByUser.get(i));
+                ownerRep.update(connectedUser);
+                break;
+            }
+        }
     }
     
     public void updateAnimalDetails()

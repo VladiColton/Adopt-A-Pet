@@ -9,10 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.Part;
-import repository.AnimalRepository;
 import repository.OwnerRepository;
 import static sun.misc.IOUtils.readFully;
 
@@ -109,7 +107,7 @@ public class NewAnimalRegirtrationFormManager {
         this.image = image;
     }
     
-    public void addNewAnimal(ActionEvent event)
+    public void addNewAnimal()
     {
         //Verify that user connected and only then update the information
         if(!SessionUtils.isUserConnected())
