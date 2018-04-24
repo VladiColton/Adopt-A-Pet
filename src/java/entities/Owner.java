@@ -117,10 +117,13 @@ public class Owner implements Persistable, Serializable {
     }
 
     public void addAnimal(Animal animal) {
+        if (animals.contains(animal)) {
+            return;
+        }
         animals.add(animal);
         animal.setOwner(this);
     }
-    
+
     public void removeAnimal(Animal animal) {
         animals.remove(animal);
         animal.setOwner(null);
