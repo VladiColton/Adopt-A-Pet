@@ -147,8 +147,6 @@ public class NewAnimalRegirtrationFormManager {
         Owner owner = repOwner.getOwner(SessionUtils.getUserEmail());
         
         //Create Animal from the recieved details
-        AnimalRepository repAnimal = new AnimalRepository();
-
         newAnimal = Animal.builder()
                 .name(name)
                 .age(age)
@@ -160,6 +158,6 @@ public class NewAnimalRegirtrationFormManager {
         
         //Create the animal in the DB
         owner.addAnimal(newAnimal);
-//        repAnimal.create(newAnimal);
+        repOwner.update(owner);
     }
 }

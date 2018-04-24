@@ -135,10 +135,16 @@ public class UserUpdateInformationFormManager{
             session.invalidate();
             
             //Remove all animals user have registered
-            AnimalRepository animalRep = new AnimalRepository();
             List<Animal> userAnimalsList = user.getAnimals();
-            userAnimalsList.forEach((userAnimal) -> {animalRep.remove(userAnimal.getId());});
-            
+            if(userAnimalsList.size() > 0)
+            {
+                for(int i = 0; i < userAnimalsList.size(); i++)
+                {
+                    user.removeAnimal(userAnimalsList.get(i));
+                }
+            }
+            //Update user
+            userRep.update(user);
             //Now after all user Animals removed delete the user from the DB
             userRep.remove(user.getId());
         }
