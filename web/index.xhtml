@@ -88,7 +88,7 @@
                         <a data-toggle="modal" data-href="#addNewAnimalModal" data-target="#addNewAnimalModal" style="cursor:pointer;">Add New Animal</a>
                     </li>
                     <li>
-                        <a data-toggle="modal" data-href="#userSettingsModal" data-target="#userSettingsModal" style="cursor:pointer;">Settings</a>
+                        <a data-toggle="modal" data-href="#userSettingsModal" data-target="#userSettingsModal" style="cursor:pointer;">Personal Settings</a>
                     </li>
                 </h:panelGroup>
                 <div class="login-form">
@@ -368,7 +368,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
-                                            <h:commandButton id="addNewAnimalButton" class="btn btn-lg" value="Save-Changes" disabled="#{not newAnimalRegirtrationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" actionListener="#{newAnimalRegirtrationFormManager.addNewAnimal(ActionEvent)}" />
+                                            <h:commandButton id="addNewAnimalButton" class="btn btn-lg" value="Save-Changes" disabled="#{not newAnimalRegirtrationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" action="#{newAnimalRegirtrationFormManager.addNewAnimal()}" />
                                         </div>
                                     </div>
                                 </article>

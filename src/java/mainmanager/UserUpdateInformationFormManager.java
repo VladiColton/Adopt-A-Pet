@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpSession;
-import repository.AnimalRepository;
 import repository.OwnerRepository;
 
 
