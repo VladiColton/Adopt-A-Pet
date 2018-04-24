@@ -131,15 +131,10 @@ public class Animal implements Persistable, Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Animal)) {
+        if (object ==  null || !(object instanceof Animal)) {
             return false;
         }
         Animal other = (Animal) object;
-//        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-//            return false;
-//        }
-
         return this.name.equals(other.name) && this.creationDate.equals(other.creationDate);
     }
 
