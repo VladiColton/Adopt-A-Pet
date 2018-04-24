@@ -57,7 +57,7 @@ public class MainPageMGR implements Serializable {
                 .subType("subtype")
                 .description("testAnimal")
                 .animalPic(animalProfPic)
-                .owner(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build())
+//                .owner(Owner.builder().name("Sivan" + " " + "Schrier").location("Eilat" + ", " + "Israel").phoneNumber(546903018).email("Sivan@sivan.com").build())
                 .build();
         this._animals.add(an1);
         
@@ -68,7 +68,7 @@ public class MainPageMGR implements Serializable {
                 .subType("subtype")
                 .description("testAnima2")
                 .animalPic(animalProfPic)
-                .owner(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build())
+//                .owner(Owner.builder().name("Vladi" + " " + "Colton").location("Nesher" + ", " + "Israel").phoneNumber(546903018).email("Vladi@Vladi.com").build())
                 .build();
         this._animals.add(an2);
         

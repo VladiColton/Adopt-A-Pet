@@ -156,10 +156,10 @@ public class NewAnimalRegirtrationFormManager {
                 .subType(subType)
                 .description(description)
                 .animalPic(animalProfPic)
-                .owner(owner)
                 .build();
         
         //Create the animal in the DB
-        repAnimal.create(newAnimal);
+        owner.addAnimal(newAnimal);
+//        repAnimal.create(newAnimal);
     }
 }

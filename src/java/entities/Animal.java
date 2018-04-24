@@ -40,20 +40,20 @@ public class Animal implements Persistable, Serializable {
     @Lob
     private byte[] animalPic;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
     private Owner owner;
 
     protected Animal() {
     }
 
-    private Animal(String name, double age, String type, String subType, String description, byte[] animalPic, Owner owner) {
+    private Animal(String name, double age, String type, String subType, String description, byte[] animalPic) {
         this.name = name;
         this.age = age;
         this.type = type;
         this.subType = subType;
         this.description = description;
         this.animalPic = animalPic;
-        this.owner = owner;
 
         this.creationDate = new Date();
     }
@@ -117,6 +117,10 @@ public class Animal implements Persistable, Serializable {
 
     public Owner getOwner() {
         return owner;
+    }
+    
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     @Override
@@ -183,13 +187,8 @@ public class Animal implements Persistable, Serializable {
             return this;
         }
 
-        public AnimalBuilder owner(Owner owner) {
-            this.owner = owner;
-            return this;
-        }
-
         public Animal build() {
-            return new Animal(name, age, type, subType, description, animalPic, owner);
+            return new Animal(name, age, type, subType, description, animalPic);
         }
     }
 }
