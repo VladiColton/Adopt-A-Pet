@@ -97,7 +97,10 @@ function myMap()
     {
         maps[i] = new google.maps.Map(document.getElementById("googleMap"+i),mapProp);
         let geocoder = new google.maps.Geocoder();
-        geocodeAddress(geocoder, maps[i], $("#addressGeoLocation"+i).text());
+        var userLocation = $("#addressGeoLocation"+i).text();
+        if (userLocation === "" || userLocation === null)
+            userLocation = 'Israel'; //Set default geoLocation to avoid errors
+        geocodeAddress(geocoder, maps[i], userLocation);
     }
     
     //Only one time set for our-location window
