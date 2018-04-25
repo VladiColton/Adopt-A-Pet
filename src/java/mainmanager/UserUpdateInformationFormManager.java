@@ -2,13 +2,16 @@ package mainmanager;
 
 import entities.Animal;
 import entities.Owner;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
-import javax.faces.event.ActionEvent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import repository.OwnerRepository;
+import static sun.misc.IOUtils.readFully;
 
 
 /**
@@ -22,6 +25,7 @@ public class UserUpdateInformationFormManager{
     private String _streetAddress;
     private String _city;
     private String _password;
+    private Part image;
     
     public UserUpdateInformationFormManager()
     {
@@ -69,6 +73,15 @@ public class UserUpdateInformationFormManager{
         this._password = password;
     }
     
+    public Part getImage()
+    {
+        return image;
+    }
+    public void setImage(Part image)
+    {
+        this.image = image;
+    }
+    
     public String getUserName()
     {
         return SessionUtils.getUserName();
@@ -79,7 +92,7 @@ public class UserUpdateInformationFormManager{
         return (_phoneNumber != 0);
     }
     
-    public void updateRregistrationInfo(ActionEvent event)
+    public void updateRregistrationInfo()
     {
         //Verify that user connected and only then update the information
         if(!SessionUtils.isUserConnected())
@@ -111,13 +124,27 @@ public class UserUpdateInformationFormManager{
             user.setPhoneNumber(_phoneNumber);
             needDBUpdate = true;
         }
+        if(this.image != null)
+        {
+            try
+            {
+                InputStream in = image.getInputStream();
+                //Create byte array to save the image in the DB
+                byte[] fileAsByteArray = readFully(in, Integer.MAX_VALUE, true/*ignored since Integer.MAX_VALUE set*/);
+                user.setProfilePic(fileAsByteArray);
+            }
+            catch(IOException ex)
+            {
+                ex.printStackTrace(System.out);
+            }
+            needDBUpdate = true;
+        }
         
         //Update DB with new details if needed
         if(needDBUpdate)
         {
             rep.update(user);
         }
-        
     }
     
     public String deleteUserAccount()

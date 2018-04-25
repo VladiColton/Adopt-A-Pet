@@ -1,9 +1,17 @@
 package mainmanager;
 
+import entities.Owner;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.faces.bean.*;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import repository.OwnerRepository;
 
 /**
@@ -87,6 +95,45 @@ public class UserAuthentication implements Serializable{
             this._isUserConnected = false;
             this.setAutoErrorMSG("Incorrect Email or Password!!");
         }
+    }
+    
+    public StreamedContent getProfileImageFromDB()
+    {
+        OwnerRepository rep = new OwnerRepository();
+        Owner user = rep.getOwner(SessionUtils.getUserEmail());
+
+        byte[] image = user.getProfilePic();
+
+        //Secure code if some user appears somehow without image from the DB
+        if(image == null)
+        {
+            image = getDefaultProfileImage();
+        }
+        
+        return new DefaultStreamedContent(new ByteArrayInputStream(image));     
+    }
+    
+    private byte[] getDefaultProfileImage()
+    {
+        byte[] defaultProfPic = null;
+        
+        try 
+        {
+            //Get directory with default image
+            File f = new File(UserAuthentication.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+            String imageLocation = f.getPath(); //Set relative path to the DB
+            imageLocation = Paths.get(imageLocation.substring(0, imageLocation.indexOf("Adopt-A-Pet")+12), "web", "images").toString();
+            //Get default image
+            File usrImageFile = new File(Paths.get(imageLocation, "defaultUserImage.png").toString());
+            //Create byte array for saving in the DB
+            defaultProfPic = Files.readAllBytes(usrImageFile.toPath());
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace(System.out);
+        }
+        
+        return defaultProfPic;
     }
     
     //Logout event, invalidate session
