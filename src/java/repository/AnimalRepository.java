@@ -8,11 +8,14 @@ public class AnimalRepository extends Repository<Animal> {
     public AnimalRepository() {
         super(Animal.class);
     }
-    
-//    public List<Animal> getAnimals(int from, int amount) {
-//        List<Animal> resultList = em.createNamedQuery(Animal.GET_ANIMALS_BY_DATE_DESC)
-//                .setFirstResult(from)
-//                .setMaxResults(amount)
-//                .getResultList();
-//    }
+
+    /**
+     * get all animals from database sorted by creation date descending
+     *
+     * @return animals list
+     */
+    public List<Animal> getAllAnimals() {
+        List<Animal> resultList = em.createNamedQuery(Animal.GET_ANIMALS_BY_DATE_DESC).getResultList();
+        return resultList;
+    }
 }
