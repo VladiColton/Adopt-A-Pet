@@ -121,7 +121,7 @@ public class NewAnimalRegirtrationFormManager {
             {
 
                     //Get directory with default image
-                    File f = new File(UploadController.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+                    File f = new File(NewAnimalRegirtrationFormManager.class.getProtectionDomain().getCodeSource().getLocation().getPath());
                     String imageLocation = f.getPath(); //Set relative path to the DB
                     imageLocation = Paths.get(imageLocation.substring(0, imageLocation.indexOf("Adopt-A-Pet")+12), "web", "images").toString();
                     //Get default image

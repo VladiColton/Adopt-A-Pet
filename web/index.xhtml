@@ -109,7 +109,7 @@
                     <!--Connected User view-->
                     <h:panelGroup>  
                         <h:form  class="login-details" rendered="#{userAuthentication.isUserConnected}">
-                            <k:graphicImage value="#{imageReciverController.profileImageFromDB}" height="80" width="120" cache="false" />
+                            <k:graphicImage value="#{userAuthentication.profileImageFromDB}" height="80" width="120" cache="false" />
                             <center>
                                 <h:outputText class="text-light" style="display: block; padding-top: 3%" value="Welcome: #{userAuthentication.email}" />
                                 <h:commandButton class="btn btn-sm" action="#{userAuthentication.logout()}" value="Logout" />
@@ -293,13 +293,11 @@
                                                 <h:inputText class="form-control-custom" p:placeholder="City" value="#{userUpdateInformationFormManager.city}" autocomplete="off" />
                                             </div>
                                         </div>
-                                        <h:inputFile class="btn btn-sm" value="#{uploadController.image}" style="padding-top: 5%; margin-left: auto; margin-right: auto" />
+                                        <h:inputFile class="btn btn-sm" value="#{userUpdateInformationFormManager.image}" style="padding-top: 5%; margin-left: auto; margin-right: auto" />
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
-                                            <h:commandButton id="userPersonalDetailsUpdateButton" class="btn btn-lg" value="Save Changes" disabled="#{not userUpdateInformationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" actionListener="#{userUpdateInformationFormManager.updateRregistrationInfo(ActionEvent)}">
-                                                <f:actionListener binding="#{uploadController.doUploadForProfile()}" />
-                                            </h:commandButton>
+                                            <h:commandButton id="userPersonalDetailsUpdateButton" class="btn btn-lg" value="Save Changes" disabled="#{not userUpdateInformationFormManager.allPropertiesFilled(AjaxBehaviorEvent)}" action="#{userUpdateInformationFormManager.updateRregistrationInfo()}" />
                                             <h:commandButton id="userPersonalDetailsDeleteButton" class="btn btn-lg" value="Delete Account" action="#{userUpdateInformationFormManager.deleteUserAccount()}" />
                                         </div>
                                     </div>
@@ -436,13 +434,11 @@
                                         <div class="form-row">
                                             <h:inputTextarea style="height: 100px; padding-bottom: 0px;" class="form-control-custom animalUpdateFormField_Description" p:placeholder="Full Animal Description" value="#{animalUpdateFormManager.description}" required="true" />
                                         </div>
-                                        <h:inputFile class="btn btn-sm" value="#{uploadController.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto" />
+                                        <h:inputFile class="btn btn-sm" value="#{animalUpdateFormManager.image}" style="padding-top: 2%; margin-left: auto; margin-right: auto" />
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12 text-center">
-                                            <h:commandButton class="btn btn-lg" value="Save Changes" actionListener="#{animalUpdateFormManager.updateAnimalDetails()}">
-                                                <f:actionListener binding="#{uploadController.doUploadForAnimal(animalUpdateFormManager.id)}" />
-                                            </h:commandButton>
+                                            <h:commandButton class="btn btn-lg" value="Save Changes" actionListener="#{animalUpdateFormManager.updateAnimalDetails()}" />
                                             <h:commandButton class="btn btn-lg" value="Delete Animal" actionListener="#{animalUpdateFormManager.deleteAnimal()}" />
                                         </div>
                                     </div>
