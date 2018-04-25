@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:k="http://primefaces.org/ui">
+      xmlns:k="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="UTF-8"></meta>
         <title>Adopt a pet</title>
@@ -137,7 +138,7 @@
         </div>
         <!--Animated cards-->
         <div class="animal-cards-container">
-            <ui:repeat value="#{mainPageMGR.animals}" var="animal" varStatus="status">
+            <c:forEach items="#{mainPageMGR.animals}" var="animal" varStatus="status">
                 <div class="hover panel" onmouseover="javascript:this.className += ' flip';" onmouseout="javascript:this.className = 'hover panel';">
                     <!--Cards FRONT side content-->
                     <div class="front">
@@ -173,7 +174,7 @@
                         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcJMsyeLLERuchKUu9LNTZB4Xo7jkzqEQ&amp;callback=myMap"></script>
                     </div>
                 </div>
-            </ui:repeat>
+            </c:forEach>
         </div>
         <!--User registration form pop-up-->
         <div class="container">
