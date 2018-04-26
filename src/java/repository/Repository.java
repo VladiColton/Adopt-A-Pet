@@ -2,7 +2,9 @@ package repository;
 
 import javax.persistence.*;
 import entities.Persistable;
+import javax.faces.bean.ApplicationScoped;
 
+@ApplicationScoped
 public abstract class Repository<T extends Persistable> {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Adopt-A-PetPU");
