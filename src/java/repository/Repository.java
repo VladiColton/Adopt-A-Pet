@@ -7,7 +7,6 @@ public abstract class Repository<T extends Persistable> {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Adopt-A-PetPU");
     protected final EntityManager em = emf.createEntityManager();
-    protected final EntityTransaction tx = em.getTransaction();
 
     private final Class<T> type;
 
@@ -16,9 +15,9 @@ public abstract class Repository<T extends Persistable> {
     }
 
     public T create(T t) {
-        tx.begin();
+        em.getTransaction().begin();
         em.persist(t);
-        tx.commit();
+        em.getTransaction().commit();
         return t;
     }
 
@@ -28,11 +27,12 @@ public abstract class Repository<T extends Persistable> {
 
     public void remove(long id) {
         T t = find(id);
-        if (t != null) {
-            tx.begin();
-            em.remove(t);
-            tx.commit();
+        if (t == null) {
+            return;
         }
+        em.getTransaction().begin();
+        em.remove(t);
+        em.getTransaction().commit();
     }
 
     public void update(T t) {
@@ -40,8 +40,8 @@ public abstract class Repository<T extends Persistable> {
         if (find(id) == null) {
             throw new EntityNotFoundException("entity with id " + id + " does not exist");
         }
-        tx.begin();
+        em.getTransaction().begin();
         em.merge(t);
-        tx.commit();
+        em.getTransaction().commit();
     }
 }
