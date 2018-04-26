@@ -100,9 +100,9 @@
                             <center>
                                 <h:outputText class="text-error" value="#{userAuthentication.autoErrorMSG}" />
                                 <h:outputText class="text-light" value="Email:" />
-                                <h:inputText  class="form-control-light input-password-image" id="email" value="#{userAuthentication.email}" autocomplete="off"/>
+                                <h:inputText  class="form-control-light input-email-image" id="email" value="#{userAuthentication.email}" autocomplete="off"/>
                                 <h:outputText class="text-light" value="Password:" />
-                                <h:inputSecret class="form-control-light input-email-image" id="password" value="#{userAuthentication.password}" autocomplete="off"/>
+                                <h:inputSecret class="form-control-light input-password-image" id="password" value="#{userAuthentication.password}" autocomplete="off"/>
                             </center>
                             <h:commandButton class="btn btn-sm " actionListener="#{userAuthentication.validateEmailPassword(ActionEvent)}" value="Login" ></h:commandButton>
                         </h:form>
