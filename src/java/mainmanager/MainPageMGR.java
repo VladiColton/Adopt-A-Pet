@@ -40,7 +40,14 @@ public class MainPageMGR implements Serializable {
         
         if (animalTypeToView.equalsIgnoreCase("all")) {
             res = this._animals;
-        } else {
+        } 
+        else if(animalTypeToView.equalsIgnoreCase("Only My"))
+        {
+            String userMail = SessionUtils.getUserEmail();
+            res = this._animals.stream().filter(a -> a.getOwner().getEmail().equalsIgnoreCase(userMail)).collect(Collectors.toList());
+        }
+        else 
+        {
             //Build new sublist to return with only selected animals
             res = this._animals.stream().filter(a -> a.getType().equalsIgnoreCase(animalTypeToView)).collect(Collectors.toList());
         }
