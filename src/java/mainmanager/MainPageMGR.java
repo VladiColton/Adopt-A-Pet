@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.faces.bean.*;
-import javax.faces.context.FacesContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import repository.AnimalRepository;
@@ -64,6 +63,7 @@ public class MainPageMGR implements Serializable {
             case "dog":
             case "cat":
             case "parrot":
+            case "Only My":
                 animalTypeToView = animalType;
                 break;
             default:
