@@ -100,9 +100,9 @@
                             <center>
                                 <h:outputText class="text-error" value="#{userAuthentication.autoErrorMSG}" />
                                 <h:outputText class="text-light" value="Email:" />
-                                <h:inputText  class="form-control-light input-password-image" id="email" value="#{userAuthentication.email}" autocomplete="off"/>
+                                <h:inputText  class="form-control-light input-email-image" id="email" value="#{userAuthentication.email}" autocomplete="off"/>
                                 <h:outputText class="text-light" value="Password:" />
-                                <h:inputSecret class="form-control-light input-email-image" id="password" value="#{userAuthentication.password}" autocomplete="off"/>
+                                <h:inputSecret class="form-control-light input-password-image" id="password" value="#{userAuthentication.password}" autocomplete="off"/>
                             </center>
                             <h:commandButton class="btn btn-sm " actionListener="#{userAuthentication.validateEmailPassword(ActionEvent)}" value="Login" ></h:commandButton>
                         </h:form>
@@ -151,7 +151,7 @@
                     <!--Cards BACK side content-->
                     <div class="back">
                         <div class="backTitle">#{animal.type}</div>
-                        <div class="backParagraph">Hi<h:outputText value="#{userAuthentication.isUserConnected ? userAuthentication.email : ''}" />, <br /><h:outputText value="My name is:" style="font-weight:bold" /> #{animal.name} (#{animal.age})<br /><h:outputText value="My location is:" style="font-weight:bold" /> #{animal.owner.location}<br /><h:outputText value="Owners Contact information:" style="font-weight:bold" /> Name:#{animal.owner.name}, Phone: #{animal.owner.phoneNumber}<br /><br />Come Adopt Me!</div>
+                        <div class="backParagraph">Hi, <h:outputText value="#{userAuthentication.isUserConnected ? userAuthentication.email : ''}" /><br /><h:outputText value="My name is:" style="font-weight:bold" /> #{animal.name} (#{animal.age})<br /><h:outputText value="My location is:" style="font-weight:bold" /> #{animal.owner.location}<br /><h:outputText value="Owners Contact information:" style="font-weight:bold" /> Name:#{animal.owner.name}, Phone: #{animal.owner.phoneNumber}<br /><br />Come Adopt Me!</div>
                         <div class="backGoto">
                             <a id="pet-desc-link" target="_blank" onclick="openFullAnimalDescription(#{status.index})" title="PetPanel">Open full info →</a>
                         </div>
@@ -236,7 +236,7 @@
                                             </h:inputText>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>City</label>
+                                            <label>City and Country</label>
                                             <h:inputText class="form-control-custom" p:placeholder="City" value="#{userRegistrationFormManager.city}" autocomplete="off">
                                                 <f:ajax listener="#{userRegistrationFormManager.allPropertiesFilled}" render="userRegistrationForm" />
                                             </h:inputText>
