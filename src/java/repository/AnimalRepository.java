@@ -3,6 +3,13 @@ package repository;
 import entities.Animal;
 import java.util.List;
 
+/**
+ * <pre>
+ * Animal repository.
+ *
+ * Handles all animal related persistency actions.
+ * </pre>
+ */
 public class AnimalRepository extends Repository<Animal> {
 
     public AnimalRepository() {
@@ -10,7 +17,8 @@ public class AnimalRepository extends Repository<Animal> {
     }
 
     /**
-     * get all animals from database sorted by creation date descending
+     * Get all animals from connected database sorted by creation date
+     * descending.
      *
      * @return animals list
      */

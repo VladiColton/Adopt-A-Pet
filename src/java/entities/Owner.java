@@ -6,7 +6,26 @@ import javax.persistence.*;
 import passwords.Passwords;
 
 /**
- * Owner representation Class
+ * <pre>
+ * Owner JPA entity DAO.
+ *
+ * Owner has a One to Many relationship with the Animal class.
+ * Initialization is done using the OwnerBuilder.
+ * Uniqueness is inferred by name + creation date.
+ *
+ * Mandatory fields:
+ *  - email
+ *  - password
+ *  - name
+ *
+ * JPQL queries:
+ *  - GET_EMAIL_COUNT
+ *      - returns the count of provided email persisted in db.
+ *  - GET_OWNER_PASSWORD
+ *      - returns the provided owner's hashed password from the db.
+ *  - GET_OWNER
+ *      - return an owner entity from the db.
+ * </pre>
  */
 @Entity
 @NamedQueries({
@@ -149,10 +168,24 @@ public class Owner implements Persistable, Serializable {
         return true;
     }
 
+    /**
+     * Owner builder
+     *
+     * @return an owner builder object
+     */
     public static OwnerBuilder builder() {
         return new OwnerBuilder();
     }
 
+    /**
+     * <pre>
+     * Owner builder class.
+     *
+     * Used to initialize an owner.
+     * No default values are given to missing fields.
+     * implements the Builder desing-pattern.
+     * </pre>
+     */
     public static class OwnerBuilder {
 
         private String email;
@@ -192,6 +225,12 @@ public class Owner implements Persistable, Serializable {
             return this;
         }
 
+        /**
+         * Builds a new owner with the provided arguments from the builder class
+         * methods.
+         *
+         * @return new instance of owner with given arguments.
+         */
         public Owner build() {
             return new Owner(email, passwordHash, name, phoneNumber, location, profilePic);
         }

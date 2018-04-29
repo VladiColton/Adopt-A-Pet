@@ -5,7 +5,22 @@ import java.util.Date;
 import javax.persistence.*;
 
 /**
- * Animal Representation Class
+ * <pre>
+ * Animal JPA entity DAO.
+ *
+ * Animal has a Many to One relationship with the Owner class.
+ * Cannot be persisted without an owner.
+ * Initialization is done using the AnimalBuilder.
+ * Uniqueness is inferred by name + creation date.
+ *
+ * Mandatory fields:
+ *  - name
+ *  - age
+ *  - type
+ *
+ * JPQL queries:
+ *  - GET_ANIMALS_BY_DATE_DESC - returns all existing animals ordered by date descending
+ * </pre>
  */
 @Entity
 @NamedQueries({
@@ -131,17 +146,31 @@ public class Animal implements Persistable, Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (object ==  null || !(object instanceof Animal)) {
+        if (!(object instanceof Animal)) {
             return false;
         }
         Animal other = (Animal) object;
         return this.name.equals(other.name) && this.creationDate.equals(other.creationDate);
     }
 
+    /**
+     * Animal builder
+     *
+     * @return an animal builder object
+     */
     public static AnimalBuilder builder() {
         return new AnimalBuilder();
     }
 
+    /**
+     * <pre>
+     * Animal builder class.
+     *
+     * Used to initialize an animal.
+     * No default values are given to missing fields.
+     * implements the Builder desing-pattern.
+     * </pre>
+     */
     public static class AnimalBuilder {
 
         private String name;
@@ -182,6 +211,12 @@ public class Animal implements Persistable, Serializable {
             return this;
         }
 
+        /**
+         * Builds a new animal with the provided arguments from the builder
+         * class methods.
+         *
+         * @return new instance of animal with given arguments.
+         */
         public Animal build() {
             return new Animal(name, age, type, subType, description, animalPic);
         }
