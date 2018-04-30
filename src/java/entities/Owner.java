@@ -11,7 +11,6 @@ import passwords.Passwords;
  *
  * Owner has a One to Many relationship with the Animal class.
  * Initialization is done using the OwnerBuilder.
- * Uniqueness is inferred by name + creation date.
  *
  * Mandatory fields:
  *  - email
